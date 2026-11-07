@@ -1,0 +1,832 @@
+{
+    "organizations":  [
+                          {
+                              "id":  "11111111-1111-1111-1111-111111111111",
+                              "name":  "Acme Corporation",
+                              "code":  "ACME-CORP",
+                              "description":  "Enterprise organization workspace running Lokus Trust \u0026 Verification Platform.",
+                              "created_at":  "2026-11-06T20:16:46.285Z"
+                          }
+                      ],
+    "units":  [
+                  {
+                      "id":  "u-1",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Executive Leadership",
+                      "unit_type":  "division",
+                      "parent_unit_id":  null,
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "u-2",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Engineering",
+                      "unit_type":  "division",
+                      "parent_unit_id":  null,
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "u-3",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Cloud Infrastructure \u0026 Security",
+                      "unit_type":  "department",
+                      "parent_unit_id":  "u-2",
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "u-4",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Product \u0026 Design",
+                      "unit_type":  "department",
+                      "parent_unit_id":  "u-2",
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "u-5",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "People \u0026 Operations",
+                      "unit_type":  "division",
+                      "parent_unit_id":  null,
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  }
+              ],
+    "users":  [
+                  {
+                      "id":  "22222222-2222-2222-2222-222222222222",
+                      "email":  "admin@lokus.io",
+                      "password_hash":  "e438f556a18b4cf37659569af06ec11e96bceace27c361392125d07c75863234",
+                      "is_active":  true,
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  }
+              ],
+    "roles":  [
+                  {
+                      "id":  "r-1",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Organisation Administrator",
+                      "description":  "Complete system access across all Lokus modules.",
+                      "is_system":  true,
+                      "permissions":  [
+                                          {
+                                              "id":  "p-1",
+                                              "code":  "organisation.read",
+                                              "description":  "View organization data"
+                                          },
+                                          {
+                                              "id":  "p-2",
+                                              "code":  "organisation.manage",
+                                              "description":  "Manage organization settings"
+                                          },
+                                          {
+                                              "id":  "p-3",
+                                              "code":  "organisation.manage_units",
+                                              "description":  "Manage organization units"
+                                          },
+                                          {
+                                              "id":  "p-4",
+                                              "code":  "employee.read",
+                                              "description":  "View employees"
+                                          },
+                                          {
+                                              "id":  "p-5",
+                                              "code":  "employee.create",
+                                              "description":  "Create employees"
+                                          },
+                                          {
+                                              "id":  "p-6",
+                                              "code":  "employee.update",
+                                              "description":  "Update employees"
+                                          },
+                                          {
+                                              "id":  "p-7",
+                                              "code":  "employee.delete",
+                                              "description":  "Delete employees"
+                                          },
+                                          {
+                                              "id":  "p-8",
+                                              "code":  "employee.import",
+                                              "description":  "Import employees"
+                                          },
+                                          {
+                                              "id":  "p-9",
+                                              "code":  "asset.read",
+                                              "description":  "View assets and categories"
+                                          },
+                                          {
+                                              "id":  "p-10",
+                                              "code":  "asset.create",
+                                              "description":  "Create assets"
+                                          },
+                                          {
+                                              "id":  "p-11",
+                                              "code":  "asset.update",
+                                              "description":  "Update assets"
+                                          },
+                                          {
+                                              "id":  "p-12",
+                                              "code":  "asset.assign",
+                                              "description":  "Assign assets"
+                                          },
+                                          {
+                                              "id":  "p-13",
+                                              "code":  "asset.transfer",
+                                              "description":  "Transfer assets"
+                                          },
+                                          {
+                                              "id":  "p-14",
+                                              "code":  "asset.return",
+                                              "description":  "Return assets"
+                                          },
+                                          {
+                                              "id":  "p-15",
+                                              "code":  "asset.transaction.read",
+                                              "description":  "View asset history"
+                                          },
+                                          {
+                                              "id":  "p-16",
+                                              "code":  "role.read",
+                                              "description":  "View roles"
+                                          },
+                                          {
+                                              "id":  "p-17",
+                                              "code":  "role.assign",
+                                              "description":  "Assign roles"
+                                          },
+                                          {
+                                              "id":  "p-18",
+                                              "code":  "role.revoke",
+                                              "description":  "Revoke roles"
+                                          },
+                                          {
+                                              "id":  "p-19",
+                                              "code":  "role.manage",
+                                              "description":  "Manage custom roles"
+                                          },
+                                          {
+                                              "id":  "p-20",
+                                              "code":  "audit.read",
+                                              "description":  "View audit events"
+                                          },
+                                          {
+                                              "id":  "p-21",
+                                              "code":  "verification.identity",
+                                              "description":  "Verify identities"
+                                          },
+                                          {
+                                              "id":  "p-22",
+                                              "code":  "verification.asset",
+                                              "description":  "Verify assets"
+                                          },
+                                          {
+                                              "id":  "p-23",
+                                              "code":  "verification.read",
+                                              "description":  "View verification status"
+                                          },
+                                          {
+                                              "id":  "p-24",
+                                              "code":  "verification.manage",
+                                              "description":  "Manage verification seals"
+                                          },
+                                          {
+                                              "id":  "p-25",
+                                              "code":  "blockchain.read",
+                                              "description":  "View integrity status"
+                                          },
+                                          {
+                                              "id":  "p-26",
+                                              "code":  "blockchain.anchor",
+                                              "description":  "Issue integrity seals"
+                                          },
+                                          {
+                                              "id":  "p-27",
+                                              "code":  "blockchain.verify",
+                                              "description":  "Verify integrity seals"
+                                          },
+                                          {
+                                              "id":  "p-28",
+                                              "code":  "blockchain.transaction.read",
+                                              "description":  "View seal transactions"
+                                          }
+                                      ],
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "r-2",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Asset Manager",
+                      "description":  "Manages physical and digital assets, custody assignments, and returns.",
+                      "is_system":  false,
+                      "permissions":  [
+                                          {
+                                              "id":  "p-9",
+                                              "code":  "asset.read",
+                                              "description":  "View assets and categories"
+                                          },
+                                          {
+                                              "id":  "p-10",
+                                              "code":  "asset.create",
+                                              "description":  "Create assets"
+                                          },
+                                          {
+                                              "id":  "p-11",
+                                              "code":  "asset.update",
+                                              "description":  "Update assets"
+                                          },
+                                          {
+                                              "id":  "p-12",
+                                              "code":  "asset.assign",
+                                              "description":  "Assign assets"
+                                          },
+                                          {
+                                              "id":  "p-13",
+                                              "code":  "asset.transfer",
+                                              "description":  "Transfer assets"
+                                          },
+                                          {
+                                              "id":  "p-14",
+                                              "code":  "asset.return",
+                                              "description":  "Return assets"
+                                          },
+                                          {
+                                              "id":  "p-15",
+                                              "code":  "asset.transaction.read",
+                                              "description":  "View asset history"
+                                          },
+                                          {
+                                              "id":  "p-21",
+                                              "code":  "verification.identity",
+                                              "description":  "Verify identities"
+                                          },
+                                          {
+                                              "id":  "p-22",
+                                              "code":  "verification.asset",
+                                              "description":  "Verify assets"
+                                          },
+                                          {
+                                              "id":  "p-23",
+                                              "code":  "verification.read",
+                                              "description":  "View verification status"
+                                          },
+                                          {
+                                              "id":  "p-24",
+                                              "code":  "verification.manage",
+                                              "description":  "Manage verification seals"
+                                          }
+                                      ],
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  },
+                  {
+                      "id":  "r-3",
+                      "organization_id":  "11111111-1111-1111-1111-111111111111",
+                      "name":  "Employee",
+                      "description":  "Standard member role with access to own profile and assets.",
+                      "is_system":  false,
+                      "permissions":  [
+                                          {
+                                              "id":  "p-4",
+                                              "code":  "employee.read",
+                                              "description":  "View employees"
+                                          },
+                                          {
+                                              "id":  "p-9",
+                                              "code":  "asset.read",
+                                              "description":  "View assets and categories"
+                                          },
+                                          {
+                                              "id":  "p-23",
+                                              "code":  "verification.read",
+                                              "description":  "View verification status"
+                                          }
+                                      ],
+                      "created_at":  "2026-11-06T20:16:46.285Z"
+                  }
+              ],
+    "user_roles":  [
+                       {
+                           "user_id":  "22222222-2222-2222-2222-222222222222",
+                           "role_id":  "r-1",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111"
+                       }
+                   ],
+    "employees":  [
+                      {
+                          "id":  "e-1",
+                          "organization_id":  "11111111-1111-1111-1111-111111111111",
+                          "organization_unit_id":  "u-1",
+                          "employee_code":  "EMP-001",
+                          "first_name":  "Elena",
+                          "last_name":  "Vance",
+                          "email":  "admin@lokus.io",
+                          "designation":  "Chief Technology Officer",
+                          "employment_status":  "active",
+                          "manager_employee_id":  null,
+                          "created_at":  "2026-11-06T20:16:46.285Z"
+                      },
+                      {
+                          "id":  "e-2",
+                          "organization_id":  "11111111-1111-1111-1111-111111111111",
+                          "organization_unit_id":  "u-2",
+                          "employee_code":  "EMP-002",
+                          "first_name":  "Marcus",
+                          "last_name":  "Chen",
+                          "email":  "marcus.chen@lokus.io",
+                          "designation":  "Principal Security Architect",
+                          "employment_status":  "active",
+                          "manager_employee_id":  "e-1",
+                          "created_at":  "2026-11-06T20:16:46.285Z"
+                      },
+                      {
+                          "id":  "e-3",
+                          "organization_id":  "11111111-1111-1111-1111-111111111111",
+                          "organization_unit_id":  "u-3",
+                          "employee_code":  "EMP-003",
+                          "first_name":  "Sarah",
+                          "last_name":  "Connor",
+                          "email":  "sarah.connor@lokus.io",
+                          "designation":  "Lead DevOps Engineer",
+                          "employment_status":  "active",
+                          "manager_employee_id":  "e-2",
+                          "created_at":  "2026-11-06T20:16:46.285Z"
+                      },
+                      {
+                          "id":  "e-4",
+                          "organization_id":  "11111111-1111-1111-1111-111111111111",
+                          "organization_unit_id":  "u-4",
+                          "employee_code":  "EMP-004",
+                          "first_name":  "David",
+                          "last_name":  "Kim",
+                          "email":  "david.kim@lokus.io",
+                          "designation":  "Senior Product Designer",
+                          "employment_status":  "active",
+                          "manager_employee_id":  "e-1",
+                          "created_at":  "2026-11-06T20:16:46.285Z"
+                      },
+                      {
+                          "id":  "e-5",
+                          "organization_id":  "11111111-1111-1111-1111-111111111111",
+                          "organization_unit_id":  "u-5",
+                          "employee_code":  "EMP-005",
+                          "first_name":  "Aisha",
+                          "last_name":  "Patel",
+                          "email":  "aisha.patel@lokus.io",
+                          "designation":  "People Operations Lead",
+                          "employment_status":  "active",
+                          "manager_employee_id":  "e-1",
+                          "created_at":  "2026-11-06T20:16:46.285Z"
+                      }
+                  ],
+    "identities":  [
+                       {
+                           "id":  "id-e-1",
+                           "employee_id":  "e-1",
+                           "did":  "did:lokus:acme-corp:e-1",
+                           "status":  "Verified",
+                           "hash":  "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
+                           "seal_ref":  "LOKUS-SEAL-IDE-E1-F0A021612D",
+                           "verified_at":  "2026-11-06T20:16:46.285Z",
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "id-e-2",
+                           "employee_id":  "e-2",
+                           "did":  "did:lokus:acme-corp:e-2",
+                           "status":  "Verified",
+                           "hash":  "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
+                           "seal_ref":  "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
+                           "verified_at":  "2026-11-06T20:16:46.285Z",
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "id-e-3",
+                           "employee_id":  "e-3",
+                           "did":  "did:lokus:acme-corp:e-3",
+                           "status":  "Verified",
+                           "hash":  "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
+                           "seal_ref":  "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
+                           "verified_at":  "2026-11-06T20:16:46.285Z",
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "id-e-4",
+                           "employee_id":  "e-4",
+                           "did":  "did:lokus:acme-corp:e-4",
+                           "status":  "Verified",
+                           "hash":  "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
+                           "seal_ref":  "LOKUS-SEAL-IDE-E4-292434C9EC",
+                           "verified_at":  "2026-11-06T20:16:46.285Z",
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "id-e-5",
+                           "employee_id":  "e-5",
+                           "did":  "did:lokus:acme-corp:e-5",
+                           "status":  "Verified",
+                           "hash":  "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
+                           "seal_ref":  "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
+                           "verified_at":  "2026-11-06T20:16:46.285Z",
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       }
+                   ],
+    "categories":  [
+                       {
+                           "id":  "c-1",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Laptops \u0026 Workstations",
+                           "type":  "Physical",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "c-2",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Hardware Security Keys",
+                           "type":  "Physical",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "c-3",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Monitors \u0026 Displays",
+                           "type":  "Physical",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "c-4",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Cloud Infrastructure Keys",
+                           "type":  "Digital",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "c-5",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Cryptographic SSL Certificates",
+                           "type":  "Digital",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "c-6",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "name":  "Enterprise Software Licenses",
+                           "type":  "Digital",
+                           "parent_category_id":  null,
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       }
+                   ],
+    "assets":  [
+                   {
+                       "id":  "a-1",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-1",
+                       "asset_code":  "AST-1001",
+                       "name":  "MacBook Pro 16\" M3 Max",
+                       "description":  "Engineering development workstation (64GB RAM, 2TB SSD)",
+                       "asset_type":  "Physical",
+                       "serial_number":  "C02G30X1MD6R",
+                       "location":  "San Francisco HQ - Building A",
+                       "condition":  "Excellent",
+                       "status":  "ASSIGNED",
+                       "current_employee_id":  "e-1",
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A1-DD4E944B49",
+                       "canonical_hash":  "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
+                       "metadata":  {
+                                        "condition":  "Excellent"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   },
+                   {
+                       "id":  "a-2",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-2",
+                       "asset_code":  "AST-1002",
+                       "name":  "YubiKey 5C NFC Enterprise Security Key",
+                       "description":  "Hardware multi-factor token for production cluster access",
+                       "asset_type":  "Physical",
+                       "serial_number":  "YK-9482-10842",
+                       "location":  "Security Operations Vault",
+                       "condition":  "New",
+                       "status":  "ASSIGNED",
+                       "current_employee_id":  "e-2",
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A2-F80CFF56FE",
+                       "canonical_hash":  "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
+                       "metadata":  {
+                                        "condition":  "New"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   },
+                   {
+                       "id":  "a-3",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-3",
+                       "asset_code":  "AST-1003",
+                       "name":  "Dell UltraSharp 32\" 4K USB-C Hub Monitor",
+                       "description":  "Design and analysis display with 90W power delivery",
+                       "asset_type":  "Physical",
+                       "serial_number":  "CN-098F3D-74261",
+                       "location":  "San Francisco HQ - Desk 402",
+                       "condition":  "Good",
+                       "status":  "ASSIGNED",
+                       "current_employee_id":  "e-4",
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A3-45817E73E6",
+                       "canonical_hash":  "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
+                       "metadata":  {
+                                        "condition":  "Good"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   },
+                   {
+                       "id":  "a-4",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-4",
+                       "asset_code":  "AST-2001",
+                       "name":  "AWS Production Primary Root KMS Key",
+                       "description":  "Cryptographic envelope encryption master key for production DB",
+                       "asset_type":  "Digital",
+                       "serial_number":  "arn:aws:kms:us-west-2:10948271:key/a1b2c3d4",
+                       "location":  "AWS us-west-2 Oregon",
+                       "condition":  "Active",
+                       "status":  "ASSIGNED",
+                       "current_employee_id":  "e-3",
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A4-338965855E",
+                       "canonical_hash":  "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
+                       "metadata":  {
+                                        "condition":  "Active",
+                                        "expires_at":  "2028-12-31"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   },
+                   {
+                       "id":  "a-5",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-5",
+                       "asset_code":  "AST-2002",
+                       "name":  "Enterprise Wildcard SSL Certificate (*.lokus.internal)",
+                       "description":  "DigiCert 2048-bit RSA TLS server identity certificate",
+                       "asset_type":  "Digital",
+                       "serial_number":  "SHA256:F4:7A:B3:91:0C:4E",
+                       "location":  "Global Edge Ingress",
+                       "condition":  "Active",
+                       "status":  "AVAILABLE",
+                       "current_employee_id":  null,
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A5-6B0370E91F",
+                       "canonical_hash":  "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
+                       "metadata":  {
+                                        "condition":  "Active",
+                                        "expires_at":  "2027-06-30"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   },
+                   {
+                       "id":  "a-6",
+                       "organization_id":  "11111111-1111-1111-1111-111111111111",
+                       "asset_category_id":  "c-6",
+                       "asset_code":  "AST-2003",
+                       "name":  "Figma Enterprise Organization Seat License",
+                       "description":  "Design system team collaboration seat",
+                       "asset_type":  "Digital",
+                       "serial_number":  "LIC-FIGMA-2026-991",
+                       "location":  "Cloud SaaS",
+                       "condition":  "Active",
+                       "status":  "ASSIGNED",
+                       "current_employee_id":  "e-4",
+                       "integrity_status":  "Verified",
+                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A6-526C5EECD2",
+                       "canonical_hash":  "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
+                       "metadata":  {
+                                        "condition":  "Active"
+                                    },
+                       "created_at":  "2026-11-06T20:16:46.285Z"
+                   }
+               ],
+    "transactions":  [
+                         {
+                             "id":  "tx-1",
+                             "asset_id":  "a-1",
+                             "transaction_type":  "ASSIGN",
+                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
+                             "new_employee_id":  "e-1",
+                             "previous_employee_id":  null,
+                             "notes":  "Initial executive laptop deployment",
+                             "created_at":  "2026-11-06T20:16:46.285Z"
+                         },
+                         {
+                             "id":  "tx-2",
+                             "asset_id":  "a-2",
+                             "transaction_type":  "ASSIGN",
+                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
+                             "new_employee_id":  "e-2",
+                             "previous_employee_id":  null,
+                             "notes":  "Hardware security key issued for security architect",
+                             "created_at":  "2026-11-06T20:16:46.285Z"
+                         },
+                         {
+                             "id":  "tx-3",
+                             "asset_id":  "a-3",
+                             "transaction_type":  "ASSIGN",
+                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
+                             "new_employee_id":  "e-4",
+                             "previous_employee_id":  null,
+                             "notes":  "Monitor issued for UI/UX workstation setup",
+                             "created_at":  "2026-11-06T20:16:46.285Z"
+                         }
+                     ],
+    "audit_logs":  [
+                       {
+                           "id":  "log-1",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
+                           "action":  "ORGANISATION_INITIALIZED",
+                           "entity_type":  "Organisation",
+                           "entity_id":  "11111111-1111-1111-1111-111111111111",
+                           "metadata":  {
+                                            "name":  "Acme Corporation",
+                                            "code":  "ACME-CORP"
+                                        },
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "log-2",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
+                           "action":  "SECURITY_POLICY_CONFIGURED",
+                           "entity_type":  "Role",
+                           "entity_id":  "r-1",
+                           "metadata":  {
+                                            "role":  "Organisation Administrator",
+                                            "permissionsCount":  28
+                                        },
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "log-3",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
+                           "action":  "PERSONNEL_ONBOARDED",
+                           "entity_type":  "Employee",
+                           "entity_id":  "e-1",
+                           "metadata":  {
+                                            "name":  "Elena Vance",
+                                            "title":  "Chief Technology Officer"
+                                        },
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "log-4",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
+                           "action":  "CRYPTOGRAPHIC_SEAL_ISSUED",
+                           "entity_type":  "Identity",
+                           "entity_id":  "e-1",
+                           "metadata":  {
+                                            "algorithm":  "SHA-256",
+                                            "did":  "did:lokus:acme-corp:e-1"
+                                        },
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       },
+                       {
+                           "id":  "log-5",
+                           "organization_id":  "11111111-1111-1111-1111-111111111111",
+                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
+                           "action":  "ASSET_CUSTODY_ASSIGNED",
+                           "entity_type":  "Asset",
+                           "entity_id":  "a-1",
+                           "metadata":  {
+                                            "asset":  "MacBook Pro 16\" M3 Max",
+                                            "assignee":  "Elena Vance"
+                                        },
+                           "created_at":  "2026-11-06T20:16:46.285Z"
+                       }
+                   ],
+    "integrity_seals":  [
+                            {
+                                "id":  "seal-id-e-1",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Identity",
+                                "entity_id":  "e-1",
+                                "record_key":  "fdf8d433348de56a71681162b4177bdfd5535e33fd1bca6f79d60aaf540f878c",
+                                "record_hash":  "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
+                                "seal_ref":  "LOKUS-SEAL-IDE-E1-F0A021612D",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-id-e-2",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Identity",
+                                "entity_id":  "e-2",
+                                "record_key":  "8bc58dbceb93ed85370187fad520a628da278b847d6ec318be8cfe744ccc3b87",
+                                "record_hash":  "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
+                                "seal_ref":  "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-id-e-3",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Identity",
+                                "entity_id":  "e-3",
+                                "record_key":  "16516e0b5fffdac018b1a92fc72aa9d85696bf9681b4122d139162bf62b042d0",
+                                "record_hash":  "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
+                                "seal_ref":  "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-id-e-4",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Identity",
+                                "entity_id":  "e-4",
+                                "record_key":  "577b5493bc38a6062f3fbcc04430b2a7517ed176cfdf1779db4ec24905048efc",
+                                "record_hash":  "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
+                                "seal_ref":  "LOKUS-SEAL-IDE-E4-292434C9EC",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-id-e-5",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Identity",
+                                "entity_id":  "e-5",
+                                "record_key":  "60e86130de8cb43d3f7a4bada7a8c535989ec042a12dc280e2679e72a03075cb",
+                                "record_hash":  "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
+                                "seal_ref":  "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-1",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-1",
+                                "record_key":  "167794c3bc6201fbd8a628bfe7d7cb5b2f4ce1082be3a802d7a99863fd2d6f81",
+                                "record_hash":  "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A1-DD4E944B49",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-2",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-2",
+                                "record_key":  "1854b8b2f31287c00df9e2627e48ed0e2d883469fa5ebaf7c1ee6c03f1ec01d4",
+                                "record_hash":  "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A2-F80CFF56FE",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-3",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-3",
+                                "record_key":  "494f3df0571f06100f033f3a12b1285917ef9b407a29bb5c3ca77cef71552dc0",
+                                "record_hash":  "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A3-45817E73E6",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-4",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-4",
+                                "record_key":  "00ddbda10048e29613d6075467f02422ba9f209a5d013eeebcb37959e95e0467",
+                                "record_hash":  "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A4-338965855E",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-5",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-5",
+                                "record_key":  "94b22aa92443cbd190cb4fc9bdf781b28fd0f13e6132c5b7133e00b4c4ba6ffa",
+                                "record_hash":  "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A5-6B0370E91F",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            },
+                            {
+                                "id":  "seal-ast-a-6",
+                                "organization_id":  "11111111-1111-1111-1111-111111111111",
+                                "entity_type":  "Asset",
+                                "entity_id":  "a-6",
+                                "record_key":  "e0dc86d552ae77f8b895660594f42ef5c46928ab590848a7002e11a85d081381",
+                                "record_hash":  "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
+                                "seal_ref":  "LOKUS-SEAL-ASS-A6-526C5EECD2",
+                                "sealed_at":  "2026-11-06T20:16:46.285Z",
+                                "algorithm":  "SHA-256"
+                            }
+                        ]
+}
