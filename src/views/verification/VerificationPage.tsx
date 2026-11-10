@@ -9,9 +9,7 @@ export default function VerificationPage() {
   return (
     <>
       <PageHeading
-        eyebrow="TRUST & VERIFICATION"
         title="Verification Center"
-        description="Verify an identity credential, validate asset integrity, or audit role authorizations."
       />
       <div className="trust-strip">
         <div className="inline">
