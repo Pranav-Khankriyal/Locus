@@ -125,12 +125,12 @@ export default function AdminDashboard() {
       {/* Subheader: Welcome Message & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 pt-0.5">
         <div>
-          <h1 className="text-xl sm:text-2xl text-gray-800 tracking-tight leading-none">
-            <span className="font-light text-gray-500">Welcome Back, </span>
-            <span className="font-bold text-gray-900">{userName}</span>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight">
+            <span className="font-light text-gray-400">Welcome back, </span>
+            <span>{userName}</span>
           </h1>
-          <p className="text-xs text-gray-500 mt-1">
-            {organisation?.name || 'Acme Corporation'} · Zero-Trust Asset & Identity Governance
+          <p className="text-xs font-medium text-gray-400 mt-1">
+            {organisation?.name || 'Acme Corporation'}
           </p>
         </div>
 
