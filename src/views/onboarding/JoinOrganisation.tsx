@@ -42,12 +42,9 @@ export default function JoinOrganisation() {
             </button>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight mb-5">
             Join an organization
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1 mb-5 leading-normal">
-            Enter the invitation code provided by your workspace administrator.
-          </p>
 
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>

@@ -42,12 +42,9 @@ export default function CreateOrganisation() {
             </button>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111827] tracking-tight mb-5">
             Create an organization
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1 mb-5 leading-normal">
-            You will be the primary administrator of your new company workspace.
-          </p>
 
           <form onSubmit={handleSubmit} className="space-y-3">
             <div>
