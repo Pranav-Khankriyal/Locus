@@ -82,9 +82,7 @@ export default function AssetsPage() {
   return (
     <>
       <PageHeading
-        eyebrow="ASSET MANAGEMENT"
         title={title}
-        description="Keep track of every asset, its owner and its history."
         actions={
           manage ? (
             <Button onClick={() => setAdding(true)}>

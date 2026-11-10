@@ -45,9 +45,7 @@ export default function AssetDetailPage() {
   return (
     <>
       <PageHeading
-        eyebrow="ASSET DETAILS"
         title={d?.asset.name || 'Asset details'}
-        description={d ? d.asset.assetId + ' · ' + d.asset.type + ' asset' : undefined}
         actions={
           d && !query.loading ? (
             <>
