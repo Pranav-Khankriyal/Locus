@@ -2,6 +2,35 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { computeEntityHash, generateSealRef, sha256Hex } from './crypto-verification';
+import {
+  ENTERPRISE_PERMISSIONS,
+  buildDefaultEmployeeHRData,
+  computeSalaryBreakdownFromCTC,
+  createEnterpriseSeedForSchema,
+  type LokusAttendanceRecord,
+  type LokusBonusRecord,
+  type LokusHoliday,
+  type LokusLeaveBalance,
+  type LokusLeaveRequest,
+  type LokusOrgRequest,
+  type LokusPFAccount,
+  type LokusPFTransaction,
+  type LokusSalarySlip,
+  type LokusSalaryStructure,
+} from './enterprise-seed';
+
+export type {
+  LokusAttendanceRecord,
+  LokusBonusRecord,
+  LokusHoliday,
+  LokusLeaveBalance,
+  LokusLeaveRequest,
+  LokusOrgRequest,
+  LokusPFAccount,
+  LokusPFTransaction,
+  LokusSalarySlip,
+  LokusSalaryStructure,
+};
 
 export interface LokusOrganization {
   id: string;
@@ -114,7 +143,19 @@ export interface LokusAuditEvent {
   organization_id: string;
   actor_user_id: string;
   action: string;
-  entity_type: 'Employee' | 'Asset' | 'Organisation' | 'Role' | 'Identity' | 'System';
+  entity_type:
+    | 'Employee'
+    | 'Asset'
+    | 'Organisation'
+    | 'Role'
+    | 'Identity'
+    | 'System'
+    | 'Attendance'
+    | 'Leave'
+    | 'Payroll'
+    | 'Bonus'
+    | 'PF'
+    | 'Request';
   entity_id: string;
   metadata: Record<string, any>;
   created_at: string;
@@ -145,6 +186,16 @@ export interface LokusDatabaseSchema {
   transactions: LokusAssetTransaction[];
   audit_logs: LokusAuditEvent[];
   integrity_seals: LokusIntegritySeal[];
+  attendance_records: LokusAttendanceRecord[];
+  leave_balances: LokusLeaveBalance[];
+  leave_requests: LokusLeaveRequest[];
+  holidays: LokusHoliday[];
+  salary_structures: LokusSalaryStructure[];
+  salary_slips: LokusSalarySlip[];
+  pf_accounts: LokusPFAccount[];
+  pf_transactions: LokusPFTransaction[];
+  bonuses: LokusBonusRecord[];
+  org_requests: LokusOrgRequest[];
 }
 
 const DB_FILE_PATH = path.join(process.cwd(), 'data', 'lokus-db.json');
@@ -182,6 +233,7 @@ const ALL_PERMISSIONS: LokusPermission[] = [
   { id: 'p-26', code: 'blockchain.anchor', description: 'Issue integrity seals' },
   { id: 'p-27', code: 'blockchain.verify', description: 'Verify integrity seals' },
   { id: 'p-28', code: 'blockchain.transaction.read', description: 'View seal transactions' },
+  ...ENTERPRISE_PERMISSIONS,
 ];
 
 function createDefaultSeed(): LokusDatabaseSchema {
@@ -229,9 +281,22 @@ function createDefaultSeed(): LokusDatabaseSchema {
     id: 'r-3',
     organization_id: orgId,
     name: 'Employee',
-    description: 'Standard member role with access to own profile and assets.',
+    description: 'Standard member role with self-service access to attendance, leaves, salary slips, PF, requests, and assigned assets.',
     is_system: false,
-    permissions: ALL_PERMISSIONS.filter((p) => ['employee.read', 'asset.read', 'verification.read'].includes(p.code)),
+    permissions: ALL_PERMISSIONS.filter((p) =>
+      [
+        'employee.read',
+        'asset.read',
+        'verification.read',
+        'attendance.read',
+        'attendance.manage',
+        'leaves.read',
+        'leaves.manage',
+        'payroll.read',
+        'requests.read',
+        'requests.manage',
+      ].includes(p.code)
+    ),
     created_at: now,
   };
 
@@ -576,6 +641,8 @@ function createDefaultSeed(): LokusDatabaseSchema {
     },
   ];
 
+  const enterprise = createEnterpriseSeedForSchema([org], employees);
+
   return {
     organizations: [org],
     units,
@@ -589,6 +656,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     transactions,
     audit_logs,
     integrity_seals,
+    ...enterprise,
   };
 }
 
@@ -603,6 +671,58 @@ class LokusDatabase {
     }
   }
 
+  private hydrateSchema(data: LokusDatabaseSchema): boolean {
+    let changed = false;
+    if (!Array.isArray(data.attendance_records) || !Array.isArray(data.salary_slips) || !Array.isArray(data.pf_accounts)) {
+      const seed = createEnterpriseSeedForSchema(data.organizations || [], data.employees || []);
+      data.attendance_records = data.attendance_records || seed.attendance_records;
+      data.leave_balances = data.leave_balances || seed.leave_balances;
+      data.leave_requests = data.leave_requests || seed.leave_requests;
+      data.holidays = data.holidays || seed.holidays;
+      data.salary_structures = data.salary_structures || seed.salary_structures;
+      data.salary_slips = data.salary_slips || seed.salary_slips;
+      data.pf_accounts = data.pf_accounts || seed.pf_accounts;
+      data.pf_transactions = data.pf_transactions || seed.pf_transactions;
+      data.bonuses = data.bonuses || seed.bonuses;
+      data.org_requests = data.org_requests || seed.org_requests;
+      changed = true;
+    }
+
+    // Ensure Organisation Administrator role holds new HR/Payroll permissions
+    for (const role of data.roles || []) {
+      if (role.is_system || role.name === 'Organisation Administrator') {
+        const codes = new Set(role.permissions.map((p) => p.code));
+        for (const p of ALL_PERMISSIONS) {
+          if (!codes.has(p.code)) {
+            role.permissions.push(p);
+            changed = true;
+          }
+        }
+      } else if (role.name === 'Employee') {
+        const empCodes = [
+          'attendance.read',
+          'attendance.manage',
+          'leaves.read',
+          'leaves.manage',
+          'payroll.read',
+          'requests.read',
+          'requests.manage',
+        ];
+        const codes = new Set(role.permissions.map((p) => p.code));
+        for (const code of empCodes) {
+          if (!codes.has(code)) {
+            const found = ALL_PERMISSIONS.find((p) => p.code === code);
+            if (found) {
+              role.permissions.push(found);
+              changed = true;
+            }
+          }
+        }
+      }
+    }
+    return changed;
+  }
+
   private load(): LokusDatabaseSchema {
     this.ensureDir();
     if (fs.existsSync(DB_FILE_PATH)) {
@@ -612,8 +732,13 @@ class LokusDatabase {
           return this.data;
         }
         const content = fs.readFileSync(DB_FILE_PATH, 'utf-8');
-        this.data = JSON.parse(content);
+        const parsed = JSON.parse(content) as LokusDatabaseSchema;
+        const migrated = this.hydrateSchema(parsed);
+        this.data = parsed;
         this.lastMtime = stat.mtimeMs;
+        if (migrated) {
+          this.save();
+        }
         return this.data!;
       } catch (err) {
         console.error('Error reading Lokus database file, re-initializing seed:', err);
@@ -648,6 +773,16 @@ class LokusDatabase {
   get transactions() { return this.load().transactions; }
   get audit_logs() { return this.load().audit_logs; }
   get integrity_seals() { return this.load().integrity_seals; }
+  get attendance_records() { return this.load().attendance_records; }
+  get leave_balances() { return this.load().leave_balances; }
+  get leave_requests() { return this.load().leave_requests; }
+  get holidays() { return this.load().holidays; }
+  get salary_structures() { return this.load().salary_structures; }
+  get salary_slips() { return this.load().salary_slips; }
+  get pf_accounts() { return this.load().pf_accounts; }
+  get pf_transactions() { return this.load().pf_transactions; }
+  get bonuses() { return this.load().bonuses; }
+  get org_requests() { return this.load().org_requests; }
 
   // --- Mutators ---
   addOrganization(org: LokusOrganization) {
@@ -721,6 +856,12 @@ class LokusDatabase {
       sealed_at: now,
       algorithm: 'SHA-256',
     });
+
+    // Automatically initialize leave balance, compensation structure, and PF account
+    const hr = buildDefaultEmployeeHRData(emp, db.employees.length, now);
+    db.leave_balances.push(hr.leaveBalance);
+    db.salary_structures.push(hr.salaryStructure);
+    db.pf_accounts.push(hr.pfAccount);
 
     this.save();
     return emp;
@@ -1026,6 +1167,520 @@ class LokusDatabase {
       this.save();
       return sealRecord;
     }
+  }
+
+  // --- Attendance Mutators ---
+  upsertAttendance(input: {
+    organization_id: string;
+    employee_id: string;
+    date: string;
+    action?: 'clock_in' | 'clock_out' | 'mark';
+    check_in?: string | null;
+    check_out?: string | null;
+    status?: LokusAttendanceRecord['status'];
+    work_mode?: LokusAttendanceRecord['work_mode'];
+    location?: string;
+    notes?: string;
+  }): LokusAttendanceRecord {
+    const db = this.load();
+    const now = new Date();
+    const nowIso = now.toISOString();
+    const hhmm = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    const idx = db.attendance_records.findIndex(
+      (a) => a.employee_id === input.employee_id && a.date === input.date
+    );
+
+    const existing = idx !== -1 ? db.attendance_records[idx] : null;
+    let checkIn = input.check_in !== undefined ? input.check_in : existing?.check_in ?? null;
+    let checkOut = input.check_out !== undefined ? input.check_out : existing?.check_out ?? null;
+
+    if (input.action === 'clock_in' && !checkIn) {
+      checkIn = hhmm;
+    }
+    if (input.action === 'clock_out') {
+      checkOut = input.check_out || hhmm;
+      if (!checkIn) checkIn = '09:00';
+    }
+
+    let workHours = existing?.work_hours ?? 0;
+    if (checkIn && checkOut) {
+      const [h1, m1] = checkIn.split(':').map(Number);
+      const [h2, m2] = checkOut.split(':').map(Number);
+      if (!Number.isNaN(h1) && !Number.isNaN(h2)) {
+        const diff = (h2 * 60 + (m2 || 0) - (h1 * 60 + (m1 || 0))) / 60;
+        workHours = Math.max(0, Number(diff.toFixed(1)));
+      }
+    }
+
+    let status: LokusAttendanceRecord['status'] = input.status || existing?.status || 'Present';
+    if (input.action === 'clock_in' && !input.status && checkIn) {
+      const [h, m] = checkIn.split(':').map(Number);
+      const isLate = h > 9 || (h === 9 && m > 45);
+      status = input.work_mode === 'Remote' ? 'WFH' : isLate ? 'Late' : 'Present';
+    } else if (input.action === 'clock_out' && !input.status && workHours > 0 && workHours < 5) {
+      status = 'Half Day';
+    }
+
+    const record: LokusAttendanceRecord = {
+      id: existing?.id || `att-${input.employee_id}-${input.date}`,
+      organization_id: input.organization_id,
+      employee_id: input.employee_id,
+      date: input.date,
+      check_in: checkIn,
+      check_out: checkOut,
+      work_hours: workHours,
+      status,
+      work_mode: input.work_mode || existing?.work_mode || 'Office',
+      location: input.location || existing?.location || (input.work_mode === 'Remote' ? 'Remote' : 'HQ Office'),
+      notes: input.notes !== undefined ? input.notes : existing?.notes || '',
+      updated_at: nowIso,
+    };
+
+    if (idx !== -1) {
+      db.attendance_records[idx] = record;
+    } else {
+      db.attendance_records.unshift(record);
+    }
+
+    this.save();
+    return record;
+  }
+
+  // --- Leaves & Paid Leave Balance Mutators ---
+  createLeaveRequest(req: Omit<LokusLeaveRequest, 'id' | 'status' | 'reviewed_by_id' | 'reviewed_at' | 'reviewer_notes' | 'created_at'>): LokusLeaveRequest {
+    const db = this.load();
+    const now = new Date().toISOString();
+    const record: LokusLeaveRequest = {
+      ...req,
+      id: `lv-${Date.now()}-${Math.floor(Math.random() * 100)}`,
+      is_paid: req.leave_type !== 'Unpaid Leave',
+      status: 'Pending',
+      reviewed_by_id: null,
+      reviewed_at: null,
+      reviewer_notes: null,
+      created_at: now,
+    };
+    db.leave_requests.unshift(record);
+    this.save();
+    return record;
+  }
+
+  reviewLeaveRequest(
+    id: string,
+    status: 'Approved' | 'Rejected' | 'Cancelled',
+    reviewerId: string,
+    notes?: string
+  ): LokusLeaveRequest | null {
+    const db = this.load();
+    const idx = db.leave_requests.findIndex((l) => l.id === id);
+    if (idx === -1) return null;
+
+    const req = db.leave_requests[idx];
+    const prevStatus = req.status;
+    if (prevStatus === status) return req;
+
+    const now = new Date().toISOString();
+    req.status = status;
+    req.reviewed_by_id = reviewerId;
+    req.reviewed_at = now;
+    if (notes !== undefined) req.reviewer_notes = notes;
+
+    // Adjust leave balance only when transitioning to Approved
+    if (status === 'Approved' && prevStatus !== 'Approved') {
+      let bal = db.leave_balances.find((b) => b.employee_id === req.employee_id);
+      if (!bal) {
+        bal = {
+          employee_id: req.employee_id,
+          organization_id: req.organization_id,
+          year: 2026,
+          paid_total: 18,
+          paid_used: 0,
+          sick_total: 10,
+          sick_used: 0,
+          casual_total: 8,
+          casual_used: 0,
+          privilege_total: 12,
+          privilege_used: 0,
+          comp_off: 0,
+          unpaid_taken: 0,
+        };
+        db.leave_balances.push(bal);
+      }
+
+      if (req.leave_type === 'Paid Leave') bal.paid_used += req.days;
+      else if (req.leave_type === 'Sick Leave') bal.sick_used += req.days;
+      else if (req.leave_type === 'Casual Leave') bal.casual_used += req.days;
+      else if (req.leave_type === 'Privilege Leave') bal.privilege_used += req.days;
+      else if (req.leave_type === 'Comp Off') bal.comp_off = Math.max(0, bal.comp_off - req.days);
+      else if (req.leave_type === 'Unpaid Leave') bal.unpaid_taken += req.days;
+
+      // Mark attendance dates as On Leave
+      const start = new Date(req.start_date);
+      const end = new Date(req.end_date);
+      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        const day = d.getDay();
+        if (day === 0 || day === 6) continue;
+        const dateStr = d.toISOString().slice(0, 10);
+        const existingIdx = db.attendance_records.findIndex(
+          (a) => a.employee_id === req.employee_id && a.date === dateStr
+        );
+        const attRow: LokusAttendanceRecord = {
+          id: `att-${req.employee_id}-${dateStr}`,
+          organization_id: req.organization_id,
+          employee_id: req.employee_id,
+          date: dateStr,
+          check_in: null,
+          check_out: null,
+          work_hours: 0,
+          status: 'On Leave',
+          work_mode: 'Remote',
+          location: req.is_paid ? 'Paid Leave' : 'Unpaid Leave (LOP)',
+          notes: `${req.leave_type}: ${req.reason}`,
+          updated_at: now,
+        };
+        if (existingIdx !== -1) db.attendance_records[existingIdx] = attRow;
+        else db.attendance_records.unshift(attRow);
+      }
+    }
+
+    this.save();
+    return req;
+  }
+
+  deleteLeaveRequest(id: string) {
+    const db = this.load();
+    db.leave_requests = db.leave_requests.filter((l) => l.id !== id);
+    this.save();
+  }
+
+  // --- Payroll, Salary Structures, Bonuses & PF Mutators ---
+  upsertSalaryStructure(input: Partial<LokusSalaryStructure> & { organization_id: string; employee_id: string }) {
+    const db = this.load();
+    const now = new Date().toISOString();
+    const idx = db.salary_structures.findIndex((s) => s.employee_id === input.employee_id);
+    const existing = idx !== -1 ? db.salary_structures[idx] : null;
+
+    const ctc = Number(input.annual_ctc ?? existing?.annual_ctc ?? 1500000);
+    const auto = computeSalaryBreakdownFromCTC(ctc);
+
+    const record: LokusSalaryStructure = {
+      id: existing?.id || `sal-${input.employee_id}`,
+      organization_id: input.organization_id,
+      employee_id: input.employee_id,
+      currency: input.currency || existing?.currency || 'INR',
+      annual_ctc: ctc,
+      basic_monthly: input.basic_monthly !== undefined ? Number(input.basic_monthly) : auto.basic_monthly,
+      hra_monthly: input.hra_monthly !== undefined ? Number(input.hra_monthly) : auto.hra_monthly,
+      special_allowance_monthly:
+        input.special_allowance_monthly !== undefined
+          ? Number(input.special_allowance_monthly)
+          : auto.special_allowance_monthly,
+      conveyance_monthly:
+        input.conveyance_monthly !== undefined ? Number(input.conveyance_monthly) : auto.conveyance_monthly,
+      employee_pf_monthly:
+        input.employee_pf_monthly !== undefined ? Number(input.employee_pf_monthly) : auto.employee_pf_monthly,
+      employer_pf_monthly:
+        input.employer_pf_monthly !== undefined ? Number(input.employer_pf_monthly) : auto.employer_pf_monthly,
+      professional_tax_monthly:
+        input.professional_tax_monthly !== undefined
+          ? Number(input.professional_tax_monthly)
+          : auto.professional_tax_monthly,
+      tds_monthly: input.tds_monthly !== undefined ? Number(input.tds_monthly) : auto.tds_monthly,
+      bank_name: input.bank_name || existing?.bank_name || 'HDFC Bank',
+      bank_account_last4: input.bank_account_last4 || existing?.bank_account_last4 || '4810',
+      pan_number: input.pan_number || existing?.pan_number || 'ABCDE1234F',
+      effective_from: input.effective_from || existing?.effective_from || now.slice(0, 10),
+      updated_at: now,
+    };
+
+    if (idx !== -1) db.salary_structures[idx] = record;
+    else db.salary_structures.push(record);
+    this.save();
+    return record;
+  }
+
+  generateSalarySlips(orgId: string, month: string): LokusSalarySlip[] {
+    const db = this.load();
+    const now = new Date().toISOString();
+    const [y, m] = month.split('-').map(Number);
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    const monthLabel = `${monthNames[((m || 1) - 1) % 12]} ${y || 2026}`;
+    const orgEmployees = db.employees.filter((e) => e.organization_id === orgId);
+    const createdOrUpdated: LokusSalarySlip[] = [];
+
+    for (const emp of orgEmployees) {
+      const struct =
+        db.salary_structures.find((s) => s.employee_id === emp.id) ||
+        this.upsertSalaryStructure({ organization_id: orgId, employee_id: emp.id });
+
+      const existingIdx = db.salary_slips.findIndex(
+        (s) => s.employee_id === emp.id && s.month === month
+      );
+      if (existingIdx !== -1 && db.salary_slips[existingIdx].status === 'Paid') {
+        createdOrUpdated.push(db.salary_slips[existingIdx]);
+        continue;
+      }
+
+      const workingDays = 22;
+      const monthLeaves = db.leave_requests.filter(
+        (l) =>
+          l.employee_id === emp.id &&
+          l.status === 'Approved' &&
+          l.start_date.startsWith(month)
+      );
+      const lopDays = monthLeaves
+        .filter((l) => !l.is_paid)
+        .reduce((acc, l) => acc + l.days, 0);
+      const paidLeavesUsed = monthLeaves
+        .filter((l) => l.is_paid)
+        .reduce((acc, l) => acc + l.days, 0);
+      const paidDays = Math.max(0, workingDays - lopDays);
+
+      const monthBonuses = db.bonuses.filter(
+        (b) =>
+          b.employee_id === emp.id &&
+          b.payout_month === month &&
+          (b.status === 'Approved' || b.status === 'Credited')
+      );
+      const bonusAmount = monthBonuses.reduce((acc, b) => acc + b.amount, 0);
+
+      const baseMonthlyGross =
+        struct.basic_monthly +
+        struct.hra_monthly +
+        struct.special_allowance_monthly +
+        struct.conveyance_monthly;
+      const lopDeduction = lopDays > 0 ? Math.round((baseMonthlyGross / workingDays) * lopDays) : 0;
+      const grossEarnings = baseMonthlyGross + bonusAmount;
+      const totalDeductions =
+        struct.employee_pf_monthly +
+        struct.professional_tax_monthly +
+        struct.tds_monthly +
+        lopDeduction;
+      const netPay = Math.max(0, grossEarnings - totalDeductions);
+      const slipId = `slip-${emp.id}-${month}`;
+      const hash = sha256Hex(`${slipId}:${emp.id}:${month}:${netPay}`);
+
+      const slip: LokusSalarySlip = {
+        id: slipId,
+        organization_id: orgId,
+        slip_number: `SLIP-${month.replace('-', '')}-${emp.id.toUpperCase()}`,
+        employee_id: emp.id,
+        month,
+        month_label: monthLabel,
+        working_days: workingDays,
+        paid_days: paidDays,
+        paid_leaves_used: paidLeavesUsed,
+        lop_days: lopDays,
+        basic: struct.basic_monthly,
+        hra: struct.hra_monthly,
+        special_allowance: struct.special_allowance_monthly,
+        conveyance: struct.conveyance_monthly,
+        bonus_amount: bonusAmount,
+        gross_earnings: grossEarnings,
+        employee_pf: struct.employee_pf_monthly,
+        employer_pf: struct.employer_pf_monthly,
+        professional_tax: struct.professional_tax_monthly,
+        tds: struct.tds_monthly,
+        lop_deduction: lopDeduction,
+        total_deductions: totalDeductions,
+        net_pay: netPay,
+        status: 'Processed',
+        seal_ref: generateSealRef('Asset', slipId, hash),
+        paid_at: null,
+        generated_at: now,
+      };
+
+      if (existingIdx !== -1) db.salary_slips[existingIdx] = slip;
+      else db.salary_slips.unshift(slip);
+      createdOrUpdated.push(slip);
+    }
+
+    this.save();
+    return createdOrUpdated;
+  }
+
+  markSlipPaid(slipId: string): LokusSalarySlip | null {
+    const db = this.load();
+    const slip = db.salary_slips.find((s) => s.id === slipId);
+    if (!slip) return null;
+
+    const now = new Date().toISOString();
+    slip.status = 'Paid';
+    slip.paid_at = now;
+
+    // Credit linked approved bonuses
+    for (const bon of db.bonuses) {
+      if (
+        bon.employee_id === slip.employee_id &&
+        bon.payout_month === slip.month &&
+        bon.status === 'Approved'
+      ) {
+        bon.status = 'Credited';
+        bon.credited_at = now;
+      }
+    }
+
+    // Credit monthly PF contribution to passbook if not already posted
+    const existingPfTx = db.pf_transactions.find(
+      (t) =>
+        t.employee_id === slip.employee_id &&
+        t.month === slip.month &&
+        t.type === 'Monthly Contribution'
+    );
+    if (!existingPfTx) {
+      const pf = db.pf_accounts.find((p) => p.employee_id === slip.employee_id);
+      if (pf) {
+        pf.employee_share_total += slip.employee_pf;
+        pf.employer_share_total += slip.employer_pf;
+        pf.total_balance += slip.employee_pf + slip.employer_pf;
+        pf.updated_at = now;
+
+        db.pf_transactions.unshift({
+          id: `pftx-${slip.employee_id}-${slip.month}`,
+          organization_id: slip.organization_id,
+          employee_id: slip.employee_id,
+          month: slip.month,
+          type: 'Monthly Contribution',
+          employee_contribution: slip.employee_pf,
+          employer_contribution: slip.employer_pf,
+          total_amount: slip.employee_pf + slip.employer_pf,
+          balance_after: pf.total_balance,
+          reference: `EPFO-ECR-${slip.month.replace('-', '')}-${slip.employee_id.toUpperCase()}`,
+          created_at: now,
+        });
+      }
+    }
+
+    this.save();
+    return slip;
+  }
+
+  createBonus(input: Omit<LokusBonusRecord, 'id' | 'created_at' | 'credited_at'>): LokusBonusRecord {
+    const db = this.load();
+    const now = new Date().toISOString();
+    const record: LokusBonusRecord = {
+      ...input,
+      id: `bon-${Date.now()}-${Math.floor(Math.random() * 100)}`,
+      created_at: now,
+      credited_at: input.status === 'Credited' ? now : null,
+    };
+    db.bonuses.unshift(record);
+    this.save();
+    return record;
+  }
+
+  updateBonusStatus(id: string, status: LokusBonusRecord['status'], actorId: string): LokusBonusRecord | null {
+    const db = this.load();
+    const bon = db.bonuses.find((b) => b.id === id);
+    if (!bon) return null;
+    bon.status = status;
+    if (status === 'Approved' || status === 'Credited') bon.approved_by_id = actorId;
+    if (status === 'Credited') bon.credited_at = new Date().toISOString();
+    this.save();
+    return bon;
+  }
+
+  updatePFAccount(employeeId: string, updates: Partial<LokusPFAccount>): LokusPFAccount | null {
+    const db = this.load();
+    const idx = db.pf_accounts.findIndex((p) => p.employee_id === employeeId);
+    if (idx === -1) return null;
+    db.pf_accounts[idx] = {
+      ...db.pf_accounts[idx],
+      ...updates,
+      updated_at: new Date().toISOString(),
+    };
+    this.save();
+    return db.pf_accounts[idx];
+  }
+
+  addPFTransaction(input: {
+    organization_id: string;
+    employee_id: string;
+    month: string;
+    type: LokusPFTransaction['type'];
+    employee_contribution: number;
+    employer_contribution: number;
+  }): LokusPFTransaction | null {
+    const db = this.load();
+    const pf = db.pf_accounts.find((p) => p.employee_id === input.employee_id);
+    if (!pf) return null;
+
+    const now = new Date().toISOString();
+    const delta =
+      input.type === 'PF Advance'
+        ? -(Math.abs(input.employee_contribution) + Math.abs(input.employer_contribution))
+        : Math.abs(input.employee_contribution) + Math.abs(input.employer_contribution);
+
+    pf.employee_share_total = Math.max(0, pf.employee_share_total + (input.type === 'PF Advance' ? -Math.abs(input.employee_contribution) : input.employee_contribution));
+    pf.employer_share_total = Math.max(0, pf.employer_share_total + (input.type === 'PF Advance' ? -Math.abs(input.employer_contribution) : input.employer_contribution));
+    pf.total_balance = Math.max(0, pf.total_balance + delta);
+    pf.updated_at = now;
+
+    const tx: LokusPFTransaction = {
+      id: `pftx-${Date.now()}-${Math.floor(Math.random() * 100)}`,
+      organization_id: input.organization_id,
+      employee_id: input.employee_id,
+      month: input.month,
+      type: input.type,
+      employee_contribution: input.employee_contribution,
+      employer_contribution: input.employer_contribution,
+      total_amount: delta,
+      balance_after: pf.total_balance,
+      reference: `EPFO-${Date.now().toString().slice(-6)}`,
+      created_at: now,
+    };
+    db.pf_transactions.unshift(tx);
+    this.save();
+    return tx;
+  }
+
+  // --- Organisation Requests Mutators ---
+  createOrgRequest(
+    input: Omit<LokusOrgRequest, 'id' | 'request_number' | 'status' | 'reviewed_by_id' | 'reviewer_notes' | 'created_at' | 'updated_at'>
+  ): LokusOrgRequest {
+    const db = this.load();
+    const now = new Date().toISOString();
+    const num = `REQ-2026-${String(db.org_requests.length + 15).padStart(3, '0')}`;
+    const record: LokusOrgRequest = {
+      ...input,
+      id: `req-${Date.now()}-${Math.floor(Math.random() * 100)}`,
+      request_number: num,
+      status: 'Pending',
+      reviewed_by_id: null,
+      reviewer_notes: null,
+      created_at: now,
+      updated_at: now,
+    };
+    db.org_requests.unshift(record);
+    this.save();
+    return record;
+  }
+
+  reviewOrgRequest(
+    id: string,
+    status: LokusOrgRequest['status'],
+    reviewerId: string,
+    notes?: string
+  ): LokusOrgRequest | null {
+    const db = this.load();
+    const req = db.org_requests.find((r) => r.id === id);
+    if (!req) return null;
+    req.status = status;
+    req.reviewed_by_id = reviewerId;
+    if (notes !== undefined) req.reviewer_notes = notes;
+    req.updated_at = new Date().toISOString();
+    this.save();
+    return req;
+  }
+
+  deleteOrgRequest(id: string) {
+    const db = this.load();
+    db.org_requests = db.org_requests.filter((r) => r.id !== id);
+    this.save();
   }
 }
 

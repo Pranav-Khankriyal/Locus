@@ -1,832 +1,2633 @@
 {
-    "organizations":  [
-                          {
-                              "id":  "11111111-1111-1111-1111-111111111111",
-                              "name":  "Acme Corporation",
-                              "code":  "ACME-CORP",
-                              "description":  "Enterprise organization workspace running Lokus Trust \u0026 Verification Platform.",
-                              "created_at":  "2026-11-06T20:16:46.285Z"
-                          }
-                      ],
-    "units":  [
-                  {
-                      "id":  "u-1",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Executive Leadership",
-                      "unit_type":  "division",
-                      "parent_unit_id":  null,
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "u-2",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Engineering",
-                      "unit_type":  "division",
-                      "parent_unit_id":  null,
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "u-3",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Cloud Infrastructure \u0026 Security",
-                      "unit_type":  "department",
-                      "parent_unit_id":  "u-2",
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "u-4",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Product \u0026 Design",
-                      "unit_type":  "department",
-                      "parent_unit_id":  "u-2",
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "u-5",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "People \u0026 Operations",
-                      "unit_type":  "division",
-                      "parent_unit_id":  null,
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  }
-              ],
-    "users":  [
-                  {
-                      "id":  "22222222-2222-2222-2222-222222222222",
-                      "email":  "admin@lokus.io",
-                      "password_hash":  "e438f556a18b4cf37659569af06ec11e96bceace27c361392125d07c75863234",
-                      "is_active":  true,
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  }
-              ],
-    "roles":  [
-                  {
-                      "id":  "r-1",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Organisation Administrator",
-                      "description":  "Complete system access across all Lokus modules.",
-                      "is_system":  true,
-                      "permissions":  [
-                                          {
-                                              "id":  "p-1",
-                                              "code":  "organisation.read",
-                                              "description":  "View organization data"
-                                          },
-                                          {
-                                              "id":  "p-2",
-                                              "code":  "organisation.manage",
-                                              "description":  "Manage organization settings"
-                                          },
-                                          {
-                                              "id":  "p-3",
-                                              "code":  "organisation.manage_units",
-                                              "description":  "Manage organization units"
-                                          },
-                                          {
-                                              "id":  "p-4",
-                                              "code":  "employee.read",
-                                              "description":  "View employees"
-                                          },
-                                          {
-                                              "id":  "p-5",
-                                              "code":  "employee.create",
-                                              "description":  "Create employees"
-                                          },
-                                          {
-                                              "id":  "p-6",
-                                              "code":  "employee.update",
-                                              "description":  "Update employees"
-                                          },
-                                          {
-                                              "id":  "p-7",
-                                              "code":  "employee.delete",
-                                              "description":  "Delete employees"
-                                          },
-                                          {
-                                              "id":  "p-8",
-                                              "code":  "employee.import",
-                                              "description":  "Import employees"
-                                          },
-                                          {
-                                              "id":  "p-9",
-                                              "code":  "asset.read",
-                                              "description":  "View assets and categories"
-                                          },
-                                          {
-                                              "id":  "p-10",
-                                              "code":  "asset.create",
-                                              "description":  "Create assets"
-                                          },
-                                          {
-                                              "id":  "p-11",
-                                              "code":  "asset.update",
-                                              "description":  "Update assets"
-                                          },
-                                          {
-                                              "id":  "p-12",
-                                              "code":  "asset.assign",
-                                              "description":  "Assign assets"
-                                          },
-                                          {
-                                              "id":  "p-13",
-                                              "code":  "asset.transfer",
-                                              "description":  "Transfer assets"
-                                          },
-                                          {
-                                              "id":  "p-14",
-                                              "code":  "asset.return",
-                                              "description":  "Return assets"
-                                          },
-                                          {
-                                              "id":  "p-15",
-                                              "code":  "asset.transaction.read",
-                                              "description":  "View asset history"
-                                          },
-                                          {
-                                              "id":  "p-16",
-                                              "code":  "role.read",
-                                              "description":  "View roles"
-                                          },
-                                          {
-                                              "id":  "p-17",
-                                              "code":  "role.assign",
-                                              "description":  "Assign roles"
-                                          },
-                                          {
-                                              "id":  "p-18",
-                                              "code":  "role.revoke",
-                                              "description":  "Revoke roles"
-                                          },
-                                          {
-                                              "id":  "p-19",
-                                              "code":  "role.manage",
-                                              "description":  "Manage custom roles"
-                                          },
-                                          {
-                                              "id":  "p-20",
-                                              "code":  "audit.read",
-                                              "description":  "View audit events"
-                                          },
-                                          {
-                                              "id":  "p-21",
-                                              "code":  "verification.identity",
-                                              "description":  "Verify identities"
-                                          },
-                                          {
-                                              "id":  "p-22",
-                                              "code":  "verification.asset",
-                                              "description":  "Verify assets"
-                                          },
-                                          {
-                                              "id":  "p-23",
-                                              "code":  "verification.read",
-                                              "description":  "View verification status"
-                                          },
-                                          {
-                                              "id":  "p-24",
-                                              "code":  "verification.manage",
-                                              "description":  "Manage verification seals"
-                                          },
-                                          {
-                                              "id":  "p-25",
-                                              "code":  "blockchain.read",
-                                              "description":  "View integrity status"
-                                          },
-                                          {
-                                              "id":  "p-26",
-                                              "code":  "blockchain.anchor",
-                                              "description":  "Issue integrity seals"
-                                          },
-                                          {
-                                              "id":  "p-27",
-                                              "code":  "blockchain.verify",
-                                              "description":  "Verify integrity seals"
-                                          },
-                                          {
-                                              "id":  "p-28",
-                                              "code":  "blockchain.transaction.read",
-                                              "description":  "View seal transactions"
-                                          }
-                                      ],
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "r-2",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Asset Manager",
-                      "description":  "Manages physical and digital assets, custody assignments, and returns.",
-                      "is_system":  false,
-                      "permissions":  [
-                                          {
-                                              "id":  "p-9",
-                                              "code":  "asset.read",
-                                              "description":  "View assets and categories"
-                                          },
-                                          {
-                                              "id":  "p-10",
-                                              "code":  "asset.create",
-                                              "description":  "Create assets"
-                                          },
-                                          {
-                                              "id":  "p-11",
-                                              "code":  "asset.update",
-                                              "description":  "Update assets"
-                                          },
-                                          {
-                                              "id":  "p-12",
-                                              "code":  "asset.assign",
-                                              "description":  "Assign assets"
-                                          },
-                                          {
-                                              "id":  "p-13",
-                                              "code":  "asset.transfer",
-                                              "description":  "Transfer assets"
-                                          },
-                                          {
-                                              "id":  "p-14",
-                                              "code":  "asset.return",
-                                              "description":  "Return assets"
-                                          },
-                                          {
-                                              "id":  "p-15",
-                                              "code":  "asset.transaction.read",
-                                              "description":  "View asset history"
-                                          },
-                                          {
-                                              "id":  "p-21",
-                                              "code":  "verification.identity",
-                                              "description":  "Verify identities"
-                                          },
-                                          {
-                                              "id":  "p-22",
-                                              "code":  "verification.asset",
-                                              "description":  "Verify assets"
-                                          },
-                                          {
-                                              "id":  "p-23",
-                                              "code":  "verification.read",
-                                              "description":  "View verification status"
-                                          },
-                                          {
-                                              "id":  "p-24",
-                                              "code":  "verification.manage",
-                                              "description":  "Manage verification seals"
-                                          }
-                                      ],
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  },
-                  {
-                      "id":  "r-3",
-                      "organization_id":  "11111111-1111-1111-1111-111111111111",
-                      "name":  "Employee",
-                      "description":  "Standard member role with access to own profile and assets.",
-                      "is_system":  false,
-                      "permissions":  [
-                                          {
-                                              "id":  "p-4",
-                                              "code":  "employee.read",
-                                              "description":  "View employees"
-                                          },
-                                          {
-                                              "id":  "p-9",
-                                              "code":  "asset.read",
-                                              "description":  "View assets and categories"
-                                          },
-                                          {
-                                              "id":  "p-23",
-                                              "code":  "verification.read",
-                                              "description":  "View verification status"
-                                          }
-                                      ],
-                      "created_at":  "2026-11-06T20:16:46.285Z"
-                  }
-              ],
-    "user_roles":  [
-                       {
-                           "user_id":  "22222222-2222-2222-2222-222222222222",
-                           "role_id":  "r-1",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111"
-                       }
-                   ],
-    "employees":  [
-                      {
-                          "id":  "e-1",
-                          "organization_id":  "11111111-1111-1111-1111-111111111111",
-                          "organization_unit_id":  "u-1",
-                          "employee_code":  "EMP-001",
-                          "first_name":  "Elena",
-                          "last_name":  "Vance",
-                          "email":  "admin@lokus.io",
-                          "designation":  "Chief Technology Officer",
-                          "employment_status":  "active",
-                          "manager_employee_id":  null,
-                          "created_at":  "2026-11-06T20:16:46.285Z"
-                      },
-                      {
-                          "id":  "e-2",
-                          "organization_id":  "11111111-1111-1111-1111-111111111111",
-                          "organization_unit_id":  "u-2",
-                          "employee_code":  "EMP-002",
-                          "first_name":  "Marcus",
-                          "last_name":  "Chen",
-                          "email":  "marcus.chen@lokus.io",
-                          "designation":  "Principal Security Architect",
-                          "employment_status":  "active",
-                          "manager_employee_id":  "e-1",
-                          "created_at":  "2026-11-06T20:16:46.285Z"
-                      },
-                      {
-                          "id":  "e-3",
-                          "organization_id":  "11111111-1111-1111-1111-111111111111",
-                          "organization_unit_id":  "u-3",
-                          "employee_code":  "EMP-003",
-                          "first_name":  "Sarah",
-                          "last_name":  "Connor",
-                          "email":  "sarah.connor@lokus.io",
-                          "designation":  "Lead DevOps Engineer",
-                          "employment_status":  "active",
-                          "manager_employee_id":  "e-2",
-                          "created_at":  "2026-11-06T20:16:46.285Z"
-                      },
-                      {
-                          "id":  "e-4",
-                          "organization_id":  "11111111-1111-1111-1111-111111111111",
-                          "organization_unit_id":  "u-4",
-                          "employee_code":  "EMP-004",
-                          "first_name":  "David",
-                          "last_name":  "Kim",
-                          "email":  "david.kim@lokus.io",
-                          "designation":  "Senior Product Designer",
-                          "employment_status":  "active",
-                          "manager_employee_id":  "e-1",
-                          "created_at":  "2026-11-06T20:16:46.285Z"
-                      },
-                      {
-                          "id":  "e-5",
-                          "organization_id":  "11111111-1111-1111-1111-111111111111",
-                          "organization_unit_id":  "u-5",
-                          "employee_code":  "EMP-005",
-                          "first_name":  "Aisha",
-                          "last_name":  "Patel",
-                          "email":  "aisha.patel@lokus.io",
-                          "designation":  "People Operations Lead",
-                          "employment_status":  "active",
-                          "manager_employee_id":  "e-1",
-                          "created_at":  "2026-11-06T20:16:46.285Z"
-                      }
-                  ],
-    "identities":  [
-                       {
-                           "id":  "id-e-1",
-                           "employee_id":  "e-1",
-                           "did":  "did:lokus:acme-corp:e-1",
-                           "status":  "Verified",
-                           "hash":  "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
-                           "seal_ref":  "LOKUS-SEAL-IDE-E1-F0A021612D",
-                           "verified_at":  "2026-11-06T20:16:46.285Z",
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "id-e-2",
-                           "employee_id":  "e-2",
-                           "did":  "did:lokus:acme-corp:e-2",
-                           "status":  "Verified",
-                           "hash":  "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
-                           "seal_ref":  "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
-                           "verified_at":  "2026-11-06T20:16:46.285Z",
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "id-e-3",
-                           "employee_id":  "e-3",
-                           "did":  "did:lokus:acme-corp:e-3",
-                           "status":  "Verified",
-                           "hash":  "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
-                           "seal_ref":  "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
-                           "verified_at":  "2026-11-06T20:16:46.285Z",
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "id-e-4",
-                           "employee_id":  "e-4",
-                           "did":  "did:lokus:acme-corp:e-4",
-                           "status":  "Verified",
-                           "hash":  "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
-                           "seal_ref":  "LOKUS-SEAL-IDE-E4-292434C9EC",
-                           "verified_at":  "2026-11-06T20:16:46.285Z",
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "id-e-5",
-                           "employee_id":  "e-5",
-                           "did":  "did:lokus:acme-corp:e-5",
-                           "status":  "Verified",
-                           "hash":  "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
-                           "seal_ref":  "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
-                           "verified_at":  "2026-11-06T20:16:46.285Z",
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       }
-                   ],
-    "categories":  [
-                       {
-                           "id":  "c-1",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Laptops \u0026 Workstations",
-                           "type":  "Physical",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "c-2",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Hardware Security Keys",
-                           "type":  "Physical",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "c-3",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Monitors \u0026 Displays",
-                           "type":  "Physical",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "c-4",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Cloud Infrastructure Keys",
-                           "type":  "Digital",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "c-5",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Cryptographic SSL Certificates",
-                           "type":  "Digital",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "c-6",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "name":  "Enterprise Software Licenses",
-                           "type":  "Digital",
-                           "parent_category_id":  null,
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       }
-                   ],
-    "assets":  [
-                   {
-                       "id":  "a-1",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-1",
-                       "asset_code":  "AST-1001",
-                       "name":  "MacBook Pro 16\" M3 Max",
-                       "description":  "Engineering development workstation (64GB RAM, 2TB SSD)",
-                       "asset_type":  "Physical",
-                       "serial_number":  "C02G30X1MD6R",
-                       "location":  "San Francisco HQ - Building A",
-                       "condition":  "Excellent",
-                       "status":  "ASSIGNED",
-                       "current_employee_id":  "e-1",
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A1-DD4E944B49",
-                       "canonical_hash":  "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
-                       "metadata":  {
-                                        "condition":  "Excellent"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   },
-                   {
-                       "id":  "a-2",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-2",
-                       "asset_code":  "AST-1002",
-                       "name":  "YubiKey 5C NFC Enterprise Security Key",
-                       "description":  "Hardware multi-factor token for production cluster access",
-                       "asset_type":  "Physical",
-                       "serial_number":  "YK-9482-10842",
-                       "location":  "Security Operations Vault",
-                       "condition":  "New",
-                       "status":  "ASSIGNED",
-                       "current_employee_id":  "e-2",
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A2-F80CFF56FE",
-                       "canonical_hash":  "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
-                       "metadata":  {
-                                        "condition":  "New"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   },
-                   {
-                       "id":  "a-3",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-3",
-                       "asset_code":  "AST-1003",
-                       "name":  "Dell UltraSharp 32\" 4K USB-C Hub Monitor",
-                       "description":  "Design and analysis display with 90W power delivery",
-                       "asset_type":  "Physical",
-                       "serial_number":  "CN-098F3D-74261",
-                       "location":  "San Francisco HQ - Desk 402",
-                       "condition":  "Good",
-                       "status":  "ASSIGNED",
-                       "current_employee_id":  "e-4",
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A3-45817E73E6",
-                       "canonical_hash":  "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
-                       "metadata":  {
-                                        "condition":  "Good"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   },
-                   {
-                       "id":  "a-4",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-4",
-                       "asset_code":  "AST-2001",
-                       "name":  "AWS Production Primary Root KMS Key",
-                       "description":  "Cryptographic envelope encryption master key for production DB",
-                       "asset_type":  "Digital",
-                       "serial_number":  "arn:aws:kms:us-west-2:10948271:key/a1b2c3d4",
-                       "location":  "AWS us-west-2 Oregon",
-                       "condition":  "Active",
-                       "status":  "ASSIGNED",
-                       "current_employee_id":  "e-3",
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A4-338965855E",
-                       "canonical_hash":  "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
-                       "metadata":  {
-                                        "condition":  "Active",
-                                        "expires_at":  "2028-12-31"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   },
-                   {
-                       "id":  "a-5",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-5",
-                       "asset_code":  "AST-2002",
-                       "name":  "Enterprise Wildcard SSL Certificate (*.lokus.internal)",
-                       "description":  "DigiCert 2048-bit RSA TLS server identity certificate",
-                       "asset_type":  "Digital",
-                       "serial_number":  "SHA256:F4:7A:B3:91:0C:4E",
-                       "location":  "Global Edge Ingress",
-                       "condition":  "Active",
-                       "status":  "AVAILABLE",
-                       "current_employee_id":  null,
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A5-6B0370E91F",
-                       "canonical_hash":  "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
-                       "metadata":  {
-                                        "condition":  "Active",
-                                        "expires_at":  "2027-06-30"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   },
-                   {
-                       "id":  "a-6",
-                       "organization_id":  "11111111-1111-1111-1111-111111111111",
-                       "asset_category_id":  "c-6",
-                       "asset_code":  "AST-2003",
-                       "name":  "Figma Enterprise Organization Seat License",
-                       "description":  "Design system team collaboration seat",
-                       "asset_type":  "Digital",
-                       "serial_number":  "LIC-FIGMA-2026-991",
-                       "location":  "Cloud SaaS",
-                       "condition":  "Active",
-                       "status":  "ASSIGNED",
-                       "current_employee_id":  "e-4",
-                       "integrity_status":  "Verified",
-                       "integrity_seal_ref":  "LOKUS-SEAL-ASS-A6-526C5EECD2",
-                       "canonical_hash":  "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
-                       "metadata":  {
-                                        "condition":  "Active"
-                                    },
-                       "created_at":  "2026-11-06T20:16:46.285Z"
-                   }
-               ],
-    "transactions":  [
-                         {
-                             "id":  "tx-1",
-                             "asset_id":  "a-1",
-                             "transaction_type":  "ASSIGN",
-                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
-                             "new_employee_id":  "e-1",
-                             "previous_employee_id":  null,
-                             "notes":  "Initial executive laptop deployment",
-                             "created_at":  "2026-11-06T20:16:46.285Z"
-                         },
-                         {
-                             "id":  "tx-2",
-                             "asset_id":  "a-2",
-                             "transaction_type":  "ASSIGN",
-                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
-                             "new_employee_id":  "e-2",
-                             "previous_employee_id":  null,
-                             "notes":  "Hardware security key issued for security architect",
-                             "created_at":  "2026-11-06T20:16:46.285Z"
-                         },
-                         {
-                             "id":  "tx-3",
-                             "asset_id":  "a-3",
-                             "transaction_type":  "ASSIGN",
-                             "performed_by_user_id":  "22222222-2222-2222-2222-222222222222",
-                             "new_employee_id":  "e-4",
-                             "previous_employee_id":  null,
-                             "notes":  "Monitor issued for UI/UX workstation setup",
-                             "created_at":  "2026-11-06T20:16:46.285Z"
-                         }
-                     ],
-    "audit_logs":  [
-                       {
-                           "id":  "log-1",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
-                           "action":  "ORGANISATION_INITIALIZED",
-                           "entity_type":  "Organisation",
-                           "entity_id":  "11111111-1111-1111-1111-111111111111",
-                           "metadata":  {
-                                            "name":  "Acme Corporation",
-                                            "code":  "ACME-CORP"
-                                        },
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "log-2",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
-                           "action":  "SECURITY_POLICY_CONFIGURED",
-                           "entity_type":  "Role",
-                           "entity_id":  "r-1",
-                           "metadata":  {
-                                            "role":  "Organisation Administrator",
-                                            "permissionsCount":  28
-                                        },
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "log-3",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
-                           "action":  "PERSONNEL_ONBOARDED",
-                           "entity_type":  "Employee",
-                           "entity_id":  "e-1",
-                           "metadata":  {
-                                            "name":  "Elena Vance",
-                                            "title":  "Chief Technology Officer"
-                                        },
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "log-4",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
-                           "action":  "CRYPTOGRAPHIC_SEAL_ISSUED",
-                           "entity_type":  "Identity",
-                           "entity_id":  "e-1",
-                           "metadata":  {
-                                            "algorithm":  "SHA-256",
-                                            "did":  "did:lokus:acme-corp:e-1"
-                                        },
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       },
-                       {
-                           "id":  "log-5",
-                           "organization_id":  "11111111-1111-1111-1111-111111111111",
-                           "actor_user_id":  "22222222-2222-2222-2222-222222222222",
-                           "action":  "ASSET_CUSTODY_ASSIGNED",
-                           "entity_type":  "Asset",
-                           "entity_id":  "a-1",
-                           "metadata":  {
-                                            "asset":  "MacBook Pro 16\" M3 Max",
-                                            "assignee":  "Elena Vance"
-                                        },
-                           "created_at":  "2026-11-06T20:16:46.285Z"
-                       }
-                   ],
-    "integrity_seals":  [
-                            {
-                                "id":  "seal-id-e-1",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Identity",
-                                "entity_id":  "e-1",
-                                "record_key":  "fdf8d433348de56a71681162b4177bdfd5535e33fd1bca6f79d60aaf540f878c",
-                                "record_hash":  "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
-                                "seal_ref":  "LOKUS-SEAL-IDE-E1-F0A021612D",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-id-e-2",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Identity",
-                                "entity_id":  "e-2",
-                                "record_key":  "8bc58dbceb93ed85370187fad520a628da278b847d6ec318be8cfe744ccc3b87",
-                                "record_hash":  "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
-                                "seal_ref":  "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-id-e-3",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Identity",
-                                "entity_id":  "e-3",
-                                "record_key":  "16516e0b5fffdac018b1a92fc72aa9d85696bf9681b4122d139162bf62b042d0",
-                                "record_hash":  "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
-                                "seal_ref":  "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-id-e-4",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Identity",
-                                "entity_id":  "e-4",
-                                "record_key":  "577b5493bc38a6062f3fbcc04430b2a7517ed176cfdf1779db4ec24905048efc",
-                                "record_hash":  "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
-                                "seal_ref":  "LOKUS-SEAL-IDE-E4-292434C9EC",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-id-e-5",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Identity",
-                                "entity_id":  "e-5",
-                                "record_key":  "60e86130de8cb43d3f7a4bada7a8c535989ec042a12dc280e2679e72a03075cb",
-                                "record_hash":  "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
-                                "seal_ref":  "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-1",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-1",
-                                "record_key":  "167794c3bc6201fbd8a628bfe7d7cb5b2f4ce1082be3a802d7a99863fd2d6f81",
-                                "record_hash":  "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A1-DD4E944B49",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-2",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-2",
-                                "record_key":  "1854b8b2f31287c00df9e2627e48ed0e2d883469fa5ebaf7c1ee6c03f1ec01d4",
-                                "record_hash":  "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A2-F80CFF56FE",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-3",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-3",
-                                "record_key":  "494f3df0571f06100f033f3a12b1285917ef9b407a29bb5c3ca77cef71552dc0",
-                                "record_hash":  "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A3-45817E73E6",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-4",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-4",
-                                "record_key":  "00ddbda10048e29613d6075467f02422ba9f209a5d013eeebcb37959e95e0467",
-                                "record_hash":  "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A4-338965855E",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-5",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-5",
-                                "record_key":  "94b22aa92443cbd190cb4fc9bdf781b28fd0f13e6132c5b7133e00b4c4ba6ffa",
-                                "record_hash":  "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A5-6B0370E91F",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            },
-                            {
-                                "id":  "seal-ast-a-6",
-                                "organization_id":  "11111111-1111-1111-1111-111111111111",
-                                "entity_type":  "Asset",
-                                "entity_id":  "a-6",
-                                "record_key":  "e0dc86d552ae77f8b895660594f42ef5c46928ab590848a7002e11a85d081381",
-                                "record_hash":  "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
-                                "seal_ref":  "LOKUS-SEAL-ASS-A6-526C5EECD2",
-                                "sealed_at":  "2026-11-06T20:16:46.285Z",
-                                "algorithm":  "SHA-256"
-                            }
-                        ]
+  "organizations": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "name": "Acme Corporation",
+      "code": "ACME-CORP",
+      "description": "Enterprise organization workspace running Lokus Trust & Verification Platform.",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Executive Leadership",
+      "unit_type": "division",
+      "parent_unit_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "u-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Engineering",
+      "unit_type": "division",
+      "parent_unit_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "u-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Cloud Infrastructure & Security",
+      "unit_type": "department",
+      "parent_unit_id": "u-2",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "u-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Product & Design",
+      "unit_type": "department",
+      "parent_unit_id": "u-2",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "u-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "People & Operations",
+      "unit_type": "division",
+      "parent_unit_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "email": "admin@lokus.io",
+      "password_hash": "e438f556a18b4cf37659569af06ec11e96bceace27c361392125d07c75863234",
+      "is_active": true,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "roles": [
+    {
+      "id": "r-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Organisation Administrator",
+      "description": "Complete system access across all Lokus modules.",
+      "is_system": true,
+      "permissions": [
+        {
+          "id": "p-1",
+          "code": "organisation.read",
+          "description": "View organization data"
+        },
+        {
+          "id": "p-2",
+          "code": "organisation.manage",
+          "description": "Manage organization settings"
+        },
+        {
+          "id": "p-3",
+          "code": "organisation.manage_units",
+          "description": "Manage organization units"
+        },
+        {
+          "id": "p-4",
+          "code": "employee.read",
+          "description": "View employees"
+        },
+        {
+          "id": "p-5",
+          "code": "employee.create",
+          "description": "Create employees"
+        },
+        {
+          "id": "p-6",
+          "code": "employee.update",
+          "description": "Update employees"
+        },
+        {
+          "id": "p-7",
+          "code": "employee.delete",
+          "description": "Delete employees"
+        },
+        {
+          "id": "p-8",
+          "code": "employee.import",
+          "description": "Import employees"
+        },
+        {
+          "id": "p-9",
+          "code": "asset.read",
+          "description": "View assets and categories"
+        },
+        {
+          "id": "p-10",
+          "code": "asset.create",
+          "description": "Create assets"
+        },
+        {
+          "id": "p-11",
+          "code": "asset.update",
+          "description": "Update assets"
+        },
+        {
+          "id": "p-12",
+          "code": "asset.assign",
+          "description": "Assign assets"
+        },
+        {
+          "id": "p-13",
+          "code": "asset.transfer",
+          "description": "Transfer assets"
+        },
+        {
+          "id": "p-14",
+          "code": "asset.return",
+          "description": "Return assets"
+        },
+        {
+          "id": "p-15",
+          "code": "asset.transaction.read",
+          "description": "View asset history"
+        },
+        {
+          "id": "p-16",
+          "code": "role.read",
+          "description": "View roles"
+        },
+        {
+          "id": "p-17",
+          "code": "role.assign",
+          "description": "Assign roles"
+        },
+        {
+          "id": "p-18",
+          "code": "role.revoke",
+          "description": "Revoke roles"
+        },
+        {
+          "id": "p-19",
+          "code": "role.manage",
+          "description": "Manage custom roles"
+        },
+        {
+          "id": "p-20",
+          "code": "audit.read",
+          "description": "View audit events"
+        },
+        {
+          "id": "p-21",
+          "code": "verification.identity",
+          "description": "Verify identities"
+        },
+        {
+          "id": "p-22",
+          "code": "verification.asset",
+          "description": "Verify assets"
+        },
+        {
+          "id": "p-23",
+          "code": "verification.read",
+          "description": "View verification status"
+        },
+        {
+          "id": "p-24",
+          "code": "verification.manage",
+          "description": "Manage verification seals"
+        },
+        {
+          "id": "p-25",
+          "code": "blockchain.read",
+          "description": "View integrity status"
+        },
+        {
+          "id": "p-26",
+          "code": "blockchain.anchor",
+          "description": "Issue integrity seals"
+        },
+        {
+          "id": "p-27",
+          "code": "blockchain.verify",
+          "description": "Verify integrity seals"
+        },
+        {
+          "id": "p-28",
+          "code": "blockchain.transaction.read",
+          "description": "View seal transactions"
+        },
+        {
+          "id": "p-29",
+          "code": "attendance.read",
+          "description": "View attendance records"
+        },
+        {
+          "id": "p-30",
+          "code": "attendance.manage",
+          "description": "Check-in, mark, and regularize attendance"
+        },
+        {
+          "id": "p-31",
+          "code": "leaves.read",
+          "description": "View leaves and paid leave balances"
+        },
+        {
+          "id": "p-32",
+          "code": "leaves.manage",
+          "description": "Apply, approve, and manage leave policies"
+        },
+        {
+          "id": "p-33",
+          "code": "payroll.read",
+          "description": "View salary slips, bonuses, and PF passbooks"
+        },
+        {
+          "id": "p-34",
+          "code": "payroll.manage",
+          "description": "Run payroll, manage structures, bonuses, and PF"
+        },
+        {
+          "id": "p-35",
+          "code": "requests.read",
+          "description": "View organizational employee requests"
+        },
+        {
+          "id": "p-36",
+          "code": "requests.manage",
+          "description": "Create, triage, and approve requests"
+        }
+      ],
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "r-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Asset Manager",
+      "description": "Manages physical and digital assets, custody assignments, and returns.",
+      "is_system": false,
+      "permissions": [
+        {
+          "id": "p-9",
+          "code": "asset.read",
+          "description": "View assets and categories"
+        },
+        {
+          "id": "p-10",
+          "code": "asset.create",
+          "description": "Create assets"
+        },
+        {
+          "id": "p-11",
+          "code": "asset.update",
+          "description": "Update assets"
+        },
+        {
+          "id": "p-12",
+          "code": "asset.assign",
+          "description": "Assign assets"
+        },
+        {
+          "id": "p-13",
+          "code": "asset.transfer",
+          "description": "Transfer assets"
+        },
+        {
+          "id": "p-14",
+          "code": "asset.return",
+          "description": "Return assets"
+        },
+        {
+          "id": "p-15",
+          "code": "asset.transaction.read",
+          "description": "View asset history"
+        },
+        {
+          "id": "p-21",
+          "code": "verification.identity",
+          "description": "Verify identities"
+        },
+        {
+          "id": "p-22",
+          "code": "verification.asset",
+          "description": "Verify assets"
+        },
+        {
+          "id": "p-23",
+          "code": "verification.read",
+          "description": "View verification status"
+        },
+        {
+          "id": "p-24",
+          "code": "verification.manage",
+          "description": "Manage verification seals"
+        }
+      ],
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "r-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Employee",
+      "description": "Standard member role with access to own profile and assets.",
+      "is_system": false,
+      "permissions": [
+        {
+          "id": "p-4",
+          "code": "employee.read",
+          "description": "View employees"
+        },
+        {
+          "id": "p-9",
+          "code": "asset.read",
+          "description": "View assets and categories"
+        },
+        {
+          "id": "p-23",
+          "code": "verification.read",
+          "description": "View verification status"
+        },
+        {
+          "id": "p-29",
+          "code": "attendance.read",
+          "description": "View attendance records"
+        },
+        {
+          "id": "p-30",
+          "code": "attendance.manage",
+          "description": "Check-in, mark, and regularize attendance"
+        },
+        {
+          "id": "p-31",
+          "code": "leaves.read",
+          "description": "View leaves and paid leave balances"
+        },
+        {
+          "id": "p-32",
+          "code": "leaves.manage",
+          "description": "Apply, approve, and manage leave policies"
+        },
+        {
+          "id": "p-33",
+          "code": "payroll.read",
+          "description": "View salary slips, bonuses, and PF passbooks"
+        },
+        {
+          "id": "p-35",
+          "code": "requests.read",
+          "description": "View organizational employee requests"
+        },
+        {
+          "id": "p-36",
+          "code": "requests.manage",
+          "description": "Create, triage, and approve requests"
+        }
+      ],
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "user_roles": [
+    {
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "role_id": "r-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111"
+    }
+  ],
+  "employees": [
+    {
+      "id": "e-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "organization_unit_id": "u-1",
+      "employee_code": "EMP-001",
+      "first_name": "Elena",
+      "last_name": "Vance",
+      "email": "admin@lokus.io",
+      "designation": "Chief Technology Officer",
+      "employment_status": "active",
+      "manager_employee_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "e-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "organization_unit_id": "u-2",
+      "employee_code": "EMP-002",
+      "first_name": "Marcus",
+      "last_name": "Chen",
+      "email": "marcus.chen@lokus.io",
+      "designation": "Principal Security Architect",
+      "employment_status": "active",
+      "manager_employee_id": "e-1",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "e-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "organization_unit_id": "u-3",
+      "employee_code": "EMP-003",
+      "first_name": "Sarah",
+      "last_name": "Connor",
+      "email": "sarah.connor@lokus.io",
+      "designation": "Lead DevOps Engineer",
+      "employment_status": "active",
+      "manager_employee_id": "e-2",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "e-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "organization_unit_id": "u-4",
+      "employee_code": "EMP-004",
+      "first_name": "David",
+      "last_name": "Kim",
+      "email": "david.kim@lokus.io",
+      "designation": "Senior Product Designer",
+      "employment_status": "active",
+      "manager_employee_id": "e-1",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "e-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "organization_unit_id": "u-5",
+      "employee_code": "EMP-005",
+      "first_name": "Aisha",
+      "last_name": "Patel",
+      "email": "aisha.patel@lokus.io",
+      "designation": "People Operations Lead",
+      "employment_status": "active",
+      "manager_employee_id": "e-1",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "identities": [
+    {
+      "id": "id-e-1",
+      "employee_id": "e-1",
+      "did": "did:lokus:acme-corp:e-1",
+      "status": "Verified",
+      "hash": "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
+      "seal_ref": "LOKUS-SEAL-IDE-E1-F0A021612D",
+      "verified_at": "2026-11-06T20:16:46.285Z",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "id-e-2",
+      "employee_id": "e-2",
+      "did": "did:lokus:acme-corp:e-2",
+      "status": "Verified",
+      "hash": "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
+      "seal_ref": "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
+      "verified_at": "2026-11-06T20:16:46.285Z",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "id-e-3",
+      "employee_id": "e-3",
+      "did": "did:lokus:acme-corp:e-3",
+      "status": "Verified",
+      "hash": "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
+      "seal_ref": "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
+      "verified_at": "2026-11-06T20:16:46.285Z",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "id-e-4",
+      "employee_id": "e-4",
+      "did": "did:lokus:acme-corp:e-4",
+      "status": "Verified",
+      "hash": "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
+      "seal_ref": "LOKUS-SEAL-IDE-E4-292434C9EC",
+      "verified_at": "2026-11-06T20:16:46.285Z",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "id-e-5",
+      "employee_id": "e-5",
+      "did": "did:lokus:acme-corp:e-5",
+      "status": "Verified",
+      "hash": "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
+      "seal_ref": "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
+      "verified_at": "2026-11-06T20:16:46.285Z",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "c-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Laptops & Workstations",
+      "type": "Physical",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "c-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Hardware Security Keys",
+      "type": "Physical",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "c-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Monitors & Displays",
+      "type": "Physical",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "c-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Cloud Infrastructure Keys",
+      "type": "Digital",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "c-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Cryptographic SSL Certificates",
+      "type": "Digital",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "c-6",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Enterprise Software Licenses",
+      "type": "Digital",
+      "parent_category_id": null,
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "assets": [
+    {
+      "id": "a-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-1",
+      "asset_code": "AST-1001",
+      "name": "MacBook Pro 16\" M3 Max",
+      "description": "Engineering development workstation (64GB RAM, 2TB SSD)",
+      "asset_type": "Physical",
+      "serial_number": "C02G30X1MD6R",
+      "location": "San Francisco HQ - Building A",
+      "condition": "Excellent",
+      "status": "ASSIGNED",
+      "current_employee_id": "e-1",
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A1-DD4E944B49",
+      "canonical_hash": "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
+      "metadata": {
+        "condition": "Excellent"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "a-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-2",
+      "asset_code": "AST-1002",
+      "name": "YubiKey 5C NFC Enterprise Security Key",
+      "description": "Hardware multi-factor token for production cluster access",
+      "asset_type": "Physical",
+      "serial_number": "YK-9482-10842",
+      "location": "Security Operations Vault",
+      "condition": "New",
+      "status": "ASSIGNED",
+      "current_employee_id": "e-2",
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A2-F80CFF56FE",
+      "canonical_hash": "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
+      "metadata": {
+        "condition": "New"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "a-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-3",
+      "asset_code": "AST-1003",
+      "name": "Dell UltraSharp 32\" 4K USB-C Hub Monitor",
+      "description": "Design and analysis display with 90W power delivery",
+      "asset_type": "Physical",
+      "serial_number": "CN-098F3D-74261",
+      "location": "San Francisco HQ - Desk 402",
+      "condition": "Good",
+      "status": "ASSIGNED",
+      "current_employee_id": "e-4",
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A3-45817E73E6",
+      "canonical_hash": "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
+      "metadata": {
+        "condition": "Good"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "a-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-4",
+      "asset_code": "AST-2001",
+      "name": "AWS Production Primary Root KMS Key",
+      "description": "Cryptographic envelope encryption master key for production DB",
+      "asset_type": "Digital",
+      "serial_number": "arn:aws:kms:us-west-2:10948271:key/a1b2c3d4",
+      "location": "AWS us-west-2 Oregon",
+      "condition": "Active",
+      "status": "ASSIGNED",
+      "current_employee_id": "e-3",
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A4-338965855E",
+      "canonical_hash": "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
+      "metadata": {
+        "condition": "Active",
+        "expires_at": "2028-12-31"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "a-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-5",
+      "asset_code": "AST-2002",
+      "name": "Enterprise Wildcard SSL Certificate (*.lokus.internal)",
+      "description": "DigiCert 2048-bit RSA TLS server identity certificate",
+      "asset_type": "Digital",
+      "serial_number": "SHA256:F4:7A:B3:91:0C:4E",
+      "location": "Global Edge Ingress",
+      "condition": "Active",
+      "status": "AVAILABLE",
+      "current_employee_id": null,
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A5-6B0370E91F",
+      "canonical_hash": "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
+      "metadata": {
+        "condition": "Active",
+        "expires_at": "2027-06-30"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "a-6",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "asset_category_id": "c-6",
+      "asset_code": "AST-2003",
+      "name": "Figma Enterprise Organization Seat License",
+      "description": "Design system team collaboration seat",
+      "asset_type": "Digital",
+      "serial_number": "LIC-FIGMA-2026-991",
+      "location": "Cloud SaaS",
+      "condition": "Active",
+      "status": "ASSIGNED",
+      "current_employee_id": "e-4",
+      "integrity_status": "Verified",
+      "integrity_seal_ref": "LOKUS-SEAL-ASS-A6-526C5EECD2",
+      "canonical_hash": "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
+      "metadata": {
+        "condition": "Active"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-1",
+      "asset_id": "a-1",
+      "transaction_type": "ASSIGN",
+      "performed_by_user_id": "22222222-2222-2222-2222-222222222222",
+      "new_employee_id": "e-1",
+      "previous_employee_id": null,
+      "notes": "Initial executive laptop deployment",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "tx-2",
+      "asset_id": "a-2",
+      "transaction_type": "ASSIGN",
+      "performed_by_user_id": "22222222-2222-2222-2222-222222222222",
+      "new_employee_id": "e-2",
+      "previous_employee_id": null,
+      "notes": "Hardware security key issued for security architect",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "tx-3",
+      "asset_id": "a-3",
+      "transaction_type": "ASSIGN",
+      "performed_by_user_id": "22222222-2222-2222-2222-222222222222",
+      "new_employee_id": "e-4",
+      "previous_employee_id": null,
+      "notes": "Monitor issued for UI/UX workstation setup",
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": "log-1794462732995",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "e-1",
+      "action": "ATTENDANCE_CLOCK_IN",
+      "entity_type": "Attendance",
+      "entity_id": "att-e-1-2026-11-12",
+      "metadata": {
+        "employeeId": "e-1",
+        "date": "2026-11-12",
+        "status": "Late",
+        "workMode": "Office"
+      },
+      "created_at": "2026-11-12T05:52:12.995Z"
+    },
+    {
+      "id": "log-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "22222222-2222-2222-2222-222222222222",
+      "action": "ORGANISATION_INITIALIZED",
+      "entity_type": "Organisation",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "metadata": {
+        "name": "Acme Corporation",
+        "code": "ACME-CORP"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "log-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "22222222-2222-2222-2222-222222222222",
+      "action": "SECURITY_POLICY_CONFIGURED",
+      "entity_type": "Role",
+      "entity_id": "r-1",
+      "metadata": {
+        "role": "Organisation Administrator",
+        "permissionsCount": 28
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "log-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "22222222-2222-2222-2222-222222222222",
+      "action": "PERSONNEL_ONBOARDED",
+      "entity_type": "Employee",
+      "entity_id": "e-1",
+      "metadata": {
+        "name": "Elena Vance",
+        "title": "Chief Technology Officer"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "log-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "22222222-2222-2222-2222-222222222222",
+      "action": "CRYPTOGRAPHIC_SEAL_ISSUED",
+      "entity_type": "Identity",
+      "entity_id": "e-1",
+      "metadata": {
+        "algorithm": "SHA-256",
+        "did": "did:lokus:acme-corp:e-1"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    },
+    {
+      "id": "log-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "22222222-2222-2222-2222-222222222222",
+      "action": "ASSET_CUSTODY_ASSIGNED",
+      "entity_type": "Asset",
+      "entity_id": "a-1",
+      "metadata": {
+        "asset": "MacBook Pro 16\" M3 Max",
+        "assignee": "Elena Vance"
+      },
+      "created_at": "2026-11-06T20:16:46.285Z"
+    }
+  ],
+  "integrity_seals": [
+    {
+      "id": "seal-id-e-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Identity",
+      "entity_id": "e-1",
+      "record_key": "fdf8d433348de56a71681162b4177bdfd5535e33fd1bca6f79d60aaf540f878c",
+      "record_hash": "f0a021612d6a189267bdaa29ffd09da7afb1406420d84ef67925f16ca05ccf2a",
+      "seal_ref": "LOKUS-SEAL-IDE-E1-F0A021612D",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-id-e-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Identity",
+      "entity_id": "e-2",
+      "record_key": "8bc58dbceb93ed85370187fad520a628da278b847d6ec318be8cfe744ccc3b87",
+      "record_hash": "eb3e0e45bb9ad2f30f1e0f4fe36eeae803570bf6d53f9365b0d563c32fd01adf",
+      "seal_ref": "LOKUS-SEAL-IDE-E2-EB3E0E45BB",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-id-e-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Identity",
+      "entity_id": "e-3",
+      "record_key": "16516e0b5fffdac018b1a92fc72aa9d85696bf9681b4122d139162bf62b042d0",
+      "record_hash": "ebe1e1e5f1aa2ea3d08e75a789062d31725b4bed9407d1311c889b54f3871849",
+      "seal_ref": "LOKUS-SEAL-IDE-E3-EBE1E1E5F1",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-id-e-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Identity",
+      "entity_id": "e-4",
+      "record_key": "577b5493bc38a6062f3fbcc04430b2a7517ed176cfdf1779db4ec24905048efc",
+      "record_hash": "292434c9ec3f368a4d1b095c8332b56f7edde975d54c19028d9f1ed1d5298df7",
+      "seal_ref": "LOKUS-SEAL-IDE-E4-292434C9EC",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-id-e-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Identity",
+      "entity_id": "e-5",
+      "record_key": "60e86130de8cb43d3f7a4bada7a8c535989ec042a12dc280e2679e72a03075cb",
+      "record_hash": "bd2d68e6fa9d6876721d56bcba3b2ba3f914d8cdbd01b207f605e2c1a17ab723",
+      "seal_ref": "LOKUS-SEAL-IDE-E5-BD2D68E6FA",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-1",
+      "record_key": "167794c3bc6201fbd8a628bfe7d7cb5b2f4ce1082be3a802d7a99863fd2d6f81",
+      "record_hash": "dd4e944b4912c22b3e8fd94ac1bd614d74ea997059825eab272a88798c653645",
+      "seal_ref": "LOKUS-SEAL-ASS-A1-DD4E944B49",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-2",
+      "record_key": "1854b8b2f31287c00df9e2627e48ed0e2d883469fa5ebaf7c1ee6c03f1ec01d4",
+      "record_hash": "f80cff56fee303989dfca48f1b6b92aca752748125c213269aec91e980e3efc9",
+      "seal_ref": "LOKUS-SEAL-ASS-A2-F80CFF56FE",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-3",
+      "record_key": "494f3df0571f06100f033f3a12b1285917ef9b407a29bb5c3ca77cef71552dc0",
+      "record_hash": "45817e73e6ae59eb96635f615e428b7e8b4c9263036280b99e63eb84f883be6e",
+      "seal_ref": "LOKUS-SEAL-ASS-A3-45817E73E6",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-4",
+      "record_key": "00ddbda10048e29613d6075467f02422ba9f209a5d013eeebcb37959e95e0467",
+      "record_hash": "338965855ef1fe50e6ce6e121a1e4f86c0539649eaa678d9a81da9d05f595e40",
+      "seal_ref": "LOKUS-SEAL-ASS-A4-338965855E",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-5",
+      "record_key": "94b22aa92443cbd190cb4fc9bdf781b28fd0f13e6132c5b7133e00b4c4ba6ffa",
+      "record_hash": "6b0370e91fa925d85afb0e3dda80b1a0ece57c134f9b3f9ceb8796e29e59178b",
+      "seal_ref": "LOKUS-SEAL-ASS-A5-6B0370E91F",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    },
+    {
+      "id": "seal-ast-a-6",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "entity_type": "Asset",
+      "entity_id": "a-6",
+      "record_key": "e0dc86d552ae77f8b895660594f42ef5c46928ab590848a7002e11a85d081381",
+      "record_hash": "526c5eecd2df4d833e1bb18597586a8e33b5fdf5879bc168f65147874c58b7c7",
+      "seal_ref": "LOKUS-SEAL-ASS-A6-526C5EECD2",
+      "sealed_at": "2026-11-06T20:16:46.285Z",
+      "algorithm": "SHA-256"
+    }
+  ],
+  "attendance_records": [
+    {
+      "id": "att-e-1-2026-11-12",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-12",
+      "check_in": "11:22",
+      "check_out": null,
+      "work_hours": 0,
+      "status": "Late",
+      "work_mode": "Office",
+      "location": "HQ Office",
+      "notes": "",
+      "updated_at": "2026-11-12T05:52:12.992Z"
+    },
+    {
+      "id": "att-e-1-2026-11-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-10",
+      "check_in": "09:01",
+      "check_out": "18:16",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-09",
+      "check_in": "09:02",
+      "check_out": "18:17",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-08",
+      "check_in": "09:03",
+      "check_out": "18:18",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-05",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-05",
+      "check_in": "09:06",
+      "check_out": "18:21",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-04",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-04",
+      "check_in": "09:07",
+      "check_out": "18:22",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-03",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-03",
+      "check_in": "09:08",
+      "check_out": "18:23",
+      "work_hours": 8.7,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-02",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-02",
+      "check_in": "09:00",
+      "check_out": "18:24",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-1-2026-11-01",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "date": "2026-11-01",
+      "check_in": "09:01",
+      "check_out": "18:25",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-10",
+      "check_in": "09:02",
+      "check_out": "18:23",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-09",
+      "check_in": "09:03",
+      "check_out": "18:24",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-08",
+      "check_in": null,
+      "check_out": null,
+      "work_hours": 0,
+      "status": "On Leave",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "Approved Paid Leave",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-05",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-05",
+      "check_in": "09:07",
+      "check_out": "18:28",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-04",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-04",
+      "check_in": "09:08",
+      "check_out": "18:29",
+      "work_hours": 8.899999999999999,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-03",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-03",
+      "check_in": "09:00",
+      "check_out": "18:30",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-02",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-02",
+      "check_in": "09:01",
+      "check_out": "18:31",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-2-2026-11-01",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "date": "2026-11-01",
+      "check_in": "09:02",
+      "check_out": "18:32",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-10",
+      "check_in": "09:03",
+      "check_out": "18:30",
+      "work_hours": 9.1,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-09",
+      "check_in": "09:04",
+      "check_out": "18:31",
+      "work_hours": 9.1,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-08",
+      "check_in": "09:05",
+      "check_out": "18:32",
+      "work_hours": 9.1,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-05",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-05",
+      "check_in": "09:08",
+      "check_out": "18:35",
+      "work_hours": 9.1,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-04",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-04",
+      "check_in": "09:00",
+      "check_out": "18:36",
+      "work_hours": 9.1,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-03",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-03",
+      "check_in": "09:01",
+      "check_out": "18:37",
+      "work_hours": 9.1,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-02",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-02",
+      "check_in": "09:02",
+      "check_out": "18:38",
+      "work_hours": 9.1,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-3-2026-11-01",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "date": "2026-11-01",
+      "check_in": "09:03",
+      "check_out": "18:39",
+      "work_hours": 9.1,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-10",
+      "check_in": "09:04",
+      "check_out": "18:37",
+      "work_hours": 8.7,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-09",
+      "check_in": "10:18",
+      "check_out": "18:38",
+      "work_hours": 7.9,
+      "status": "Late",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "Traffic delay (notified manager)",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-08",
+      "check_in": "09:06",
+      "check_out": "18:39",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-05",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-05",
+      "check_in": "09:00",
+      "check_out": "18:42",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-04",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-04",
+      "check_in": "09:01",
+      "check_out": "18:43",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-03",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-03",
+      "check_in": "09:02",
+      "check_out": "18:44",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-02",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-02",
+      "check_in": "09:03",
+      "check_out": "18:45",
+      "work_hours": 8.7,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-4-2026-11-01",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "date": "2026-11-01",
+      "check_in": "09:04",
+      "check_out": "18:46",
+      "work_hours": 8.7,
+      "status": "Present",
+      "work_mode": "Hybrid",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-10",
+      "check_in": "09:05",
+      "check_out": "18:44",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-09",
+      "check_in": "09:06",
+      "check_out": "18:45",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-08",
+      "check_in": "09:07",
+      "check_out": "18:46",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-05",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-05",
+      "check_in": "09:01",
+      "check_out": "18:49",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-04",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-04",
+      "check_in": "09:02",
+      "check_out": "18:50",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-03",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-03",
+      "check_in": "09:03",
+      "check_out": "18:51",
+      "work_hours": 8.899999999999999,
+      "status": "WFH",
+      "work_mode": "Remote",
+      "location": "Remote · Home Office",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-02",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-02",
+      "check_in": "09:04",
+      "check_out": "18:52",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "att-e-5-2026-11-01",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "date": "2026-11-01",
+      "check_in": "09:05",
+      "check_out": "18:53",
+      "work_hours": 8.899999999999999,
+      "status": "Present",
+      "work_mode": "Office",
+      "location": "Headquarters · Tech Park",
+      "notes": "",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    }
+  ],
+  "leave_balances": [
+    {
+      "employee_id": "e-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "year": 2026,
+      "paid_total": 18,
+      "paid_used": 0,
+      "sick_total": 10,
+      "sick_used": 0,
+      "casual_total": 8,
+      "casual_used": 1,
+      "privilege_total": 12,
+      "privilege_used": 0,
+      "comp_off": 0,
+      "unpaid_taken": 0
+    },
+    {
+      "employee_id": "e-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "year": 2026,
+      "paid_total": 18,
+      "paid_used": 1,
+      "sick_total": 10,
+      "sick_used": 1,
+      "casual_total": 8,
+      "casual_used": 2,
+      "privilege_total": 12,
+      "privilege_used": 0,
+      "comp_off": 0,
+      "unpaid_taken": 0
+    },
+    {
+      "employee_id": "e-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "year": 2026,
+      "paid_total": 18,
+      "paid_used": 2,
+      "sick_total": 10,
+      "sick_used": 0,
+      "casual_total": 8,
+      "casual_used": 0,
+      "privilege_total": 12,
+      "privilege_used": 0,
+      "comp_off": 2,
+      "unpaid_taken": 0
+    },
+    {
+      "employee_id": "e-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "year": 2026,
+      "paid_total": 18,
+      "paid_used": 3,
+      "sick_total": 10,
+      "sick_used": 1,
+      "casual_total": 8,
+      "casual_used": 1,
+      "privilege_total": 12,
+      "privilege_used": 0,
+      "comp_off": 0,
+      "unpaid_taken": 0
+    },
+    {
+      "employee_id": "e-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "year": 2026,
+      "paid_total": 18,
+      "paid_used": 0,
+      "sick_total": 10,
+      "sick_used": 0,
+      "casual_total": 8,
+      "casual_used": 2,
+      "privilege_total": 12,
+      "privilege_used": 0,
+      "comp_off": 0,
+      "unpaid_taken": 0
+    }
+  ],
+  "leave_requests": [
+    {
+      "id": "lv-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "leave_type": "Paid Leave",
+      "start_date": "2026-11-18",
+      "end_date": "2026-11-20",
+      "days": 3,
+      "is_paid": true,
+      "reason": "Family wedding out of station",
+      "status": "Pending",
+      "reviewed_by_id": null,
+      "reviewed_at": null,
+      "reviewer_notes": null,
+      "created_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "lv-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "leave_type": "Casual Leave",
+      "start_date": "2026-11-14",
+      "end_date": "2026-11-14",
+      "days": 1,
+      "is_paid": true,
+      "reason": "Personal errands & dental appointment",
+      "status": "Pending",
+      "reviewed_by_id": null,
+      "reviewed_at": null,
+      "reviewer_notes": null,
+      "created_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "lv-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "leave_type": "Sick Leave",
+      "start_date": "2026-11-04",
+      "end_date": "2026-11-05",
+      "days": 2,
+      "is_paid": true,
+      "reason": "Seasonal viral fever recovery",
+      "status": "Approved",
+      "reviewed_by_id": "e-1",
+      "reviewed_at": "2026-11-11T21:06:03.479Z",
+      "reviewer_notes": "Take rest and recover well.",
+      "created_at": "2026-11-04T08:30:00.000Z"
+    },
+    {
+      "id": "lv-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "leave_type": "Privilege Leave",
+      "start_date": "2026-12-01",
+      "end_date": "2026-12-04",
+      "days": 4,
+      "is_paid": true,
+      "reason": "Year-end annual vacation plan",
+      "status": "Approved",
+      "reviewed_by_id": "e-1",
+      "reviewed_at": "2026-11-11T21:06:03.479Z",
+      "reviewer_notes": "Approved with handoff completed.",
+      "created_at": "2026-11-02T11:00:00.000Z"
+    }
+  ],
+  "holidays": [
+    {
+      "id": "hol-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Republic Day",
+      "date": "2026-01-26",
+      "type": "Public"
+    },
+    {
+      "id": "hol-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Holi Festival",
+      "date": "2026-03-04",
+      "type": "Public"
+    },
+    {
+      "id": "hol-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Independence Day",
+      "date": "2026-08-15",
+      "type": "Public"
+    },
+    {
+      "id": "hol-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Gandhi Jayanti",
+      "date": "2026-10-02",
+      "type": "Public"
+    },
+    {
+      "id": "hol-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Diwali / Deepavali",
+      "date": "2026-11-08",
+      "type": "Public"
+    },
+    {
+      "id": "hol-6",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Founders Day Wellness Off",
+      "date": "2026-11-20",
+      "type": "Company"
+    },
+    {
+      "id": "hol-7",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Christmas Day",
+      "date": "2026-12-25",
+      "type": "Public"
+    }
+  ],
+  "salary_structures": [
+    {
+      "id": "sal-e-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "currency": "INR",
+      "annual_ctc": 4200000,
+      "basic_monthly": 164500,
+      "hra_monthly": 65800,
+      "conveyance_monthly": 3000,
+      "special_allowance_monthly": 95700,
+      "employee_pf_monthly": 19740,
+      "employer_pf_monthly": 21000,
+      "professional_tax_monthly": 200,
+      "tds_monthly": 49000,
+      "bank_name": "HDFC Bank",
+      "bank_account_last4": "4810",
+      "pan_number": "ABCDE1234F",
+      "effective_from": "2026-04-01",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "sal-e-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "currency": "INR",
+      "annual_ctc": 3400000,
+      "basic_monthly": 133167,
+      "hra_monthly": 53267,
+      "conveyance_monthly": 3000,
+      "special_allowance_monthly": 76899,
+      "employee_pf_monthly": 15980,
+      "employer_pf_monthly": 17000,
+      "professional_tax_monthly": 200,
+      "tds_monthly": 39667,
+      "bank_name": "ICICI Bank",
+      "bank_account_last4": "4947",
+      "pan_number": "ABCDE1235F",
+      "effective_from": "2026-04-01",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "sal-e-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "currency": "INR",
+      "annual_ctc": 2600000,
+      "basic_monthly": 101834,
+      "hra_monthly": 40734,
+      "conveyance_monthly": 3000,
+      "special_allowance_monthly": 58099,
+      "employee_pf_monthly": 12220,
+      "employer_pf_monthly": 13000,
+      "professional_tax_monthly": 200,
+      "tds_monthly": 30333,
+      "bank_name": "Axis Bank",
+      "bank_account_last4": "5084",
+      "pan_number": "ABCDE1236F",
+      "effective_from": "2026-04-01",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "sal-e-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "currency": "INR",
+      "annual_ctc": 2200000,
+      "basic_monthly": 86167,
+      "hra_monthly": 34467,
+      "conveyance_monthly": 3000,
+      "special_allowance_monthly": 48699,
+      "employee_pf_monthly": 10340,
+      "employer_pf_monthly": 11000,
+      "professional_tax_monthly": 200,
+      "tds_monthly": 25667,
+      "bank_name": "Kotak Mahindra Bank",
+      "bank_account_last4": "5221",
+      "pan_number": "ABCDE1237F",
+      "effective_from": "2026-04-01",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "sal-e-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "currency": "INR",
+      "annual_ctc": 1800000,
+      "basic_monthly": 70500,
+      "hra_monthly": 28200,
+      "conveyance_monthly": 3000,
+      "special_allowance_monthly": 39300,
+      "employee_pf_monthly": 8460,
+      "employer_pf_monthly": 9000,
+      "professional_tax_monthly": 200,
+      "tds_monthly": 21000,
+      "bank_name": "SBI Corporate",
+      "bank_account_last4": "5358",
+      "pan_number": "ABCDE1238F",
+      "effective_from": "2026-04-01",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    }
+  ],
+  "salary_slips": [
+    {
+      "id": "slip-e-1-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202608-E-1",
+      "employee_id": "e-1",
+      "month": "2026-08",
+      "month_label": "August 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 164500,
+      "hra": 65800,
+      "special_allowance": 95700,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 329000,
+      "employee_pf": 19740,
+      "employer_pf": 21000,
+      "professional_tax": 200,
+      "tds": 49000,
+      "lop_deduction": 0,
+      "total_deductions": 68940,
+      "net_pay": 260060,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202608-B8D7EDB84E",
+      "paid_at": "2026-08-28T10:00:00.000Z",
+      "generated_at": "2026-08-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-1-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202609-E-1",
+      "employee_id": "e-1",
+      "month": "2026-09",
+      "month_label": "September 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 164500,
+      "hra": 65800,
+      "special_allowance": 95700,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 329000,
+      "employee_pf": 19740,
+      "employer_pf": 21000,
+      "professional_tax": 200,
+      "tds": 49000,
+      "lop_deduction": 0,
+      "total_deductions": 68940,
+      "net_pay": 260060,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202609-F9B9843EB0",
+      "paid_at": "2026-09-28T10:00:00.000Z",
+      "generated_at": "2026-09-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-1-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202610-E-1",
+      "employee_id": "e-1",
+      "month": "2026-10",
+      "month_label": "October 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 164500,
+      "hra": 65800,
+      "special_allowance": 95700,
+      "conveyance": 3000,
+      "bonus_amount": 150000,
+      "gross_earnings": 479000,
+      "employee_pf": 19740,
+      "employer_pf": 21000,
+      "professional_tax": 200,
+      "tds": 49000,
+      "lop_deduction": 0,
+      "total_deductions": 68940,
+      "net_pay": 410060,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202610-9D5CA8E28B",
+      "paid_at": "2026-10-28T10:00:00.000Z",
+      "generated_at": "2026-10-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-2-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202608-E-2",
+      "employee_id": "e-2",
+      "month": "2026-08",
+      "month_label": "August 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 133167,
+      "hra": 53267,
+      "special_allowance": 76899,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 266333,
+      "employee_pf": 15980,
+      "employer_pf": 17000,
+      "professional_tax": 200,
+      "tds": 39667,
+      "lop_deduction": 0,
+      "total_deductions": 55847,
+      "net_pay": 210486,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202608-DE96A6BC54",
+      "paid_at": "2026-08-28T10:00:00.000Z",
+      "generated_at": "2026-08-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-2-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202609-E-2",
+      "employee_id": "e-2",
+      "month": "2026-09",
+      "month_label": "September 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 133167,
+      "hra": 53267,
+      "special_allowance": 76899,
+      "conveyance": 3000,
+      "bonus_amount": 75000,
+      "gross_earnings": 341333,
+      "employee_pf": 15980,
+      "employer_pf": 17000,
+      "professional_tax": 200,
+      "tds": 39667,
+      "lop_deduction": 0,
+      "total_deductions": 55847,
+      "net_pay": 285486,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202609-F34C07D336",
+      "paid_at": "2026-09-28T10:00:00.000Z",
+      "generated_at": "2026-09-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-2-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202610-E-2",
+      "employee_id": "e-2",
+      "month": "2026-10",
+      "month_label": "October 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 1,
+      "lop_days": 0,
+      "basic": 133167,
+      "hra": 53267,
+      "special_allowance": 76899,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 266333,
+      "employee_pf": 15980,
+      "employer_pf": 17000,
+      "professional_tax": 200,
+      "tds": 39667,
+      "lop_deduction": 0,
+      "total_deductions": 55847,
+      "net_pay": 210486,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202610-6E74C6E83F",
+      "paid_at": "2026-10-28T10:00:00.000Z",
+      "generated_at": "2026-10-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-3-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202608-E-3",
+      "employee_id": "e-3",
+      "month": "2026-08",
+      "month_label": "August 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 101834,
+      "hra": 40734,
+      "special_allowance": 58099,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 203667,
+      "employee_pf": 12220,
+      "employer_pf": 13000,
+      "professional_tax": 200,
+      "tds": 30333,
+      "lop_deduction": 0,
+      "total_deductions": 42753,
+      "net_pay": 160914,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202608-FC0B8EBA33",
+      "paid_at": "2026-08-28T10:00:00.000Z",
+      "generated_at": "2026-08-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-3-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202609-E-3",
+      "employee_id": "e-3",
+      "month": "2026-09",
+      "month_label": "September 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 101834,
+      "hra": 40734,
+      "special_allowance": 58099,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 203667,
+      "employee_pf": 12220,
+      "employer_pf": 13000,
+      "professional_tax": 200,
+      "tds": 30333,
+      "lop_deduction": 0,
+      "total_deductions": 42753,
+      "net_pay": 160914,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202609-A32D59D00D",
+      "paid_at": "2026-09-28T10:00:00.000Z",
+      "generated_at": "2026-09-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-3-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202610-E-3",
+      "employee_id": "e-3",
+      "month": "2026-10",
+      "month_label": "October 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 101834,
+      "hra": 40734,
+      "special_allowance": 58099,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 203667,
+      "employee_pf": 12220,
+      "employer_pf": 13000,
+      "professional_tax": 200,
+      "tds": 30333,
+      "lop_deduction": 0,
+      "total_deductions": 42753,
+      "net_pay": 160914,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202610-FB0B78D181",
+      "paid_at": "2026-10-28T10:00:00.000Z",
+      "generated_at": "2026-10-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-4-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202608-E-4",
+      "employee_id": "e-4",
+      "month": "2026-08",
+      "month_label": "August 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 86167,
+      "hra": 34467,
+      "special_allowance": 48699,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 172333,
+      "employee_pf": 10340,
+      "employer_pf": 11000,
+      "professional_tax": 200,
+      "tds": 25667,
+      "lop_deduction": 0,
+      "total_deductions": 36207,
+      "net_pay": 136126,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202608-A3D8834F15",
+      "paid_at": "2026-08-28T10:00:00.000Z",
+      "generated_at": "2026-08-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-4-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202609-E-4",
+      "employee_id": "e-4",
+      "month": "2026-09",
+      "month_label": "September 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 86167,
+      "hra": 34467,
+      "special_allowance": 48699,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 172333,
+      "employee_pf": 10340,
+      "employer_pf": 11000,
+      "professional_tax": 200,
+      "tds": 25667,
+      "lop_deduction": 0,
+      "total_deductions": 36207,
+      "net_pay": 136126,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202609-A0E445D726",
+      "paid_at": "2026-09-28T10:00:00.000Z",
+      "generated_at": "2026-09-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-4-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202610-E-4",
+      "employee_id": "e-4",
+      "month": "2026-10",
+      "month_label": "October 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 86167,
+      "hra": 34467,
+      "special_allowance": 48699,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 172333,
+      "employee_pf": 10340,
+      "employer_pf": 11000,
+      "professional_tax": 200,
+      "tds": 25667,
+      "lop_deduction": 0,
+      "total_deductions": 36207,
+      "net_pay": 136126,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202610-BF45EED710",
+      "paid_at": "2026-10-28T10:00:00.000Z",
+      "generated_at": "2026-10-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-5-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202608-E-5",
+      "employee_id": "e-5",
+      "month": "2026-08",
+      "month_label": "August 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 70500,
+      "hra": 28200,
+      "special_allowance": 39300,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 141000,
+      "employee_pf": 8460,
+      "employer_pf": 9000,
+      "professional_tax": 200,
+      "tds": 21000,
+      "lop_deduction": 0,
+      "total_deductions": 29660,
+      "net_pay": 111340,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202608-7DD7CE7F71",
+      "paid_at": "2026-08-28T10:00:00.000Z",
+      "generated_at": "2026-08-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-5-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202609-E-5",
+      "employee_id": "e-5",
+      "month": "2026-09",
+      "month_label": "September 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 70500,
+      "hra": 28200,
+      "special_allowance": 39300,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 141000,
+      "employee_pf": 8460,
+      "employer_pf": 9000,
+      "professional_tax": 200,
+      "tds": 21000,
+      "lop_deduction": 0,
+      "total_deductions": 29660,
+      "net_pay": 111340,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202609-F0EFE502FB",
+      "paid_at": "2026-09-28T10:00:00.000Z",
+      "generated_at": "2026-09-27T18:00:00.000Z"
+    },
+    {
+      "id": "slip-e-5-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "slip_number": "SLIP-202610-E-5",
+      "employee_id": "e-5",
+      "month": "2026-10",
+      "month_label": "October 2026",
+      "working_days": 22,
+      "paid_days": 22,
+      "paid_leaves_used": 0,
+      "lop_days": 0,
+      "basic": 70500,
+      "hra": 28200,
+      "special_allowance": 39300,
+      "conveyance": 3000,
+      "bonus_amount": 0,
+      "gross_earnings": 141000,
+      "employee_pf": 8460,
+      "employer_pf": 9000,
+      "professional_tax": 200,
+      "tds": 21000,
+      "lop_deduction": 0,
+      "total_deductions": 29660,
+      "net_pay": 111340,
+      "status": "Paid",
+      "seal_ref": "LOKUS-SEAL-ASS-202610-46A0230DA3",
+      "paid_at": "2026-10-28T10:00:00.000Z",
+      "generated_at": "2026-10-27T18:00:00.000Z"
+    }
+  ],
+  "pf_accounts": [
+    {
+      "id": "pf-e-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "uan": "101488294410",
+      "pf_account_number": "MH/BAN/0048291/000/000101",
+      "total_balance": 763569,
+      "employee_share_total": 355320,
+      "employer_share_total": 378000,
+      "vpf_monthly": 15000,
+      "interest_rate": 8.25,
+      "interest_accrued_ytd": 30249,
+      "kyc_status": "Verified",
+      "nominee_name": "Spouse / Family Nominee",
+      "status": "Active",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "pf-e-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "uan": "101488294439",
+      "pf_account_number": "MH/BAN/0048291/000/000102",
+      "total_balance": 824170,
+      "employee_share_total": 383520,
+      "employer_share_total": 408000,
+      "vpf_monthly": 0,
+      "interest_rate": 8.25,
+      "interest_accrued_ytd": 32650,
+      "kyc_status": "Verified",
+      "nominee_name": "Parent Nominee",
+      "status": "Active",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "pf-e-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "uan": "101488294468",
+      "pf_account_number": "MH/BAN/0048291/000/000103",
+      "total_balance": 787810,
+      "employee_share_total": 366600,
+      "employer_share_total": 390000,
+      "vpf_monthly": 0,
+      "interest_rate": 8.25,
+      "interest_accrued_ytd": 31210,
+      "kyc_status": "Verified",
+      "nominee_name": "Spouse / Family Nominee",
+      "status": "Active",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "pf-e-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "uan": "101488294497",
+      "pf_account_number": "MH/BAN/0048291/000/000104",
+      "total_balance": 799930,
+      "employee_share_total": 372240,
+      "employer_share_total": 396000,
+      "vpf_monthly": 0,
+      "interest_rate": 8.25,
+      "interest_accrued_ytd": 31690,
+      "kyc_status": "Verified",
+      "nominee_name": "Parent Nominee",
+      "status": "Active",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "pf-e-5",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "uan": "101488294526",
+      "pf_account_number": "MH/BAN/0048291/000/000105",
+      "total_balance": 763569,
+      "employee_share_total": 355320,
+      "employer_share_total": 378000,
+      "vpf_monthly": 0,
+      "interest_rate": 8.25,
+      "interest_accrued_ytd": 30249,
+      "kyc_status": "Verified",
+      "nominee_name": "Spouse / Family Nominee",
+      "status": "Active",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    }
+  ],
+  "pf_transactions": [
+    {
+      "id": "pftx-e-1-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "month": "2026-08",
+      "type": "Monthly Contribution",
+      "employee_contribution": 19740,
+      "employer_contribution": 21000,
+      "total_amount": 40740,
+      "balance_after": 682089,
+      "reference": "EPFO-ECR-202608-E-1",
+      "created_at": "2026-08-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-1-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "month": "2026-09",
+      "type": "Monthly Contribution",
+      "employee_contribution": 19740,
+      "employer_contribution": 21000,
+      "total_amount": 40740,
+      "balance_after": 722829,
+      "reference": "EPFO-ECR-202609-E-1",
+      "created_at": "2026-09-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-1-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "month": "2026-10",
+      "type": "Monthly Contribution",
+      "employee_contribution": 19740,
+      "employer_contribution": 21000,
+      "total_amount": 40740,
+      "balance_after": 763569,
+      "reference": "EPFO-ECR-202610-E-1",
+      "created_at": "2026-10-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-2-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "month": "2026-08",
+      "type": "Monthly Contribution",
+      "employee_contribution": 15980,
+      "employer_contribution": 17000,
+      "total_amount": 32980,
+      "balance_after": 758210,
+      "reference": "EPFO-ECR-202608-E-2",
+      "created_at": "2026-08-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-2-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "month": "2026-09",
+      "type": "Monthly Contribution",
+      "employee_contribution": 15980,
+      "employer_contribution": 17000,
+      "total_amount": 32980,
+      "balance_after": 791190,
+      "reference": "EPFO-ECR-202609-E-2",
+      "created_at": "2026-09-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-2-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "month": "2026-10",
+      "type": "Monthly Contribution",
+      "employee_contribution": 15980,
+      "employer_contribution": 17000,
+      "total_amount": 32980,
+      "balance_after": 824170,
+      "reference": "EPFO-ECR-202610-E-2",
+      "created_at": "2026-10-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-3-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "month": "2026-08",
+      "type": "Monthly Contribution",
+      "employee_contribution": 12220,
+      "employer_contribution": 13000,
+      "total_amount": 25220,
+      "balance_after": 737370,
+      "reference": "EPFO-ECR-202608-E-3",
+      "created_at": "2026-08-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-3-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "month": "2026-09",
+      "type": "Monthly Contribution",
+      "employee_contribution": 12220,
+      "employer_contribution": 13000,
+      "total_amount": 25220,
+      "balance_after": 762590,
+      "reference": "EPFO-ECR-202609-E-3",
+      "created_at": "2026-09-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-3-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "month": "2026-10",
+      "type": "Monthly Contribution",
+      "employee_contribution": 12220,
+      "employer_contribution": 13000,
+      "total_amount": 25220,
+      "balance_after": 787810,
+      "reference": "EPFO-ECR-202610-E-3",
+      "created_at": "2026-10-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-4-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "month": "2026-08",
+      "type": "Monthly Contribution",
+      "employee_contribution": 10340,
+      "employer_contribution": 11000,
+      "total_amount": 21340,
+      "balance_after": 757250,
+      "reference": "EPFO-ECR-202608-E-4",
+      "created_at": "2026-08-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-4-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "month": "2026-09",
+      "type": "Monthly Contribution",
+      "employee_contribution": 10340,
+      "employer_contribution": 11000,
+      "total_amount": 21340,
+      "balance_after": 778590,
+      "reference": "EPFO-ECR-202609-E-4",
+      "created_at": "2026-09-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-4-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "month": "2026-10",
+      "type": "Monthly Contribution",
+      "employee_contribution": 10340,
+      "employer_contribution": 11000,
+      "total_amount": 21340,
+      "balance_after": 799930,
+      "reference": "EPFO-ECR-202610-E-4",
+      "created_at": "2026-10-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-5-2026-08",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "month": "2026-08",
+      "type": "Monthly Contribution",
+      "employee_contribution": 8460,
+      "employer_contribution": 9000,
+      "total_amount": 17460,
+      "balance_after": 728649,
+      "reference": "EPFO-ECR-202608-E-5",
+      "created_at": "2026-08-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-5-2026-09",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "month": "2026-09",
+      "type": "Monthly Contribution",
+      "employee_contribution": 8460,
+      "employer_contribution": 9000,
+      "total_amount": 17460,
+      "balance_after": 746109,
+      "reference": "EPFO-ECR-202609-E-5",
+      "created_at": "2026-09-28T11:30:00.000Z"
+    },
+    {
+      "id": "pftx-e-5-2026-10",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-5",
+      "month": "2026-10",
+      "type": "Monthly Contribution",
+      "employee_contribution": 8460,
+      "employer_contribution": 9000,
+      "total_amount": 17460,
+      "balance_after": 763569,
+      "reference": "EPFO-ECR-202610-E-5",
+      "created_at": "2026-10-28T11:30:00.000Z"
+    }
+  ],
+  "bonuses": [
+    {
+      "id": "bon-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-1",
+      "bonus_type": "Annual Appraisal",
+      "amount": 150000,
+      "payout_month": "2026-10",
+      "reason": "Q3 Infrastructure reliability & zero-trust rollout milestone",
+      "status": "Credited",
+      "approved_by_id": "e-1",
+      "created_at": "2026-10-20T10:00:00.000Z",
+      "credited_at": "2026-10-28T10:00:00.000Z"
+    },
+    {
+      "id": "bon-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-2",
+      "bonus_type": "Spot Award",
+      "amount": 75000,
+      "payout_month": "2026-09",
+      "reason": "SOC2 cryptographic attestation automation",
+      "status": "Credited",
+      "approved_by_id": "e-1",
+      "created_at": "2026-09-18T10:00:00.000Z",
+      "credited_at": "2026-09-28T10:00:00.000Z"
+    },
+    {
+      "id": "bon-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-3",
+      "bonus_type": "Performance Bonus",
+      "amount": 60000,
+      "payout_month": "2026-11",
+      "reason": "Kubernetes multi-region failover zero-downtime migration",
+      "status": "Approved",
+      "approved_by_id": "e-1",
+      "created_at": "2026-11-11T21:06:03.479Z",
+      "credited_at": null
+    },
+    {
+      "id": "bon-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "employee_id": "e-4",
+      "bonus_type": "Festival Bonus",
+      "amount": 35000,
+      "payout_month": "2026-11",
+      "reason": "Annual Diwali Festival Ex-Gratia Bonus",
+      "status": "Pending",
+      "approved_by_id": null,
+      "created_at": "2026-11-11T21:06:03.479Z",
+      "credited_at": null
+    }
+  ],
+  "org_requests": [
+    {
+      "id": "req-1",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "request_number": "REQ-2026-011",
+      "employee_id": "e-4",
+      "category": "Asset Request",
+      "title": "Wacom Intuos Pro Pen Tablet for Design Team",
+      "description": "Need precision stylus tablet for design system icon and UI illustration sprint.",
+      "priority": "Medium",
+      "amount": 34500,
+      "status": "Pending",
+      "reviewed_by_id": null,
+      "reviewer_notes": null,
+      "created_at": "2026-11-11T21:06:03.479Z",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "req-2",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "request_number": "REQ-2026-012",
+      "employee_id": "e-3",
+      "category": "Expense Reimbursement",
+      "title": "AWS re:Invent Virtual Pass & Home Fiber Upgrade",
+      "description": "Quarterly broadband allowance + technical conference certification voucher.",
+      "priority": "Low",
+      "amount": 14200,
+      "status": "In Review",
+      "reviewed_by_id": "e-5",
+      "reviewer_notes": "Receipts verified, queued for Friday settlement batch.",
+      "created_at": "2026-11-11T21:06:03.479Z",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "req-3",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "request_number": "REQ-2026-013",
+      "employee_id": "e-2",
+      "category": "Attendance Regularization",
+      "title": "Regularize Late Check-in (Client Security Audit Call)",
+      "description": "Started early from client bridge at 07:45 AM; physical badge swipe happened at 10:18 AM.",
+      "priority": "High",
+      "status": "Approved",
+      "reviewed_by_id": "e-1",
+      "reviewer_notes": "Approved — early remote shift verified.",
+      "created_at": "2026-11-08T12:00:00.000Z",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    },
+    {
+      "id": "req-4",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "request_number": "REQ-2026-014",
+      "employee_id": "e-5",
+      "category": "PF Advance / KYC",
+      "title": "Update UAN Nominee & Verify Aadhaar e-KYC",
+      "description": "Submitted updated Form-2 EPF nomination declaration for verification.",
+      "priority": "Medium",
+      "status": "Pending",
+      "reviewed_by_id": null,
+      "reviewer_notes": null,
+      "created_at": "2026-11-11T21:06:03.479Z",
+      "updated_at": "2026-11-11T21:06:03.479Z"
+    }
+  ]
 }
