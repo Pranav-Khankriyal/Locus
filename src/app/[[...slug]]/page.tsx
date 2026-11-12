@@ -28,7 +28,7 @@ export default function CatchAllPage() {
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="px-5 py-2.5 rounded-full bg-[#107C41] text-white text-xs font-semibold hover:bg-[#0d6836] transition-colors"
+            className="px-5 py-2.5 rounded-full bg-[#7C3AED] text-white text-xs font-semibold hover:bg-[#6D28D9] transition-colors"
           >
             Reload Page
           </button>
@@ -39,9 +39,9 @@ export default function CatchAllPage() {
 
   if (!Component) {
     return (
-      <div className="min-h-screen bg-[#f4f6f8] flex flex-col items-center justify-center font-sans select-none">
+      <div className="min-h-screen bg-[#fbf9f5] flex flex-col items-center justify-center font-sans select-none">
         <div className="w-9 h-9 border-3 border-emerald-200 border-t-[#107C41] rounded-full animate-spin mb-4" />
-        <div className="text-xs font-bold text-gray-500 tracking-widest uppercase">
+        <div className="text-xs font-bold text-slate-500 tracking-widest uppercase">
           Loading Lokus...
         </div>
       </div>

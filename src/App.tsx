@@ -48,7 +48,7 @@ const RequestsPage=lazy(()=>import('@/views/requests/RequestsPage'));
 function Dashboard(){const {permissions}=useSession();if(!can(permissions,'employees')||!can(permissions,'assets'))return <AccessDenied/>;return can(permissions,'audit')?<AdminDashboard/>:<EmployeeDashboard/>;}
 function SettingsIndex(){const {permissions}=useSession();return <Navigate to={can(permissions,'settings','manage')?'organisation':'account'} replace/>;}
 export default function App(){return <AppErrorBoundary><BrowserRouter><AuthProvider><NotificationProvider><Suspense fallback={<LoadingState/>}><Routes>
-  <Route path="/" element={<Navigate to="/login" replace/>}/>
+  <Route path="/" element={<Landing/>}/>
   <Route path="/login" element={<Login/>}/>
   <Route path="/signup" element={<Login/>}/>
   <Route element={<ProtectedRoute onboarding/>}><Route path="/onboarding/create-organisation" element={<CreateOrganisation/>}/><Route path="/onboarding/join-organisation" element={<JoinOrganisation/>}/></Route>

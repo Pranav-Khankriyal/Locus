@@ -47,6 +47,10 @@ import { LeaveService } from '@/services/LeaveService';
 import { PayrollService } from '@/services/PayrollService';
 import { RequestService } from '@/services/RequestService';
 import { formatCurrency } from '@/utils/formatCurrency';
+import {
+  DashboardAttendanceCalendar,
+  DashboardWorkflowPulse,
+} from '@/components/dashboard/DashboardTopWidgets';
 
 export default function AdminDashboard() {
   const { user, organisation } = useSession();
@@ -365,6 +369,26 @@ export default function AdminDashboard() {
             <PiggyBank className="w-5 h-5" />
           </span>
         </Link>
+      </div>
+
+      {/* Top Landing-Synced Interactive Calendar & Connected Flow */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="lg:col-span-7">
+          <DashboardAttendanceCalendar
+            attendance={data?.attendance || []}
+            leaveRequests={data?.leaveRequests || []}
+          />
+        </div>
+        <div className="lg:col-span-5">
+          <DashboardWorkflowPulse
+            employeeCount={employeeCount}
+            rolesCount={rolesCount}
+            assignedAssets={assignedAssets}
+            totalAssets={totalAssets}
+            presentToday={presentToday}
+            monthlyPayrollTotal={monthlyPayrollTotal}
+          />
+        </div>
       </div>
 
       {/* Main 3-Column Bento Grid */}

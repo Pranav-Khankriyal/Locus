@@ -34,6 +34,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { unitPath } from '@/utils/buildTree';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { formatDate } from '@/utils/formatDate';
+import { DashboardAttendanceCalendar } from '@/components/dashboard/DashboardTopWidgets';
 
 export default function EmployeeDashboard() {
   const { user, organisation, role } = useSession();
@@ -152,6 +153,15 @@ export default function EmployeeDashboard() {
                   Attendance Log <ArrowUpRight size={14} />
                 </Link>
               </div>
+            </div>
+
+            {/* Top Attendance Calendar */}
+            <div className="mb-6">
+              <DashboardAttendanceCalendar
+                attendance={d.attendance}
+                leaveRequests={d.leaves.requests}
+                personal
+              />
             </div>
 
             {/* Personal HR & Payroll Strip */}
