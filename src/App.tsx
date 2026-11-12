@@ -41,6 +41,10 @@ const RolesPage=lazy(()=>import('@/views/roles/RolesPage'));
 const RoleDetailPage=lazy(()=>import('@/views/roles/RoleDetailPage'));
 const AuditPage=lazy(()=>import('@/views/audit/AuditPage'));
 const VerificationPage=lazy(()=>import('@/views/verification/VerificationPage'));
+const AttendancePage=lazy(()=>import('@/views/attendance/AttendancePage'));
+const LeavesPage=lazy(()=>import('@/views/leaves/LeavesPage'));
+const PayrollPage=lazy(()=>import('@/views/payroll/PayrollPage'));
+const RequestsPage=lazy(()=>import('@/views/requests/RequestsPage'));
 function Dashboard(){const {permissions}=useSession();if(!can(permissions,'employees')||!can(permissions,'assets'))return <AccessDenied/>;return can(permissions,'audit')?<AdminDashboard/>:<EmployeeDashboard/>;}
 function SettingsIndex(){const {permissions}=useSession();return <Navigate to={can(permissions,'settings','manage')?'organisation':'account'} replace/>;}
 export default function App(){return <AppErrorBoundary><BrowserRouter><AuthProvider><NotificationProvider><Suspense fallback={<LoadingState/>}><Routes>
@@ -53,6 +57,10 @@ export default function App(){return <AppErrorBoundary><BrowserRouter><AuthProvi
     <Route element={<ProtectedRoute resource="organisation"/>}><Route path="/organisation" element={<OrganisationPage/>}/><Route path="/organisation/:unitId" element={<OrganisationUnitPage/>}/></Route>
     <Route element={<ProtectedRoute resource="employees"/>}><Route path="/employees" element={<EmployeesPage/>}/><Route path="/employees/:employeeId" element={<EmployeeProfilePage/>}/></Route>
     <Route element={<ProtectedRoute resource="employees" action="manage"/>}><Route path="/employees/import" element={<EmployeeImportPage/>}/></Route>
+    <Route element={<ProtectedRoute resource="attendance"/>}><Route path="/attendance" element={<AttendancePage/>}/></Route>
+    <Route element={<ProtectedRoute resource="leaves"/>}><Route path="/leaves" element={<LeavesPage/>}/></Route>
+    <Route element={<ProtectedRoute resource="payroll"/>}><Route path="/payroll" element={<PayrollPage/>}/></Route>
+    <Route element={<ProtectedRoute resource="requests"/>}><Route path="/requests" element={<RequestsPage/>}/></Route>
     <Route element={<ProtectedRoute resource="assets"/>}><Route path="/assets" element={<AssetsPage/>}/><Route path="/assets/physical" element={<AssetsPage/>}/><Route path="/assets/digital" element={<AssetsPage/>}/><Route path="/assets/category/:categoryId" element={<AssetCategoryPage/>}/><Route path="/assets/:assetId" element={<AssetDetailPage/>}/></Route>
     <Route element={<ProtectedRoute resource="roles"/>}><Route path="/roles" element={<RolesPage/>}/><Route path="/roles/:roleId" element={<RoleDetailPage/>}/></Route>
     <Route element={<ProtectedRoute resource="audit"/>}><Route path="/audit" element={<AuditPage/>}/></Route>
