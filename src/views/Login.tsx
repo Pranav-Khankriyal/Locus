@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, Building2, Users, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Building2, Users, ArrowLeft, ArrowRight, AtSign } from 'lucide-react';
+import { AuthShowcaseCard } from '@/components/auth/AuthShowcaseCard';
+import { CompanySetupFields } from '@/components/auth/CompanySetupFields';
 import { useSession } from '@/hooks/useSession';
+import type { HierarchyBranchDraft } from '@/contexts/AuthContext';
 
 type AuthMode = 'signup' | 'login';
 type SignupStep = 'credentials' | 'details';
@@ -29,7 +32,20 @@ export default function Login() {
 
   // Org setup state
   const [orgName, setOrgName] = useState('');
-  const [inviteCode, setInviteCode] = useState('ACME-2026');
+  const [companyCode, setCompanyCode] = useState('');
+  const [codeTouched, setCodeTouched] = useState(false);
+  const [codeAvailable, setCodeAvailable] = useState<boolean | null>(null);
+  const [branches, setBranches] = useState<HierarchyBranchDraft[]>([
+    {
+      name: 'Bengaluru HQ',
+      country: 'India',
+      state: 'Karnataka',
+      departments: ['Engineering', 'People & Operations'],
+    },
+  ]);
+  const [coAdminEmails, setCoAdminEmails] = useState<string[]>([]);
+  const [inviteCode, setInviteCode] = useState('');
+  const [designation, setDesignation] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -97,13 +113,23 @@ export default function Login() {
       return;
     }
 
-    if (orgChoice === 'create' && !orgName.trim()) {
-      setError('Please enter an organization name.');
-      return;
+    if (orgChoice === 'create') {
+      if (!orgName.trim()) {
+        setError('Please enter an organization name.');
+        return;
+      }
+      if (companyCode.replace(/-+$/, '').length < 3) {
+        setError('Please enter a unique company code (at least 3 characters).');
+        return;
+      }
+      if (codeAvailable === false) {
+        setError('That company code is already taken. Please choose a unique code.');
+        return;
+      }
     }
 
     if (orgChoice === 'join' && !inviteCode.trim()) {
-      setError('Please enter an invitation code.');
+      setError('Please enter your unique company code.');
       return;
     }
 
@@ -113,9 +139,18 @@ export default function Login() {
       await signup(signupName.trim(), signupEmail.trim(), signupPassword);
 
       if (orgChoice === 'create') {
-        await createOrganisation(orgName.trim());
+        await createOrganisation({
+          name: orgName.trim(),
+          code: companyCode.replace(/-+$/, ''),
+          creatorName: signupName.trim(),
+          coAdminEmails,
+          hierarchy: { branches },
+        });
       } else {
-        await joinOrganisation(inviteCode.trim());
+        await joinOrganisation(inviteCode.trim(), {
+          name: signupName.trim(),
+          designation: designation.trim() || undefined,
+        });
       }
     } catch (err) {
       setError((err as Error).message || 'Failed to complete registration and workspace setup');
@@ -135,12 +170,27 @@ export default function Login() {
         if (!orgName.trim()) {
           throw new Error('Please enter an organization name');
         }
-        await createOrganisation(orgName.trim());
+        if (companyCode.replace(/-+$/, '').length < 3) {
+          throw new Error('Please enter a unique company code (at least 3 characters)');
+        }
+        if (codeAvailable === false) {
+          throw new Error('That company code is already taken. Choose a different code.');
+        }
+        await createOrganisation({
+          name: orgName.trim(),
+          code: companyCode.replace(/-+$/, ''),
+          creatorName: user?.name,
+          coAdminEmails,
+          hierarchy: { branches },
+        });
       } else {
         if (!inviteCode.trim()) {
-          throw new Error('Please enter an invitation code');
+          throw new Error('Please enter your unique company code');
         }
-        await joinOrganisation(inviteCode.trim());
+        await joinOrganisation(inviteCode.trim(), {
+          name: user?.name,
+          designation: designation.trim() || undefined,
+        });
       }
     } catch (err) {
       setError((err as Error).message || 'Failed to complete workspace setup');
@@ -152,12 +202,12 @@ export default function Login() {
   const isPostLoginWithoutOrg = isAuthenticated && !organisation;
 
   return (
-    <div className="h-screen max-h-screen w-full bg-[#f2f4f6] flex items-center justify-center p-3 sm:p-5 lg:p-7 font-sans text-gray-900 overflow-hidden">
+    <div className="h-screen max-h-screen w-full bg-[#f4f6f8] flex items-center justify-center p-3 sm:p-5 lg:p-7 font-sans text-gray-900 overflow-hidden">
       {/* Centered Main Bento Card */}
       <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full max-h-[96vh] p-6 sm:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center overflow-hidden">
         
         {/* Left Column: Form Content */}
-        <div className="flex flex-col justify-center px-1 sm:px-3 py-1">
+        <div className="flex flex-col justify-center px-1 sm:px-3 py-1 max-h-[85vh] overflow-y-auto workspace-scroll">
 
           {/* ================= CASE 1: EXISTING AUTHENTICATED USER WITHOUT ORG ================= */}
           {isPostLoginWithoutOrg ? (
@@ -199,8 +249,8 @@ export default function Login() {
                     <Building2 className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold text-gray-900 leading-snug">Create Organization</h3>
-                    <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Start new workspace as admin</p>
+                    <h3 className="text-xs font-bold text-gray-900 leading-snug">Admin / Owner</h3>
+                    <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Create enterprise, code &amp; tree</p>
                   </div>
                 </button>
 
@@ -219,44 +269,61 @@ export default function Login() {
                     <Users className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold text-gray-900 leading-snug">Join Organization</h3>
-                    <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Enter invitation code</p>
+                    <h3 className="text-xs font-bold text-gray-900 leading-snug">Employee</h3>
+                    <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Join via unique company code</p>
                   </div>
                 </button>
               </div>
 
               <form onSubmit={handleExistingUserOrgSubmit} className="space-y-4">
                 {orgChoice === 'create' ? (
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                      Organization Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Acme Technologies"
-                      value={orgName}
-                      onChange={(e) => setOrgName(e.target.value)}
-                      required
-                      maxLength={100}
-                      className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all shadow-xs"
-                    />
-                  </div>
+                  <CompanySetupFields
+                    orgName={orgName}
+                    onOrgNameChange={setOrgName}
+                    companyCode={companyCode}
+                    onCompanyCodeChange={setCompanyCode}
+                    codeTouched={codeTouched}
+                    onCodeTouched={() => setCodeTouched(true)}
+                    codeAvailable={codeAvailable}
+                    onCodeAvailabilityChange={setCodeAvailable}
+                    branches={branches}
+                    onBranchesChange={setBranches}
+                    coAdminEmails={coAdminEmails}
+                    onCoAdminEmailsChange={setCoAdminEmails}
+                  />
                 ) : (
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                      Invitation Code
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. ACME-2026"
-                      value={inviteCode}
-                      onChange={(e) => setInviteCode(e.target.value)}
-                      required
-                      className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all font-mono uppercase shadow-xs"
-                    />
-                    <p className="text-xs text-emerald-700 mt-1.5 pl-1">
-                      Tip: Use <strong>ACME-2026</strong> for demo organization.
-                    </p>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Company Code
+                      </label>
+                      <div className="relative">
+                        <AtSign className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          placeholder="e.g. ACME-CORP"
+                          value={inviteCode}
+                          onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+                          required
+                          className="w-full rounded-2xl border border-gray-300 bg-white pl-10 pr-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all font-mono uppercase shadow-xs"
+                        />
+                      </div>
+                      <p className="text-xs text-emerald-700 mt-1.5 pl-1">
+                        Demo company code: <strong>ACME-CORP</strong>. Employees receive role-based access.
+                      </p>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Role / Job Title (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Software Engineer"
+                        value={designation}
+                        onChange={(e) => setDesignation(e.target.value)}
+                        className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all shadow-xs"
+                      />
+                    </div>
                   </div>
                 )}
 
@@ -346,8 +413,8 @@ export default function Login() {
                         <Building2 className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="text-xs font-bold text-gray-900 leading-snug">Create Organization</h3>
-                        <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Start new workspace as admin</p>
+                        <h3 className="text-xs font-bold text-gray-900 leading-snug">Admin / Owner</h3>
+                        <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Create enterprise, code &amp; tree</p>
                       </div>
                     </button>
 
@@ -366,45 +433,62 @@ export default function Login() {
                         <Users className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="text-xs font-bold text-gray-900 leading-snug">Join Organization</h3>
-                        <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Use invite code from team</p>
+                        <h3 className="text-xs font-bold text-gray-900 leading-snug">Employee</h3>
+                        <p className="text-[10px] text-gray-500 mt-0.5 leading-tight">Join via unique company code</p>
                       </div>
                     </button>
                   </div>
                 </div>
 
-                {/* Conditional Input based on Org Choice */}
+                {/* Conditional Input based on Account Type */}
                 {orgChoice === 'create' ? (
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                      Organization Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Acme Technologies"
-                      value={orgName}
-                      onChange={(e) => setOrgName(e.target.value)}
-                      required
-                      maxLength={100}
-                      className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 sm:py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all shadow-xs"
-                    />
-                  </div>
+                  <CompanySetupFields
+                    orgName={orgName}
+                    onOrgNameChange={setOrgName}
+                    companyCode={companyCode}
+                    onCompanyCodeChange={setCompanyCode}
+                    codeTouched={codeTouched}
+                    onCodeTouched={() => setCodeTouched(true)}
+                    codeAvailable={codeAvailable}
+                    onCodeAvailabilityChange={setCodeAvailable}
+                    branches={branches}
+                    onBranchesChange={setBranches}
+                    coAdminEmails={coAdminEmails}
+                    onCoAdminEmailsChange={setCoAdminEmails}
+                  />
                 ) : (
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                      Invitation Code
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. ACME-2026"
-                      value={inviteCode}
-                      onChange={(e) => setInviteCode(e.target.value)}
-                      required
-                      className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 sm:py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all font-mono uppercase shadow-xs"
-                    />
-                    <p className="text-xs text-emerald-700 mt-1 pl-1">
-                      Tip: Use <strong>ACME-2026</strong> for demo organization.
-                    </p>
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Unique Company Code
+                      </label>
+                      <div className="relative">
+                        <AtSign className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          placeholder="e.g. ACME-CORP"
+                          value={inviteCode}
+                          onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+                          required
+                          className="w-full rounded-2xl border border-gray-300 bg-white pl-10 pr-4 py-2.5 sm:py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all font-mono uppercase shadow-xs"
+                        />
+                      </div>
+                      <p className="text-xs text-emerald-700 mt-1 pl-1">
+                        Demo company code: <strong>ACME-CORP</strong>. Role-based permissions apply automatically.
+                      </p>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Role / Job Title (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Product Engineer"
+                        value={designation}
+                        onChange={(e) => setDesignation(e.target.value)}
+                        className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all shadow-xs"
+                      />
+                    </div>
                   </div>
                 )}
 
@@ -703,41 +787,28 @@ export default function Login() {
 
         </div>
 
-        {/* Right Column: Hero Illustration Container */}
-        <div className="bg-[#f0f8f3] rounded-[1.75rem] p-6 sm:p-8 lg:p-10 flex flex-col items-center justify-between text-center h-full max-h-[500px] border border-emerald-50/70 select-none">
-          {/* Top Illustration Image */}
-          <div className="w-full flex-1 flex items-center justify-center min-h-0 py-2">
-            <img
-              src="/asset-management-access-control.png"
-              alt="Asset Management & Access Control Illustration"
-              className="w-full max-h-[240px] sm:max-h-[270px] lg:max-h-[295px] object-contain drop-shadow-sm pointer-events-none"
-              loading="eager"
-            />
-          </div>
-
-          {/* Bottom Content: Dynamic Headline & Subtext */}
-          <div className="w-full flex flex-col items-center mt-3">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight leading-snug">
-              {isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
-                ? orgChoice === 'create'
-                  ? 'Launch Your Organization'
-                  : 'Connect With Your Team'
-                : mode === 'signup'
-                ? 'Join Lokus Enterprise'
-                : 'Asset Management & Access Control'}
-            </h2>
-
-            <p className="text-xs sm:text-[13px] text-gray-600 mt-1.5 max-w-xs leading-relaxed">
-              {isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
-                ? orgChoice === 'create'
-                  ? 'Deploy cryptographic zero-trust identity, roles, and asset tracking in minutes.'
-                  : 'Access organization resources, assigned equipment, and roles seamlessly.'
-                : mode === 'signup'
-                ? 'Manage organizational assets, roles, and permissions seamlessly in one place.'
-                : 'Track assets, manage roles, and keep everything organized in one place.'}
-            </p>
-          </div>
-        </div>
+        {/* Right Column: Live Enterprise Feature Showcase */}
+        <AuthShowcaseCard
+          maxHeightClass="max-h-[500px]"
+          title={
+            isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
+              ? orgChoice === 'create'
+                ? 'Launch Your Organization'
+                : 'Connect With Your Team'
+              : mode === 'signup'
+              ? 'Built for Modern Organizations'
+              : 'Unified Enterprise Workforce & Access OS'
+          }
+          subtitle={
+            isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
+              ? orgChoice === 'create'
+                ? 'Configure teams, payroll structures, leave policies, asset custody, and RBAC in minutes.'
+                : 'Check in daily, view salary slips & PF passbook, submit requests, and access assigned assets.'
+              : mode === 'signup'
+              ? 'Onboard your team with automated payroll, leave tracking, asset custody, and role permissions.'
+              : 'Manage attendance, paid leaves, payroll & PF, employee requests, assets, and roles in one place.'
+          }
+        />
 
       </div>
     </div>

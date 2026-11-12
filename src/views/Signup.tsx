@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { AuthShowcaseCard } from '@/components/auth/AuthShowcaseCard';
 import { useSession } from '@/hooks/useSession';
 
 export default function Signup() {
@@ -179,29 +180,11 @@ export default function Signup() {
           </p>
         </div>
 
-        {/* Right Column: Hero Illustration Container */}
-        <div className="bg-[#f0f8f3] rounded-[1.75rem] p-6 sm:p-7 lg:p-8 flex flex-col items-center justify-between text-center h-full max-h-[520px] border border-emerald-50/70 select-none">
-          {/* Top Illustration Image (Enlarged High-Quality) */}
-          <div className="w-full flex-1 flex items-center justify-center min-h-0 py-1">
-            <img
-              src="/asset-management-access-control.png"
-              alt="Asset Management & Access Control Illustration"
-              className="w-full max-h-[240px] sm:max-h-[280px] lg:max-h-[310px] object-contain drop-shadow-sm pointer-events-none"
-              loading="eager"
-            />
-          </div>
-
-          {/* Bottom Content: Headline & Subtext */}
-          <div className="w-full flex flex-col items-center mt-3">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">
-              Asset Management & Access Control
-            </h2>
-
-            <p className="text-xs text-gray-600 mt-1 max-w-xs leading-relaxed">
-              Track assets, manage roles, and keep everything organized in one place.
-            </p>
-          </div>
-        </div>
+        {/* Right Column: Live Enterprise Feature Showcase */}
+        <AuthShowcaseCard
+          title="Built for Modern Organizations"
+          subtitle="Onboard your team with automated payroll, leave tracking, asset custody, and role permissions."
+        />
 
       </div>
     </div>
