@@ -17,10 +17,32 @@ export async function GET(request: Request) {
     return NextResponse.json({ detail: 'Not authenticated' }, { status: 401 });
   }
 
+  const memberships = db.user_roles
+    .filter((ur) => ur.user_id === user.id)
+    .map((ur) => {
+      const org = db.organizations.find((o) => o.id === ur.organization_id);
+      const role = db.roles.find((r) => r.id === ur.role_id);
+      const isOwner =
+        !!org &&
+        (org.owner_user_id === user.id ||
+          (!org.owner_user_id && ur.user_id === db.users[0]?.id));
+      const isCoAdmin =
+        !!org &&
+        ((org.co_admin_emails || []).includes(user.email.toLowerCase()) ||
+          role?.name.toLowerCase() === 'co-admin');
+      return {
+        organization_id: ur.organization_id,
+        role_id: ur.role_id,
+        role_name: role?.name || 'Employee',
+        is_owner: isOwner,
+        is_co_admin: isCoAdmin,
+      };
+    });
+
   return NextResponse.json({
     id: user.id,
     email: user.email,
     created_at: user.created_at,
+    memberships,
   });
 }
-

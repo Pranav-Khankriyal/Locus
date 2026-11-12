@@ -31,6 +31,8 @@ export const adaptOrganisation = (o: any): Organisation => ({
   createdAt: text(o.created_at),
   rootUnitId: '',
   contact: o.description || undefined,
+  ownerUserId: o.owner_user_id ? text(o.owner_user_id) : undefined,
+  coAdminEmails: Array.isArray(o.co_admin_emails) ? o.co_admin_emails : [],
 });
 
 export const adaptEmployee = (e: any): Employee => ({

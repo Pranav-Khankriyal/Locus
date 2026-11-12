@@ -14,7 +14,7 @@ export type Action = 'view' | 'manage' | 'assign' | 'audit';
 export type Scope = 'all' | 'team' | 'own';
 export type Status = 'Active' | 'Inactive';
 export type IdentityStatus = 'Verified' | 'Pending' | 'Revoked';
-export interface Organisation { id: string; name: string; slug: string; createdAt: string; rootUnitId: string; contact?: string; logo?: string }
+export interface Organisation { id: string; name: string; slug: string; createdAt: string; rootUnitId: string; contact?: string; logo?: string; ownerUserId?: string; coAdminEmails?: string[] }
 export interface OrganisationUnit { id: string; name: string; type: string; parentId: string | null; managerId: string | null; employeeCount: number; assetCount: number; depth: number; deletedAt?: string }
 export interface TreeNode extends OrganisationUnit { children: TreeNode[] }
 export interface Employee { id: string; employeeId: string; name: string; email: string; designation: string; organisationUnitId: string; managerId: string | null; status: Status; role: string; identityStatus: IdentityStatus; createdAt: string; deletedAt?: string }

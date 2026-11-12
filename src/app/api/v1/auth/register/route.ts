@@ -19,17 +19,11 @@ export async function POST(request: Request) {
 
     const newUser = db.addUser({
       id: `usr-${Date.now()}`,
-      email,
-      password_hash: 'demo_hash',
+      email: email.trim(),
+      password_hash: password ? `hash_${password.length}` : 'demo_hash',
       is_active: true,
       created_at: new Date().toISOString(),
     });
-
-    const org = db.organizations[0];
-    const role = db.roles[0];
-    if (org && role) {
-      db.assignUserRole(newUser.id, role.id, org.id);
-    }
 
     return NextResponse.json(
       {
@@ -39,8 +33,8 @@ export async function POST(request: Request) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
-    return NextResponse.json({ detail: error.message || 'Registration failed' }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Registration failed';
+    return NextResponse.json({ detail: message }, { status: 500 });
   }
 }
-

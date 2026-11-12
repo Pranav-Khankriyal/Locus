@@ -716,6 +716,36 @@
   ],
   "audit_logs": [
     {
+      "id": "log-1794481010462",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "e-1",
+      "action": "ATTENDANCE_CLOCK_IN",
+      "entity_type": "Attendance",
+      "entity_id": "att-e-1-2026-11-12",
+      "metadata": {
+        "employeeId": "e-1",
+        "date": "2026-11-12",
+        "status": "Late",
+        "workMode": "Office"
+      },
+      "created_at": "2026-11-12T10:56:50.462Z"
+    },
+    {
+      "id": "log-1794481008055",
+      "organization_id": "11111111-1111-1111-1111-111111111111",
+      "actor_user_id": "e-1",
+      "action": "ATTENDANCE_CLOCK_OUT",
+      "entity_type": "Attendance",
+      "entity_id": "att-e-1-2026-11-12",
+      "metadata": {
+        "employeeId": "e-1",
+        "date": "2026-11-12",
+        "status": "Late",
+        "workMode": "Office"
+      },
+      "created_at": "2026-11-12T10:56:48.055Z"
+    },
+    {
       "id": "log-1794462732995",
       "organization_id": "11111111-1111-1111-1111-111111111111",
       "actor_user_id": "e-1",
@@ -926,13 +956,13 @@
       "employee_id": "e-1",
       "date": "2026-11-12",
       "check_in": "11:22",
-      "check_out": null,
-      "work_hours": 0,
+      "check_out": "16:26",
+      "work_hours": 5.1,
       "status": "Late",
       "work_mode": "Office",
       "location": "HQ Office",
       "notes": "",
-      "updated_at": "2026-11-12T05:52:12.992Z"
+      "updated_at": "2026-11-12T10:56:50.460Z"
     },
     {
       "id": "att-e-1-2026-11-10",

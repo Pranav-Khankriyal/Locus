@@ -37,7 +37,18 @@ export interface LokusOrganization {
   name: string;
   code: string;
   description?: string;
+  owner_user_id?: string;
+  co_admin_emails?: string[];
   created_at: string;
+}
+
+export function normalizeCompanyCode(raw: string): string {
+  return raw
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 32);
 }
 
 export interface LokusOrganizationUnit {
@@ -236,6 +247,63 @@ const ALL_PERMISSIONS: LokusPermission[] = [
   ...ENTERPRISE_PERMISSIONS,
 ];
 
+export function buildOrgDefaultRoles(orgId: string, now: string) {
+  const ownerRole: LokusRole = {
+    id: `r-owner-${orgId}`,
+    organization_id: orgId,
+    name: 'Organisation Owner',
+    description: 'Full enterprise ownership across hierarchy, co-admins, payroll, RBAC, and all modules.',
+    is_system: true,
+    permissions: ALL_PERMISSIONS,
+    created_at: now,
+  };
+
+  const coAdminRole: LokusRole = {
+    id: `r-coadmin-${orgId}`,
+    organization_id: orgId,
+    name: 'Co-Admin',
+    description: 'Delegated administrator access across workforce, payroll, hierarchy, assets, and roles.',
+    is_system: true,
+    permissions: ALL_PERMISSIONS,
+    created_at: now,
+  };
+
+  const assetManagerRole: LokusRole = {
+    id: `r-asset-${orgId}`,
+    organization_id: orgId,
+    name: 'Asset Manager',
+    description: 'Manages physical and digital assets, custody assignments, and returns.',
+    is_system: false,
+    permissions: ALL_PERMISSIONS.filter((p) => p.code.startsWith('asset.') || p.code.startsWith('verification.')),
+    created_at: now,
+  };
+
+  const employeeRole: LokusRole = {
+    id: `r-emp-${orgId}`,
+    organization_id: orgId,
+    name: 'Employee',
+    description: 'Role-based self-service access to attendance, leaves, salary slips, PF, requests, and assigned assets.',
+    is_system: false,
+    permissions: ALL_PERMISSIONS.filter((p) =>
+      [
+        'employee.read',
+        'asset.read',
+        'verification.read',
+        'attendance.read',
+        'attendance.manage',
+        'leaves.read',
+        'leaves.manage',
+        'payroll.read',
+        'requests.read',
+        'requests.manage',
+      ].includes(p.code)
+    ),
+    created_at: now,
+  };
+
+  return { ownerRole, coAdminRole, assetManagerRole, employeeRole };
+}
+
 function createDefaultSeed(): LokusDatabaseSchema {
   const orgId = '11111111-1111-1111-1111-111111111111';
   const adminUserId = '22222222-2222-2222-2222-222222222222';
@@ -246,6 +314,8 @@ function createDefaultSeed(): LokusDatabaseSchema {
     name: 'Acme Corporation',
     code: 'ACME-CORP',
     description: 'Enterprise organization workspace running Lokus Trust & Verification Platform.',
+    owner_user_id: adminUserId,
+    co_admin_emails: [],
     created_at: now,
   };
 
@@ -788,6 +858,45 @@ class LokusDatabase {
   addOrganization(org: LokusOrganization) {
     const db = this.load();
     db.organizations.push(org);
+    this.save();
+    return org;
+  }
+
+  addHoliday(holiday: LokusHoliday) {
+    const db = this.load();
+    db.holidays.push(holiday);
+    this.save();
+    return holiday;
+  }
+
+  setOrganizationCoAdmins(orgId: string, emails: string[]) {
+    const db = this.load();
+    const org = db.organizations.find((o) => o.id === orgId);
+    if (!org) return null;
+    const cleaned = Array.from(new Set(emails.map((e) => e.trim().toLowerCase()).filter(Boolean)));
+    org.co_admin_emails = cleaned;
+
+    const orgRoles = db.roles.filter((r) => r.organization_id === orgId);
+    const coAdminRole =
+      orgRoles.find((r) => r.name.toLowerCase() === 'co-admin') ||
+      orgRoles.find((r) => r.name.toLowerCase().includes('admin')) ||
+      orgRoles[0];
+    const empRole =
+      orgRoles.find((r) => r.name.toLowerCase() === 'employee') ||
+      orgRoles[orgRoles.length - 1];
+
+    // Update any existing users in this organization to match Co-Admin or Employee role
+    for (const u of db.users) {
+      if (u.id === org.owner_user_id) continue;
+      const ur = db.user_roles.find((x) => x.user_id === u.id && x.organization_id === orgId);
+      if (!ur) continue;
+      if (cleaned.includes(u.email.toLowerCase()) && coAdminRole) {
+        ur.role_id = coAdminRole.id;
+      } else if (!cleaned.includes(u.email.toLowerCase()) && coAdminRole && ur.role_id === coAdminRole.id && empRole) {
+        ur.role_id = empRole.id;
+      }
+    }
+
     this.save();
     return org;
   }
