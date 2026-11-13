@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
   Clock,
   KeyRound,
   Laptop,
@@ -33,6 +34,7 @@ export default function Landing() {
   const navigate = useNavigate();
   const { isAuthenticated, login } = useSession();
   const [isDemoLoading, setIsDemoLoading] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -80,49 +82,137 @@ export default function Landing() {
           }}
         />
 
-        {/* ─── Clean Header (Links Removed per User Request) ────────────────── */}
-        <header className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-4 border-b border-white/10 shrink-0">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2.5 cursor-pointer"
-          >
-            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0C4242] flex items-center justify-center font-bold shadow-sm">
-              <ShieldCheck className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#0C4242]" />
-            </span>
-            <span className="text-base sm:text-lg font-bold tracking-tight text-white">
-              Lokus
-            </span>
-          </button>
+        {/* ─── Reference Navbar (Logo & Links on Left, Login & Mint Button on Right) ─ */}
+        <header className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-4 border-b border-white/10 shrink-0">
+          {/* Left: Logo & Links immediately beside it */}
+          <div className="flex items-center gap-7 sm:gap-9">
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center gap-2.5 cursor-pointer text-white hover:opacity-90 transition-opacity"
+            >
+              <span className="w-8 h-8 rounded-lg bg-[#34D399] flex items-center justify-center text-zinc-950 font-bold shadow-sm">
+                <ShieldCheck className="w-5 h-5 text-zinc-950" />
+              </span>
+              <span className="text-base sm:text-lg font-bold tracking-tight text-white font-sans">
+                Lokus
+              </span>
+            </button>
 
-          {/* Right CTA */}
-          <div className="flex items-center gap-3">
+            {/* Left-aligned navigation links matching reference */}
+            <nav className="hidden md:flex items-center gap-5 sm:gap-7 text-[13px] font-medium text-white/90">
+              <button
+                type="button"
+                onClick={() => scrollTo('section-04')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Pricing
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo('section-02')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                API
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo('section-01')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Docs
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo('section-03')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Blog
+              </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setToolsOpen((v) => !v)}
+                  className="inline-flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
+                >
+                  <span>Free Tools</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-80" />
+                </button>
+
+                {toolsOpen && (
+                  <div className="absolute left-0 mt-2 w-56 rounded-xl bg-[#082920] border border-white/15 p-2 shadow-2xl z-50 text-left">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setToolsOpen(false);
+                        handleViewDemo();
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    >
+                      Interactive Live Demo
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setToolsOpen(false);
+                        scrollTo('section-04');
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    >
+                      EPF &amp; Net Salary Slip
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setToolsOpen(false);
+                        scrollTo('section-02');
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    >
+                      Hardware Custody Vault
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setToolsOpen(false);
+                        scrollTo('section-01');
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    >
+                      Employee Directory Roster
+                    </button>
+                  </div>
+                )}
+              </div>
+            </nav>
+          </div>
+
+          {/* Right: Login link + Mint Green Get started button */}
+          <div className="flex items-center gap-4 sm:gap-6">
             {isAuthenticated ? (
               <button
                 type="button"
                 onClick={() => navigate('/dashboard')}
-                className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
+                className="text-[13px] font-medium text-white hover:text-white/80 transition-colors cursor-pointer"
               >
                 Open Workspace
               </button>
             ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={() => navigate('/login?mode=login')}
-                  className="px-3 py-1.5 text-white/80 hover:text-white text-xs sm:text-sm font-medium transition-colors cursor-pointer"
-                >
-                  Log In
-                </button>
-                <button
-                  type="button"
-                  onClick={handleGetStarted}
-                  className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
-                >
-                  Get Started
-                </button>
-              </>
+              <button
+                type="button"
+                onClick={() => navigate('/login?mode=login')}
+                className="text-[13px] font-medium text-white hover:text-white/80 transition-colors cursor-pointer"
+              >
+                Login
+              </button>
             )}
+            <button
+              type="button"
+              onClick={handleGetStarted}
+              className="px-4 py-1.5 rounded-lg bg-[#34D399] hover:bg-[#2fe09d] text-zinc-950 text-[13px] font-semibold transition-all shadow-sm cursor-pointer active:scale-95"
+            >
+              Get started
+            </button>
           </div>
         </header>
 
