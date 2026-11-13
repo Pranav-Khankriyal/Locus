@@ -37,233 +37,229 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#FAFBF6] text-zinc-900 font-sans selection:bg-[#0C4242] selection:text-white overflow-x-hidden relative">
-      {/* ─── Layer 1: Inset Hero Card matching reference aesthetic ─────────── */}
-      <section className="w-full max-w-[1440px] mx-auto p-3 sm:p-5 lg:p-6">
-        <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#0C4242] text-white overflow-hidden shadow-[0_25px_60px_-15px_rgba(12,66,66,0.25)] border border-[#0C4242]/30">
-          {/* Ambient radial glow & fine grid inside the hero container */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-0"
-            style={{
-              backgroundImage: `
-                radial-gradient(ellipse 90% 60% at 50% 20%, rgba(20, 110, 100, 0.45) 0%, rgba(12, 66, 66, 0.72) 50%, rgba(8, 45, 45, 0.98) 100%),
-                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-              `,
-              backgroundSize: '100% 100%, 4.5rem 4.5rem, 4.5rem 4.5rem',
-            }}
-          />
+    <div className="w-full bg-[#FAFBF6] text-zinc-900 font-sans selection:bg-[#0C4242] selection:text-white overflow-x-hidden relative">
+      {/* ─── Layer 1: Full-Screen Edge-to-Edge Hero (Visible at One View) ───── */}
+      <section className="w-full min-h-screen lg:h-screen lg:max-h-[100dvh] bg-[#0C4242] text-white flex flex-col justify-between relative overflow-hidden">
+        {/* Ambient radial glow & fine grid extending edge-to-edge */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse 90% 60% at 50% 20%, rgba(20, 110, 100, 0.45) 0%, rgba(12, 66, 66, 0.72) 50%, rgba(8, 45, 45, 0.98) 100%),
+              linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: '100% 100%, 4.5rem 4.5rem, 4.5rem 4.5rem',
+          }}
+        />
 
-          <div className="relative z-10 flex flex-col">
-            {/* ─── Full Header inside the Hero Card ─────────────────────────── */}
-            <header className="w-full px-6 sm:px-10 h-20 flex items-center justify-between gap-4 border-b border-white/10">
+        {/* ─── Full-Bleed Top Header ────────────────────────────────────────── */}
+        <header className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-4 border-b border-white/10 shrink-0">
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2.5 cursor-pointer"
+          >
+            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0C4242] flex items-center justify-center font-bold shadow-sm">
+              <ShieldCheck className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-[#0C4242]" />
+            </span>
+            <span className="text-base sm:text-lg font-bold tracking-tight text-white">
+              Lokus
+            </span>
+          </button>
+
+          {/* Center navigation links */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs sm:text-sm font-medium text-white/80">
+            <button
+              type="button"
+              onClick={() => scrollTo('section-01')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              People
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('section-02')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Assets
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('section-03')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Attendance
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('section-04')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Payroll
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('section-05')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              RBAC
+            </button>
+          </nav>
+
+          {/* Right CTA */}
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
               <button
                 type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="flex items-center gap-2.5 cursor-pointer"
+                onClick={() => navigate('/dashboard')}
+                className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
               >
-                <span className="w-9 h-9 rounded-full bg-white text-[#0C4242] flex items-center justify-center font-bold shadow-sm">
-                  <ShieldCheck className="w-5 h-5 text-[#0C4242]" />
-                </span>
-                <span className="text-lg font-bold tracking-tight text-white">
-                  Lokus
-                </span>
+                Open Workspace
               </button>
-
-              {/* Center navigation links */}
-              <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs sm:text-sm font-medium text-white/80">
+            ) : (
+              <>
                 <button
                   type="button"
-                  onClick={() => scrollTo('section-01')}
-                  className="hover:text-white transition-colors cursor-pointer"
+                  onClick={() => navigate('/login?mode=login')}
+                  className="px-3 py-1.5 text-white/80 hover:text-white text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
-                  People
+                  Log In
                 </button>
                 <button
                   type="button"
-                  onClick={() => scrollTo('section-02')}
-                  className="hover:text-white transition-colors cursor-pointer"
+                  onClick={() => navigate('/signup')}
+                  className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
                 >
-                  Assets
+                  Get Started
                 </button>
-                <button
-                  type="button"
-                  onClick={() => scrollTo('section-03')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Attendance
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollTo('section-04')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Payroll
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollTo('section-05')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  RBAC
-                </button>
-              </nav>
-
-              {/* Right CTA */}
-              <div className="flex items-center gap-3">
-                {isAuthenticated ? (
-                  <button
-                    type="button"
-                    onClick={() => navigate('/dashboard')}
-                    className="px-5 py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
-                  >
-                    Open Workspace
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => navigate('/login?mode=login')}
-                      className="px-3.5 py-1.5 text-white/80 hover:text-white text-xs sm:text-sm font-medium transition-colors cursor-pointer"
-                    >
-                      Log In
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => navigate('/signup')}
-                      className="px-5 py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
-                    >
-                      Get Started
-                    </button>
-                  </>
-                )}
-              </div>
-            </header>
-
-            {/* ─── Hero Content flanked by Floating Preview Cards ─────────────── */}
-            <div className="relative w-full max-w-6xl mx-auto px-6 sm:px-10 pt-12 pb-12 sm:pt-20 sm:pb-16 text-center flex flex-col items-center">
-              {/* Left Floating Card (matching reference layout) */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="hidden xl:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-64 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[-3.5deg] flex-col gap-2.5 text-left pointer-events-none"
-              >
-                <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
-                  <span className="font-semibold text-[#0C4242]">ORGANIZATION ROSTER</span>
-                  <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">148 Active</span>
-                </div>
-                <div className="flex items-center gap-3 pt-1">
-                  <span className="w-9 h-9 rounded-xl bg-[#0C4242] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
-                    ENG
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-sm font-bold text-zinc-950 truncate">Elena Rostova</div>
-                    <div className="text-xs text-zinc-500 truncate">Security Architect</div>
-                  </div>
-                </div>
-                <div className="mt-1 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
-                  <span>Custody Asset</span>
-                  <span className="font-mono font-semibold text-zinc-800">AST-1001</span>
-                </div>
-              </motion.div>
-
-              {/* Right Floating Card (matching reference layout) */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-                className="hidden xl:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-64 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[3.5deg] flex-col gap-2.5 text-left pointer-events-none"
-              >
-                <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
-                  <span>MONTHLY PAYROLL</span>
-                  <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">100% EPF</span>
-                </div>
-                <div className="pt-0.5">
-                  <div className="text-xs text-zinc-500">November Net Slip</div>
-                  <div className="text-2xl font-bold text-zinc-950 tracking-tight">₹1,42,400</div>
-                </div>
-                <div className="mt-1 pt-2 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
-                  <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Verified
-                  </span>
-                  <span className="font-mono font-semibold text-[#0C4242]">Ledger Synced</span>
-                </div>
-              </motion.div>
-
-              {/* Center Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-2xl mx-auto flex flex-col items-center"
-              >
-                {/* Rating / Review Pill matching reference (+1500 reviews) */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-medium text-white mb-6">
-                  <span className="text-emerald-300">★</span>
-                  <span>Trusted by modern engineering &amp; ops teams</span>
-                </div>
-
-                {/* Giant Title */}
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold tracking-tight leading-[1.08] text-white">
-                  Workplace management,{' '}
-                  <br className="hidden sm:inline" />
-                  <span>made easy.</span>
-                </h1>
-
-                {/* Subtitle */}
-                <p className="mt-4 text-sm sm:text-base text-zinc-200/90 max-w-lg mx-auto leading-relaxed">
-                  One platform to manage employees, company assets, attendance and payroll.
-                </p>
-
-                {/* Hero CTAs */}
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-                  <button
-                    type="button"
-                    onClick={() => navigate(isAuthenticated ? '/dashboard' : '/signup')}
-                    className="px-7 py-3 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-sm sm:text-base font-semibold transition-all shadow-md inline-flex items-center gap-2 cursor-pointer active:scale-98"
-                  >
-                    Get started for free <ArrowRight className="w-4 h-4 text-[#0C4242]" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollTo('section-01')}
-                    className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white text-sm sm:text-base font-medium border border-white/25 transition-all inline-flex items-center gap-2 cursor-pointer backdrop-blur-xs active:scale-98"
-                  >
-                    View Demo
-                    <ArrowUpRight className="w-4 h-4 text-emerald-300" />
-                  </button>
-                </div>
-
-                {/* Social Avatars Proof */}
-                <div className="mt-7 flex items-center justify-center gap-3">
-                  <div className="flex -space-x-2 overflow-hidden">
-                    <span className="inline-block h-7 w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-700 text-[10px] font-bold text-white flex items-center justify-center shadow-xs">ER</span>
-                    <span className="inline-block h-7 w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-600 text-[10px] font-bold text-white flex items-center justify-center shadow-xs">MV</span>
-                    <span className="inline-block h-7 w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-800 text-[10px] font-bold text-white flex items-center justify-center shadow-xs">AM</span>
-                    <span className="inline-block h-7 w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-500 text-[10px] font-bold text-white flex items-center justify-center shadow-xs">DK</span>
-                  </div>
-                  <span className="text-xs text-white/70 font-medium">
-                    Verified enterprise cryptographic platform
-                  </span>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Bottom Trust bar inside Hero Card */}
-            <div className="w-full px-6 sm:px-10 py-5 border-t border-white/10 flex flex-wrap items-center justify-around gap-4 text-xs font-semibold uppercase tracking-wider text-white/60">
-              <span>Access Control (RBAC)</span>
-              <span className="text-white/30">·</span>
-              <span>Hardware Vault</span>
-              <span className="text-white/30">·</span>
-              <span>Biometric Attendance</span>
-              <span className="text-white/30">·</span>
-              <span>Automated EPF</span>
-              <span className="text-white/30">·</span>
-              <span>Audit Ledger</span>
-            </div>
+              </>
+            )}
           </div>
+        </header>
+
+        {/* ─── Hero Center Body (Centered & Compact for 100vh Visibility) ───── */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-10 py-4 sm:py-8 flex-1 flex flex-col items-center justify-center text-center my-auto">
+          {/* Left Floating Card (matching reference layout, hidden on smaller screens) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="hidden xl:flex absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-60 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[-3.5deg] flex-col gap-2 text-left pointer-events-none"
+          >
+            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span className="font-semibold text-[#0C4242]">ROSTER</span>
+              <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">148 Active</span>
+            </div>
+            <div className="flex items-center gap-2.5 pt-0.5">
+              <span className="w-8 h-8 rounded-xl bg-[#0C4242] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+                ENG
+              </span>
+              <div className="min-w-0">
+                <div className="text-sm font-bold text-zinc-950 truncate">Elena Rostova</div>
+                <div className="text-[11px] text-zinc-500 truncate">Security Architect</div>
+              </div>
+            </div>
+            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+              <span>Custody ID</span>
+              <span className="font-mono font-semibold text-zinc-800">AST-1001</span>
+            </div>
+          </motion.div>
+
+          {/* Right Floating Card (matching reference layout, hidden on smaller screens) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="hidden xl:flex absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-60 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[3.5deg] flex-col gap-2 text-left pointer-events-none"
+          >
+            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span>PAYROLL</span>
+              <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">100% EPF</span>
+            </div>
+            <div className="pt-0.5">
+              <div className="text-[11px] text-zinc-500">Net Slip</div>
+              <div className="text-xl font-bold text-zinc-950 tracking-tight">₹1,42,400</div>
+            </div>
+            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+              <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Verified
+              </span>
+              <span className="font-mono font-semibold text-[#0C4242]">Ledger Synced</span>
+            </div>
+          </motion.div>
+
+          {/* Center Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-2xl mx-auto flex flex-col items-center"
+          >
+            {/* Rating / Review Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-medium text-white mb-4 sm:mb-5">
+              <span className="text-emerald-300">★</span>
+              <span>Trusted by modern engineering &amp; ops teams</span>
+            </div>
+
+            {/* Giant Title */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-bold tracking-tight leading-[1.08] text-white">
+              Workplace management,{' '}
+              <br className="hidden sm:inline" />
+              <span>made easy.</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="mt-3 sm:mt-4 text-xs sm:text-base text-zinc-200/90 max-w-lg mx-auto leading-relaxed">
+              One platform to manage employees, company assets, attendance and payroll.
+            </p>
+
+            {/* Hero CTAs */}
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => navigate(isAuthenticated ? '/dashboard' : '/signup')}
+                className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-md inline-flex items-center gap-2 cursor-pointer active:scale-98"
+              >
+                Get started for free <ArrowRight className="w-4 h-4 text-[#0C4242]" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollTo('section-01')}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-medium border border-white/25 transition-all inline-flex items-center gap-2 cursor-pointer backdrop-blur-xs active:scale-98"
+              >
+                View Demo
+                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300" />
+              </button>
+            </div>
+
+            {/* Social Avatars Proof */}
+            <div className="mt-5 sm:mt-6 flex items-center justify-center gap-2.5">
+              <div className="flex -space-x-2 overflow-hidden">
+                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-700 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">ER</span>
+                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-600 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">MV</span>
+                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-800 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">AM</span>
+                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-500 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">DK</span>
+              </div>
+              <span className="text-[11px] sm:text-xs text-white/70 font-medium">
+                Verified enterprise cryptographic platform
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ─── Bottom Trust Bar (Anchored at Bottom of 100vh Hero) ─────────── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 py-3.5 sm:py-4 border-t border-white/10 flex flex-wrap items-center justify-around gap-3 sm:gap-4 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60 shrink-0">
+          <span>Access Control (RBAC)</span>
+          <span className="text-white/30">·</span>
+          <span>Hardware Vault</span>
+          <span className="text-white/30">·</span>
+          <span>Biometric Attendance</span>
+          <span className="text-white/30">·</span>
+          <span>Automated EPF</span>
+          <span className="text-white/30">·</span>
+          <span>Audit Ledger</span>
         </div>
       </section>
 
