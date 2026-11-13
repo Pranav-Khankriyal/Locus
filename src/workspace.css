@@ -1,12 +1,14 @@
 /* Lokus Enterprise - Clean, Spacious Editorial Theme */
 :root {
-  --card: #eaf4ef;
-  --pn: #dcebe3;
-  --rw: #f6fbf8;
-  --tx: #0b1f17;
-  --mt: #4c6a5c;
-  --lb: #17784f;
-  --bd: rgba(11, 31, 23, 0.08);
+  --hero-bg: #0C4242;
+  --bg-page: #FAFBF6;
+  --card: #FFFFFF;
+  --pn: #F2F7F4;
+  --rw: #FFFFFF;
+  --tx: #0B1F17;
+  --mt: #52665E;
+  --lb: #0C4242;
+  --bd: rgba(12, 66, 66, 0.09);
 }
 
 .workspace,

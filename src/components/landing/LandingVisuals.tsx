@@ -30,17 +30,17 @@ function CardFrame({ id, step, headline, description, children }: CardFrameProps
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
-      className="scroll-mt-24 bg-[#eaf4ef] rounded-3xl border border-[rgba(11,31,23,0.08)] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)] hover:shadow-[0_25px_60px_-10px_rgba(0,0,0,0.5)] transition-all overflow-hidden flex flex-col justify-between h-full"
+      className="scroll-mt-24 bg-white rounded-3xl border border-zinc-200/90 shadow-[0_12px_40px_-10px_rgba(12,66,66,0.06)] hover:shadow-[0_20px_50px_-10px_rgba(12,66,66,0.12)] hover:border-[#0C4242]/30 transition-all overflow-hidden flex flex-col justify-between h-full"
     >
       {/* Header (Step Label + Headline) */}
       <div className="px-6 pt-6 pb-5 sm:px-7 sm:pt-7">
-        <span className="text-xs font-semibold text-[#17784f] tracking-wide">
+        <span className="text-xs font-semibold text-[#0C4242] tracking-wide">
           {step}
         </span>
-        <h3 className="mt-1 text-xl sm:text-[22px] font-bold tracking-tight text-[#0b1f17]">
+        <h3 className="mt-1 text-xl sm:text-[22px] font-bold tracking-tight text-zinc-950">
           {headline}
         </h3>
-        <p className="mt-1 text-xs sm:text-[13px] text-[#4c6a5c] leading-relaxed">
+        <p className="mt-1 text-xs sm:text-[13px] text-zinc-600 leading-relaxed">
           {description}
         </p>
       </div>
@@ -71,10 +71,10 @@ export function EmployeeDirectoryCard() {
       headline="Your people, organized."
       description="Profiles, departments and reporting structure in one clean roster."
     >
-      <div className="flex-1 rounded-2xl bg-[#dcebe3] border border-[rgba(11,31,23,0.08)] p-4 sm:p-5 flex flex-col justify-between min-h-[250px] overflow-hidden">
-        <div className="flex items-center justify-between text-xs font-medium text-[#4c6a5c] mb-3">
+      <div className="flex-1 rounded-2xl bg-[#F2F7F4] border border-[#0C4242]/10 p-4 sm:p-5 flex flex-col justify-between min-h-[250px] overflow-hidden">
+        <div className="flex items-center justify-between text-xs font-medium text-zinc-500 mb-3">
           <span>Organization Directory</span>
-          <span className="font-mono text-[11px] text-[#17784f] font-semibold">148 Active</span>
+          <span className="font-mono text-[11px] text-[#0C4242] font-semibold">148 Active</span>
         </div>
 
         <div className="space-y-2.5 my-auto">
@@ -93,25 +93,25 @@ export function EmployeeDirectoryCard() {
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
                 className={`w-full text-left flex items-center gap-3 rounded-xl px-3.5 py-3 border transition-all cursor-pointer ${
                   isTilted
-                    ? 'bg-white border-2 border-[#17784f] shadow-[0_12px_24px_-6px_rgba(23,120,79,0.22)]'
-                    : 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] hover:border-[#17784f]/40 shadow-2xs'
+                    ? 'bg-white border-2 border-[#0C4242] shadow-[0_12px_24px_-6px_rgba(12,66,66,0.18)]'
+                    : 'bg-white border-zinc-200/70 hover:border-[#0C4242]/40 shadow-2xs'
                 }`}
               >
-                <GripVertical className={`w-3.5 h-3.5 shrink-0 ${isTilted ? 'text-[#4c6a5c]' : 'text-[#4c6a5c]/50'}`} />
+                <GripVertical className={`w-3.5 h-3.5 shrink-0 ${isTilted ? 'text-zinc-600' : 'text-zinc-400'}`} />
                 <span
                   className={`w-8 h-7 rounded-lg text-[10px] font-mono font-bold flex items-center justify-center shrink-0 ${
                     isTilted
-                      ? 'bg-[#17784f] text-white shadow-xs'
-                      : 'bg-[#dcebe3] text-[#17784f] border border-[#17784f]/25'
+                      ? 'bg-[#0C4242] text-white shadow-xs'
+                      : 'bg-[#E6F0EB] text-[#0C4242] border border-[#0C4242]/20'
                   }`}
                 >
                   {row.badge}
                 </span>
                 <div className="min-w-0 flex-1 flex items-center justify-between gap-2">
-                  <span className={`text-[13px] font-semibold truncate ${isTilted ? 'text-[#0b1f17]' : 'text-[#0b1f17]'}`}>
+                  <span className={`text-[13px] font-semibold truncate ${isTilted ? 'text-zinc-950 font-bold' : 'text-zinc-900'}`}>
                     {row.name}
                   </span>
-                  <span className="text-[11px] truncate text-[#4c6a5c] hidden sm:inline">
+                  <span className={`text-[11px] truncate hidden sm:inline ${isTilted ? 'text-zinc-600' : 'text-zinc-500'}`}>
                     {row.meta}
                   </span>
                 </div>
@@ -155,21 +155,21 @@ export function AssetAllocationCard() {
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') setAssigned((v) => !v);
         }}
-        className="flex-1 rounded-2xl bg-[#dcebe3] border border-[rgba(11,31,23,0.08)] relative min-h-[250px] overflow-hidden cursor-pointer flex flex-col justify-between p-4"
+        className="flex-1 rounded-2xl bg-[#F2F7F4] border border-[#0C4242]/10 relative min-h-[250px] overflow-hidden cursor-pointer flex flex-col justify-between p-4"
       >
         {/* Top status pill */}
         <div className="relative z-10 flex items-center justify-between">
-          <span className="font-mono text-[11px] text-[#4c6a5c] font-medium">AST-1001 · CUSTODY</span>
+          <span className="font-mono text-[11px] text-zinc-500 font-medium">AST-1001 · CUSTODY</span>
           <span
             className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${
               assigned
-                ? 'bg-[#f6fbf8] border-[#17784f]/35 text-[#17784f]'
-                : 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-[#4c6a5c]'
+                ? 'bg-white border-[#0C4242]/30 text-[#0C4242] shadow-2xs'
+                : 'bg-white border-zinc-200 text-zinc-500 shadow-2xs'
             }`}
           >
             <span
               className={`w-1.5 h-1.5 rounded-full ${
-                assigned ? 'bg-[#17784f] animate-pulse' : 'bg-zinc-400'
+                assigned ? 'bg-[#0C4242] animate-pulse' : 'bg-zinc-400'
               }`}
             />
             {assigned ? 'Assigned' : 'Available Pool'}
@@ -179,15 +179,15 @@ export function AssetAllocationCard() {
         {/* Concentric Bottom Orbital Arcs */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -bottom-24 -translate-x-1/2 w-72 h-72 rounded-full border border-dashed border-[#17784f]/25"
+          className="pointer-events-none absolute left-1/2 -bottom-24 -translate-x-1/2 w-72 h-72 rounded-full border border-dashed border-[#0C4242]/20"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -bottom-16 -translate-x-1/2 w-52 h-52 rounded-full border border-dashed border-[#17784f]/35"
+          className="pointer-events-none absolute left-1/2 -bottom-16 -translate-x-1/2 w-52 h-52 rounded-full border border-dashed border-[#0C4242]/30"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -bottom-8 -translate-x-1/2 w-32 h-32 rounded-full bg-[#17784f]/15"
+          className="pointer-events-none absolute left-1/2 -bottom-8 -translate-x-1/2 w-32 h-32 rounded-full bg-[#0C4242]/10"
         />
 
         {/* Floating Circular Nodes */}
@@ -199,10 +199,10 @@ export function AssetAllocationCard() {
                 key={n.label}
                 className={`absolute ${n.pos} flex flex-col items-center gap-1`}
               >
-                <div className="w-11 h-11 rounded-full bg-[#f6fbf8] border-2 border-[#17784f]/40 shadow-sm flex items-center justify-center">
-                  <Icon className="w-4 h-4 text-[#17784f]" />
+                <div className="w-11 h-11 rounded-full bg-white border-2 border-[#0C4242]/30 shadow-sm flex items-center justify-center">
+                  <Icon className="w-4 h-4 text-[#0C4242]" />
                 </div>
-                <span className="text-[10px] font-semibold text-[#0b1f17] bg-[#f6fbf8] px-2 py-0.5 rounded-full border border-[rgba(11,31,23,0.08)] shadow-2xs">
+                <span className="text-[10px] font-semibold text-zinc-800 bg-white px-2 py-0.5 rounded-full border border-zinc-200 shadow-2xs">
                   {n.label}
                 </span>
               </div>
@@ -211,7 +211,7 @@ export function AssetAllocationCard() {
         </div>
 
         {/* Center Bottom Hub */}
-        <div className="relative z-10 mx-auto w-20 h-11 rounded-t-full bg-[#17784f] text-white flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(23,120,79,0.3)]">
+        <div className="relative z-10 mx-auto w-20 h-11 rounded-t-full bg-[#0C4242] text-white flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(12,66,66,0.3)]">
           <ShieldCheck className="w-4 h-4" />
           <span className="text-[11px] font-semibold">Vault</span>
         </div>
@@ -239,23 +239,23 @@ const MINI_DAYS: { d: number; kind: DayKind; info: string }[] = [
 
 const KIND_STYLE: Record<DayKind, { dot: string; card: string; text: string }> = {
   present: {
-    dot: 'bg-[#17784f]',
-    card: 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-[#17784f]',
-    text: 'text-[#17784f]',
+    dot: 'bg-[#0C4242]',
+    card: 'bg-white border-zinc-200/80 text-[#0C4242]',
+    text: 'text-[#0C4242]',
   },
   late: {
     dot: 'bg-amber-500',
-    card: 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-amber-700',
+    card: 'bg-white border-zinc-200/80 text-amber-700',
     text: 'text-amber-700',
   },
   leave: {
     dot: 'bg-sky-500',
-    card: 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-sky-700',
+    card: 'bg-white border-zinc-200/80 text-sky-700',
     text: 'text-sky-700',
   },
   absent: {
     dot: 'bg-rose-500',
-    card: 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-rose-700',
+    card: 'bg-white border-zinc-200/80 text-rose-700',
     text: 'text-rose-700',
   },
 };
@@ -270,12 +270,12 @@ export function AttendanceCalendarCard() {
       headline="Know who's at work."
       description="Monitor daily check-ins, working hours, late arrivals and leaves."
     >
-      <div className="flex-1 rounded-2xl bg-[#dcebe3] border border-[rgba(11,31,23,0.08)] p-4 sm:p-5 flex flex-col justify-between min-h-[250px] relative overflow-hidden">
-        <div className="flex items-center justify-between text-[11px] font-mono text-[#4c6a5c] mb-3">
+      <div className="flex-1 rounded-2xl bg-[#F2F7F4] border border-[#0C4242]/10 p-4 sm:p-5 flex flex-col justify-between min-h-[250px] relative overflow-hidden">
+        <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 mb-3">
           <span>NOV 2026</span>
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1 font-semibold text-[#17784f]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#17784f]" /> Present
+            <span className="inline-flex items-center gap-1 font-semibold text-[#0C4242]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0C4242]" /> Present
             </span>
             <span className="inline-flex items-center gap-1 text-amber-700 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Late
@@ -298,10 +298,10 @@ export function AttendanceCalendarCard() {
                 onMouseEnter={() => setPicked(item)}
                 className={`rounded-xl border p-2.5 text-left transition-all cursor-pointer ${
                   st.card
-                } ${isPicked ? 'ring-2 ring-[#17784f] bg-white scale-[1.03] shadow-xs' : 'shadow-2xs'}`}
+                } ${isPicked ? 'ring-2 ring-[#0C4242] bg-[#E8F3ED] scale-[1.03] shadow-xs' : 'shadow-2xs'}`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-[#0b1f17]">
+                  <span className="font-mono text-xs font-bold text-zinc-900">
                     {item.d}
                   </span>
                   <span className={`w-1.5 h-1.5 rounded-full ${st.dot}`} />
@@ -319,12 +319,12 @@ export function AttendanceCalendarCard() {
           key={picked.d}
           initial={{ opacity: 0.7, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-4 ml-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border-2 border-[#17784f]/40 shadow-[0_8px_20px_-4px_rgba(23,120,79,0.2)] rotate-[-1.5deg] text-xs"
+          className="mt-4 ml-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border-2 border-[#0C4242]/40 shadow-[0_8px_20px_-4px_rgba(12,66,66,0.18)] rotate-[-1.5deg] text-xs"
         >
-          <Clock className="w-3.5 h-3.5 text-[#17784f]" />
-          <span className="font-bold text-[#0b1f17]">Nov {picked.d}</span>
-          <span className="text-[#4c6a5c]/40">·</span>
-          <span className="font-mono text-[#17784f] font-bold">{picked.info}</span>
+          <Clock className="w-3.5 h-3.5 text-[#0C4242]" />
+          <span className="font-bold text-zinc-900">Nov {picked.d}</span>
+          <span className="text-zinc-300">·</span>
+          <span className="font-mono text-[#0C4242] font-bold">{picked.info}</span>
         </motion.div>
       </div>
     </CardFrame>
@@ -334,7 +334,7 @@ export function AttendanceCalendarCard() {
 /* ─── Card 04: Salary & Payroll (Code Slip Preview + Angled Format Pills) ─ */
 
 const SLIP_MODES = [
-  { key: 'earnings', label: 'EARNINGS', color: 'bg-[#17784f] text-white' },
+  { key: 'earnings', label: 'EARNINGS', color: 'bg-[#0C4242] text-white' },
   { key: 'epf', label: 'EPF 12%', color: 'bg-amber-400 text-zinc-950' },
   { key: 'net', label: 'NET SLIP', color: 'bg-[#34D399] text-zinc-950' },
 ] as const;
@@ -349,8 +349,8 @@ export function SalaryBreakdownCard() {
       headline="Compensation, simplified."
       description="Automated salary slips, EPF matching and monthly deductions."
     >
-      <div className="flex-1 rounded-2xl bg-[#0b1f17] border border-[#17784f]/30 p-4 sm:p-5 flex flex-col justify-between min-h-[250px] relative overflow-hidden shadow-inner">
-        <pre className="font-mono text-[11.5px] leading-relaxed text-emerald-300 overflow-x-auto">
+      <div className="flex-1 rounded-2xl bg-[#082B2B] border border-[#0C4242]/40 p-4 sm:p-5 flex flex-col justify-between min-h-[250px] relative overflow-hidden shadow-inner">
+        <pre className="font-mono text-[11.5px] leading-relaxed text-[#34D399] overflow-x-auto">
           {mode === 'earnings'
             ? `{
   "employee": "Aarav Mehta",
@@ -414,7 +414,7 @@ export function RbacHierarchyCard() {
       headline="Everyone has their place."
       description="Owners delegate Co-Admins while employees get role-scoped views."
     >
-      <div className="flex-1 rounded-2xl bg-[#dcebe3] border border-[rgba(11,31,23,0.08)] p-4 sm:p-5 flex flex-col justify-between min-h-[250px] overflow-hidden">
+      <div className="flex-1 rounded-2xl bg-[#F2F7F4] border border-[#0C4242]/10 p-4 sm:p-5 flex flex-col justify-between min-h-[250px] overflow-hidden">
         <div className="space-y-2.5">
           {ACCESS_ROLES.map((role) => {
             const selected = role.id === activeRole;
@@ -426,25 +426,25 @@ export function RbacHierarchyCard() {
                 animate={{ scale: selected ? 1.02 : 1, rotate: selected ? 1.2 : 0 }}
                 className={`w-full text-left flex items-center justify-between rounded-xl px-3.5 py-3 border transition-all cursor-pointer ${
                   selected
-                    ? 'bg-white border-2 border-[#17784f] shadow-[0_12px_24px_-6px_rgba(23,120,79,0.22)]'
-                    : 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] hover:border-[#17784f]/40 shadow-2xs'
+                    ? 'bg-white border-2 border-[#0C4242] shadow-[0_12px_24px_-6px_rgba(12,66,66,0.18)]'
+                    : 'bg-white border-zinc-200/80 hover:border-[#0C4242]/40 shadow-2xs'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
                   {role.id === 'emp' ? (
-                    <Lock className="w-3.5 h-3.5 text-[#4c6a5c]" />
+                    <Lock className={`w-3.5 h-3.5 ${selected ? 'text-[#0C4242]' : 'text-zinc-400'}`} />
                   ) : (
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#17784f]" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#0C4242]" />
                   )}
-                  <span className="text-[13px] font-semibold text-[#0b1f17]">
+                  <span className={`text-[13px] font-semibold ${selected ? 'text-zinc-950 font-bold' : 'text-zinc-900'}`}>
                     {role.title}
                   </span>
                 </div>
                 <span
                   className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full font-bold ${
                     selected
-                      ? 'bg-[#17784f] text-white shadow-xs'
-                      : 'bg-[#dcebe3] text-[#17784f] border border-[#17784f]/25'
+                      ? 'bg-[#0C4242] text-white shadow-xs'
+                      : 'bg-[#E6F0EB] text-[#0C4242] border border-[#0C4242]/20'
                   }`}
                 >
                   {role.modules}
@@ -454,9 +454,9 @@ export function RbacHierarchyCard() {
           })}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-[rgba(11,31,23,0.08)] flex items-center justify-between text-xs">
-          <span className="text-[#4c6a5c]">Active Policy</span>
-          <span className="font-bold text-[#17784f]">{current.scope}</span>
+        <div className="mt-4 pt-3 border-t border-[#0C4242]/10 flex items-center justify-between text-xs">
+          <span className="text-zinc-500">Active Policy</span>
+          <span className="font-bold text-[#0C4242]">{current.scope}</span>
         </div>
       </div>
     </CardFrame>
@@ -488,10 +488,10 @@ export function ConnectedWorkflowCard() {
       headline="One connected workplace."
       description="From onboarding to assets, attendance and payroll — everything syncs."
     >
-      <div className="flex-1 rounded-2xl bg-[#dcebe3] border border-[rgba(11,31,23,0.08)] relative min-h-[250px] overflow-hidden flex flex-col justify-between p-4">
-        <div className="relative z-10 flex items-center justify-between text-[11px] font-mono text-[#4c6a5c]">
+      <div className="flex-1 rounded-2xl bg-[#F2F7F4] border border-[#0C4242]/10 relative min-h-[250px] overflow-hidden flex flex-col justify-between p-4">
+        <div className="relative z-10 flex items-center justify-between text-[11px] font-mono text-zinc-500">
           <span>LIVE SYNC FLOW</span>
-          <span className="text-[#17784f] font-bold">
+          <span className="text-[#0C4242] font-bold">
             0{step + 1} · {FLOW_NODES[step].label}
           </span>
         </div>
@@ -499,11 +499,11 @@ export function ConnectedWorkflowCard() {
         {/* Concentric Dashed Arcs */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -bottom-24 -translate-x-1/2 w-72 h-72 rounded-full border border-dashed border-[#17784f]/25"
+          className="pointer-events-none absolute left-1/2 -bottom-24 -translate-x-1/2 w-72 h-72 rounded-full border border-dashed border-[#0C4242]/20"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 -bottom-14 -translate-x-1/2 w-48 h-48 rounded-full border border-dashed border-[#17784f]/35"
+          className="pointer-events-none absolute left-1/2 -bottom-14 -translate-x-1/2 w-48 h-48 rounded-full border border-dashed border-[#0C4242]/30"
         />
 
         {/* Orbiting Workflow Icons */}
@@ -522,15 +522,15 @@ export function ConnectedWorkflowCard() {
                 <div
                   className={`w-10 h-10 rounded-full border-2 flex items-center justify-center shadow-sm transition-all ${
                     active
-                      ? 'bg-[#17784f] border-[#17784f] text-white scale-110 shadow-sm'
+                      ? 'bg-[#0C4242] border-[#0C4242] text-white scale-110 shadow-md'
                       : done
-                      ? 'bg-[#dcebe3] border-[#17784f] text-[#17784f]'
-                      : 'bg-[#f6fbf8] border-[rgba(11,31,23,0.08)] text-[#4c6a5c]'
+                      ? 'bg-[#E6F0EB] border-[#0C4242] text-[#0C4242]'
+                      : 'bg-white border-zinc-200 text-zinc-400'
                   }`}
                 >
                   {done ? <Check className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
                 </div>
-                <span className="text-[10px] font-semibold text-[#0b1f17] bg-[#f6fbf8] px-2 py-0.5 rounded-full border border-[rgba(11,31,23,0.08)] shadow-2xs">
+                <span className="text-[10px] font-semibold text-zinc-800 bg-white px-2 py-0.5 rounded-full border border-zinc-200 shadow-2xs">
                   {n.label}
                 </span>
               </button>
@@ -539,8 +539,8 @@ export function ConnectedWorkflowCard() {
         </div>
 
         {/* Bottom Center Hub */}
-        <div className="relative z-10 mx-auto px-5 h-10 rounded-t-full bg-[#17784f] text-white flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(23,120,79,0.3)]">
-          <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+        <div className="relative z-10 mx-auto px-5 h-10 rounded-t-full bg-[#0C4242] text-white flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(12,66,66,0.3)]">
+          <span className="w-2 h-2 rounded-full bg-[#34D399] animate-pulse" />
           <span className="text-[11px] font-semibold">Lokus Core</span>
         </div>
       </div>
