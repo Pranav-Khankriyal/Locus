@@ -1,131 +1,176 @@
-# Lokus
+# Locus
 
-> **Enterprise Trust, Cryptographic Identity, RBAC & Asset Management Platform**
-> A modern, unified Next.js full-stack system providing tamper-evident verification, identity management, role-based access control, and complete asset custody — **completely free of blockchain complexity, wallets, gas fees, or smart contract overhead.**
+> **Enterprise Trust, Cryptographic Identity, Biometric Rostering, Payroll Ledger & Asset Custody Platform**
+> 
+> A modern, unified Next.js 15 full-stack platform providing tamper-evident verification, decentralized identity (DID), fine-grained role-based access control (RBAC), biometric attendance, automated salary structures with EPF synchronization, and physical & digital hardware custody — **completely free of blockchain friction, gas fees, or smart contract overhead.**
 
 ---
 
 ## 🌟 Overview
 
-**Lokus** is an enterprise-grade platform that unites:
+**Locus** unites personnel management, operational security, and enterprise custody into a single, cohesive operating system. Built for modern engineering, operations, and compliance teams, Locus provides mathematical certainty and complete operational clarity across every corporate module.
 
-1. **Cryptographic Identity Management (DID)**: Decentralized identifiers (`did:lokus:<org>:<emp>`) paired with canonical SHA-256 tamper-evident integrity seals.
-2. **Role-Based Access Control (RBAC)**: Fine-grained permission matrices controlling resource-action capabilities (`employees`, `assets`, `organisation`, `roles`, `audit`, `verification`, `settings`).
-3. **Physical & Digital Asset Management**: Complete asset lifecycle tracking (assignments, transfers, returns, maintenance, and serial registration).
-4. **Cryptographic Integrity & Verification Engine**: Real-time tamper detection using deterministic JSON canonicalization and SHA-256 hash digests, eliminating any need for public blockchain networks or crypto wallets.
-5. **Durable Audit Trail**: Append-only activity logging capturing every administrative, custodial, and integrity event.
+### Core Pillars
+
+1. **Cryptographic Identity Management (DID)**: Every employee is issued a decentralized identifier (`did:locus:<org>:<emp>`) backed by canonical SHA-256 tamper-evident integrity seals.
+2. **Biometric Attendance & Rostering**: Granular shift monitoring across work modes (Office, Remote, Hybrid, WFH) with automated status tracking (Present, Late, Half Day, Absent, Overtime).
+3. **Payroll Engine & EPF Ledger**: Comprehensive compensation architecture including basic pay, HRA, special allowances, net pay slips, and statutory Employee Provident Fund (EPF) account ledger synchronization.
+4. **Hardware Vault & Asset Custody**: Full lifecycle tracking of physical equipment (laptops, monitors, security tokens) and digital infrastructure (SSL certificates, API keys, AWS roles) with custodian assignment and transfer history.
+5. **Role-Based Access Control (RBAC)**: Multi-tenant security matrix governing resource capabilities across employees, assets, payroll, settings, audit logs, and cryptographic verification.
+6. **Canonical Verification Engine**: Real-time tamper detection using deterministic JSON canonicalization and SHA-256 digest recalculation, eliminating public blockchain volatility while guaranteeing cryptographic truth.
+7. **Durable Immutable Audit Trail**: Append-only activity ledger recording every authentication, role assignment, asset transfer, and cryptographic re-issuance.
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Node.js**: v18.18+ (tested on Node v20 & v24)
+- **Node.js**: v18.18+ (tested on Node v20 & v24 LTS)
 - **Package Manager**: `pnpm` (recommended) or `npm`
 
 ### Installation & Run
 
-From the project root:
-
 ```bash
-# Run from repository root
-pnpm dev
-
-# Or directly inside the Lokus project folder
+# Clone the repository
+git clone https://github.com/Pranav6233/Lokus.git
 cd Lokus
+
+# Install dependencies
+pnpm install
+
+# Run the local development server
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- **Landing Page**: `/` — Interactive 3D network portal
-- **Sign In**: `/login`
-- **Dashboard**: `/dashboard`
-- **Verification Center**: `/verification`
+- **Landing Portal**: `/` — High-performance responsive presentation with 3D canvas and dynamic dissolve gradients
+- **Authentication**: `/login` (supports email login, fast demo sign-in, and onboarding)
+- **Executive Dashboard**: `/dashboard` — Live operational overview, statistics, and pending actions
+- **Employee Directory**: `/employees` — Personnel directory, DID statuses, and profile inspectors
+- **Biometric Attendance**: `/attendance` — Daily logs, shift modes, and check-in audit
+- **Payroll & EPF Ledger**: `/payroll` — Salary structures, payslip generation, and EPF savings ledger
+- **Hardware Vault & Assets**: `/assets` — Asset assignment, custody transfers, and integrity seals
+- **Integrity Verification**: `/verification` — On-demand SHA-256 cryptographic proof inspector
+- **System Settings**: `/settings` — DID scheme configuration and organization hierarchy
 
 ---
 
 ## 🔑 Demo Credentials
 
-Lokus comes pre-seeded with enterprise organization data (**Acme Corporation**):
+Locus comes pre-configured with complete enterprise seed data for **Acme Corporation**:
 
 | Role | Email | Password | Access Scope |
-| --- | --- | --- | --- |
-| **Organisation Administrator** | `admin@lokus.io` | `password123` | Complete system access across all modules |
-| **Principal Security Architect** | `marcus.chen@lokus.io` | Any password | Technology, Security & Audit |
-| **Lead DevOps Engineer** | `sarah.connor@lokus.io` | Any password | Cloud Infrastructure & Digital Assets |
-| **Senior Product Designer** | `david.kim@lokus.io` | Any password | Design Assets & Team Profile |
+| :--- | :--- | :--- | :--- |
+| **Organisation Administrator** | `admin@locus.io` | `password123` | Full administrative control across all platform modules |
+| **Principal Security Architect** | `marcus.chen@locus.io` | `password123` | Technology, Security Policies, Audit Logs & Integrity Verification |
+| **Lead DevOps Engineer** | `sarah.connor@locus.io` | `password123` | Cloud Infrastructure, Hardware Vault & Digital Asset Custody |
+| **Senior Product Designer** | `david.kim@locus.io` | `password123` | Design Assets, Team Rosters & Personnel Directory |
+| **Compliance & Operations Lead** | `aisha.patel@locus.io` | `password123` | Attendance Logs, Leave Approvals & Statutory EPF Compliance |
 
-> **Quick Demo**: You can also click the **"Quick Demo Sign In (Administrator)"** button on the landing page for instant 1-click access.
-
----
-
-## 🛡️ The Cryptographic Integrity Engine (No Blockchain)
-
-In place of costly and volatile blockchain smart contracts, Lokus uses a high-performance **Canonical Cryptographic Verification Engine**:
-
-1. **Deterministic Serialization**: When an identity or asset is registered, Lokus canonicalizes the record's core fields (sorted JSON keys with compact separators).
-2. **SHA-256 Digest**: The system generates a cryptographic SHA-256 digest and issues a unique seal (`LOKUS-SEAL-...`).
-3. **Instant Tamper Detection**:
-   - When **"Verify Cryptographic Seal"** is clicked, the system reads the live database record, recalculates its canonical SHA-256 hash, and compares it against the registered integrity seal.
-   - If any attribute has been altered in the database (e.g. employee title, serial number, condition), the digest immediately diverges and reports **Integrity Mismatch / Compromised Record**.
-   - If pristine, it returns **Verified / Valid Seal** with timestamp and seal reference.
-4. **Issue New Seals**: Administrators can issue or re-issue seals with a single click.
+> **Instant Demo**: Click **"View Demo"** or **"Get started for free"** on the landing page for immediate 1-click access without typing credentials.
 
 ---
 
-## 📁 System Architecture
+## 🛡️ Cryptographic Integrity Engine (No Blockchain Overhead)
 
-Lokus merges the previous multi-tier Python backend and Vite frontend into a single, cohesive **Next.js App Router** project:
+In place of slow, expensive blockchain networks, Locus employs a high-performance **Deterministic Canonical Cryptographic Engine**:
 
 ```
-Lokus/
+Live Record (Employee / Asset / Payroll)
+                  │
+                  ▼
+   [Sorted Canonical Key Extraction]
+                  │
+                  ▼
+      [Deterministic JSON String]
+                  │
+                  ▼
+       [SHA-256 Cryptographic Digest]
+                  │
+                  ▼
+     LOCUS-SEAL-ASS-A1-DD4E944B49
+```
+
+1. **Deterministic Serialization**: When any core record is created or modified, its authoritative attributes are canonicalized (sorted keys, compact separators, normalized types).
+2. **SHA-256 Digest**: The engine generates an SHA-256 digest and issues an immutable cryptographic reference (e.g., `LOCUS-SEAL-IDE-...` or `LOCUS-SEAL-ASS-...`).
+3. **Instant Tamper Detection**:
+   - In the **Verification Center**, clicking **"Verify Cryptographic Seal"** reads the live database record, recalculates the canonical SHA-256 digest on the fly, and matches it with the registered seal.
+   - If even a single byte or attribute was altered outside sanctioned workflows, the hash diverges and flags an **Integrity Mismatch / Compromised Record**.
+   - If intact, the system confirms **Verified / Valid Seal** with timestamp and cryptographic proof.
+
+---
+
+## 🏗️ Architecture & Project Structure
+
+Locus is built on **Next.js 15 App Router** unifying the full-stack REST API and dynamic client SPA into a performant, zero-config monolith:
+
+```
+Locus/
+├── data/
+│   ├── locus-db.json                 # Persistent local enterprise database (multi-tenant)
+│   └── lokus-db.json                 # Migration fallback compatibility store
+├── public/
+│   ├── locus-logo.png                # Primary Locus brand logo (dark typography)
+│   ├── locus-logo-white.png          # High-contrast logo for dark spruce hero backgrounds
+│   ├── locus-c-icon.png              # Distinctive Locus C icon badge
+│   ├── favicon.ico                   # Multi-resolution browser tab icon (16-256px)
+│   ├── icon.png                      # High-res PWA & browser tab icon (512x512)
+│   ├── apple-icon.png                # Apple touch mobile icon (180x180)
+│   └── login.png                     # Full-bleed 3D artwork for authentication showcase
 ├── src/
 │   ├── app/
 │   │   ├── api/v1/                   # Next.js Route Handlers (Complete REST API)
-│   │   │   ├── auth/                 # Login, register, me, logout, refresh
-│   │   │   ├── organization/         # Organization management
-│   │   │   ├── organization-units/   # Org units and hierarchy tree
-│   │   │   ├── employees/            # Employee directory & profiles
-│   │   │   ├── assets/               # Physical & digital assets
-│   │   │   ├── asset-categories/     # Asset classification
-│   │   │   ├── roles/                # RBAC & permission matrices
-│   │   │   ├── audit-logs/           # Full audit event trail
-│   │   │   ├── identities/           # DID & identity status
-│   │   │   └── verification/         # Cryptographic verification engine
-│   │   ├── [[...slug]]/              # Client SPA page route (Catch-all)
-│   │   ├── layout.tsx                # App root layout with Geist fonts & dark theme
-│   │   └── globals.css               # Core styling
-│   ├── components/                   # Modular UI components (Cards, Tables, Modals, Forms)
-│   │   ├── assets/                   # Asset assignment, return, transfer, tree
-│   │   ├── employees/                # Directory, editor, bulk import, profile
-│   │   ├── organisation/             # Tree visualization and unit nodes
-│   │   ├── roles/                    # Permission matrix & role editors
-│   │   ├── verification/             # Verification form & seal card
-│   │   └── layout/                   # Header, Sidebar, AppShell
-│   ├── contexts/                     # AuthContext, NotificationContext
-│   ├── lib/                          # Database (db.ts) & Cryptographic Engine (crypto-verification.ts)
-│   ├── views/                        # Page views (Dashboard, Assets, Employees, Roles, etc.)
-│   ├── services/                     # Client API adapters
-│   └── types/                        # TypeScript domain definitions
-├── data/                             # Persistent JSON data store
-├── package.json                      # Next.js 15 project manifest
-└── tsconfig.json                     # TypeScript configuration
+│   │   │   ├── auth/                 # Login, signup, me, refresh, sessions
+│   │   │   ├── organization/         # Organization creation, codes, hierarchy
+│   │   │   ├── employees/            # Personnel directory & DID management
+│   │   │   ├── assets/               # Hardware vault & asset custody
+│   │   │   ├── attendance/           # Shift logs & biometric records
+│   │   │   ├── payroll/              # Salary structures & EPF accounts
+│   │   │   ├── blockchain/           # Cryptographic engine status & seal verification
+│   │   │   └── audit-logs/           # Append-only immutable event trail
+│   │   ├── [[...slug]]/              # Client SPA Catch-all Page Handler
+│   │   ├── layout.tsx                # App root layout with metadata, icons & fonts
+│   │   └── globals.css               # Core styling & Tailwind CSS directives
+│   ├── components/                   # Modular UI Components
+│   │   ├── auth/                     # AuthShowcaseCard, LoginForm, SignupForm
+│   │   ├── landing/                  # LandingVisuals, FloatingHeroCards, Pillars
+│   │   ├── layout/                   # AppShell, Sidebar, Navbar, MobileMenu
+│   │   ├── verification/             # SealCard, VerificationResultModal
+│   │   └── ui/                       # Buttons, Badges, Modals, Tables, MetricCards
+│   ├── lib/                          # Core Platform Utilities
+│   │   ├── crypto-verification.ts    # Deterministic canonicalization & SHA-256 engine
+│   │   ├── db.ts                     # Multi-tenant in-memory + file-backed database
+│   │   └── enterprise-seed.ts        # Comprehensive enterprise dataset generator
+│   ├── services/                     # Client API abstraction layer
+│   │   ├── api.ts                    # Fetch client with auto-refresh & bearer auth
+│   │   ├── EmployeeService.ts        # Personnel data services
+│   │   ├── AssetService.ts           # Asset custody services
+│   │   └── VerificationService.ts    # Cryptographic proof services
+│   ├── views/                        # Full Page Views
+│   │   ├── Landing.tsx               # Spruce-emerald hero, capability strip & showcase
+│   │   ├── Login.tsx                 # Edge-to-edge dual column login experience
+│   │   ├── Signup.tsx                # Streamlined onboarding registration
+│   │   ├── dashboard/                # Operational statistics & role dashboards
+│   │   ├── onboarding/               # Create Organisation & Join via Company Code
+│   │   └── settings/                 # DID schemes, cryptographic policies & RBAC
+│   └── workspace.css                 # Editorial styling, typography & animations
+├── package.json                      # Next.js 15 manifest
+└── tsconfig.json                     # Strict TypeScript configuration
 ```
 
 ---
 
-## 🛠️ Key Capabilities
+## 🎨 Visual Identity & Design System
 
-- **Organization Hierarchy**: Arbitrary-depth organizational trees (Divisions, Departments, Teams) with visual node navigation.
-- **Employee Directory**: Full personnel records, designations, reporting manager links, and DID records.
-- **Bulk Import**: Drag-and-drop CSV or XLSX file import with client-side header mapping, row validation, error reports, and partial import support.
-- **Asset Custody Workflow**: Assign physical or digital assets to employees, transfer custody directly, return to inventory, and review full assignment history.
-- **Fine-Grained RBAC**: Configurable roles with granular matrix: View, Manage, Assign, and Audit permissions across resources.
-- **Security & Integrity**: 100% self-contained, zero cloud database or blockchain gas requirement.
+- **Primary Brand Color**: Spruce Green (`#0C4242`) & Deep Pine (`#082920`)
+- **Accent Highlighters**: Mint Green (`#34D399`) & Emerald Glow (`#10B981`)
+- **Neutral Canvas**: Warm Ivory (`#FAFBF6`) & Editorial Slate (`#F4F6F8`)
+- **Browser Favicon**: Authentic two-tone curved **C** mark from the Locus brand identity
+- **Landing Experience**: Full 100vh viewport hero with soft percentage-based gradient dissolves transitioning into capability pillars with zero harsh cutoff boundaries.
 
 ---
 
 ## 📜 License
 
-Private & Proprietary. All rights reserved.
+Private & Proprietary. All rights reserved © 2026 Locus Enterprise.
