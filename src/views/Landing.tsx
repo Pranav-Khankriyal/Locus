@@ -216,51 +216,51 @@ export default function Landing() {
         </header>
 
         {/* ─── Hero Center Body (Centered & Compact for 100vh Visibility) ───── */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-10 py-4 sm:py-8 flex-1 flex flex-col items-center justify-center text-center my-auto">
-          {/* Left Floating Card (matching reference layout, hidden on smaller screens) */}
+        <div className="relative z-10 w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-3 sm:py-6 flex-1 flex flex-col items-center justify-center text-center my-auto">
+          {/* Left Floating Card (flat, sleek, pushed to outer edge to prevent overlap) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="hidden xl:flex absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 w-60 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[-3.5deg] flex-col gap-2 text-left pointer-events-none"
+            className="hidden xl:flex absolute left-3 lg:left-6 xl:left-8 2xl:left-12 top-[38%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 flex-col gap-2 text-left pointer-events-none"
           >
-            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <div className="flex items-center justify-between text-[10px] 2xl:text-[11px] font-mono text-zinc-500">
               <span className="font-semibold text-[#0C4242]">ROSTER</span>
               <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">148 Active</span>
             </div>
             <div className="flex items-center gap-2.5 pt-0.5">
-              <span className="w-8 h-8 rounded-xl bg-[#0C4242] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+              <span className="w-7 h-7 2xl:w-8 2xl:h-8 rounded-xl bg-[#0C4242] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
                 ENG
               </span>
               <div className="min-w-0">
-                <div className="text-sm font-bold text-zinc-950 truncate">Elena Rostova</div>
-                <div className="text-[11px] text-zinc-500 truncate">Security Architect</div>
+                <div className="text-xs 2xl:text-sm font-bold text-zinc-950 truncate">Elena Rostova</div>
+                <div className="text-[10px] 2xl:text-[11px] text-zinc-500 truncate">Security Architect</div>
               </div>
             </div>
-            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[10px] 2xl:text-[11px] text-zinc-500">
               <span>Custody ID</span>
               <span className="font-mono font-semibold text-zinc-800">AST-1001</span>
             </div>
           </motion.div>
 
-          {/* Right Floating Card (matching reference layout, hidden on smaller screens) */}
+          {/* Right Floating Card (flat, sleek, pushed to outer edge to prevent overlap) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="hidden xl:flex absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 w-60 bg-white text-zinc-900 rounded-2xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 rotate-[3.5deg] flex-col gap-2 text-left pointer-events-none"
+            className="hidden xl:flex absolute right-3 lg:right-6 xl:right-8 2xl:right-12 top-[44%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 flex-col gap-2 text-left pointer-events-none"
           >
-            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <div className="flex items-center justify-between text-[10px] 2xl:text-[11px] font-mono text-zinc-500">
               <span>PAYROLL</span>
               <span className="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">100% EPF</span>
             </div>
             <div className="pt-0.5">
-              <div className="text-[11px] text-zinc-500">Net Slip</div>
-              <div className="text-xl font-bold text-zinc-950 tracking-tight">₹1,42,400</div>
+              <div className="text-[10px] 2xl:text-[11px] text-zinc-500">Net Slip</div>
+              <div className="text-lg 2xl:text-xl font-bold text-zinc-950 tracking-tight">₹1,42,400</div>
             </div>
-            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[11px] text-zinc-500">
+            <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[10px] 2xl:text-[11px] text-zinc-500">
               <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Verified
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Verified
               </span>
               <span className="font-mono font-semibold text-[#0C4242]">Ledger Synced</span>
             </div>
@@ -280,7 +280,7 @@ export default function Landing() {
             </div>
 
             {/* Giant Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-bold tracking-tight leading-[1.12] text-white text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.4rem] 2xl:text-[3.75rem] font-bold tracking-tight leading-[1.12] text-white text-center">
               <span className="block sm:whitespace-nowrap">Workplace management,</span>
               <span className="block">made easy.</span>
             </h1>
