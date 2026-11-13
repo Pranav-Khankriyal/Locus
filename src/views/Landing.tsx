@@ -217,12 +217,12 @@ export default function Landing() {
 
         {/* ─── Hero Center Body (Centered & Compact for 100vh Visibility) ───── */}
         <div className="relative z-10 w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 py-3 sm:py-6 flex-1 flex flex-col items-center justify-center text-center my-auto">
-          {/* Left Floating Card (flat, sleek, pushed to outer edge to prevent overlap) */}
+          {/* Left Floating Card (subtly tilted, pushed to outer edge) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="hidden xl:flex absolute left-3 lg:left-6 xl:left-8 2xl:left-12 top-[38%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 flex-col gap-2 text-left pointer-events-none"
+            className="hidden xl:flex absolute left-3 lg:left-6 xl:left-8 2xl:left-12 top-[38%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 rotate-[-2.5deg] flex-col gap-2 text-left pointer-events-none"
           >
             <div className="flex items-center justify-between text-[10px] 2xl:text-[11px] font-mono text-zinc-500">
               <span className="font-semibold text-[#0C4242]">ROSTER</span>
@@ -243,12 +243,12 @@ export default function Landing() {
             </div>
           </motion.div>
 
-          {/* Right Floating Card (flat, sleek, pushed to outer edge to prevent overlap) */}
+          {/* Right Floating Card (subtly tilted, pushed to outer edge) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="hidden xl:flex absolute right-3 lg:right-6 xl:right-8 2xl:right-12 top-[44%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 flex-col gap-2 text-left pointer-events-none"
+            className="hidden xl:flex absolute right-3 lg:right-6 xl:right-8 2xl:right-12 top-[44%] -translate-y-1/2 w-52 2xl:w-60 bg-white text-zinc-900 rounded-2xl p-3.5 2xl:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.32)] border border-white/20 rotate-[2.5deg] flex-col gap-2 text-left pointer-events-none"
           >
             <div className="flex items-center justify-between text-[10px] 2xl:text-[11px] font-mono text-zinc-500">
               <span>PAYROLL</span>
