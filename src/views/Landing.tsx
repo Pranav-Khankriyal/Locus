@@ -8,7 +8,6 @@ import {
   Clock,
   KeyRound,
   Laptop,
-  ShieldCheck,
   Users,
   Wallet,
 } from 'lucide-react';
@@ -89,14 +88,14 @@ export default function Landing() {
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2.5 cursor-pointer text-white hover:opacity-90 transition-opacity"
+              className="flex items-center cursor-pointer hover:opacity-90 transition-opacity"
+              aria-label="Lokus Home"
             >
-              <span className="w-8 h-8 rounded-lg bg-[#34D399] flex items-center justify-center text-zinc-950 font-bold shadow-sm">
-                <ShieldCheck className="w-5 h-5 text-zinc-950" />
-              </span>
-              <span className="text-base sm:text-lg font-bold tracking-tight text-white font-sans">
-                Lokus
-              </span>
+              <img
+                src="/locus-logo-white.png"
+                alt="Lokus"
+                className="h-7 sm:h-8 w-auto object-contain"
+              />
             </button>
 
             {/* Left-aligned navigation links matching reference */}
@@ -321,18 +320,7 @@ export default function Landing() {
               </button>
             </div>
 
-            {/* Social Avatars Proof */}
-            <div className="mt-5 sm:mt-6 flex items-center justify-center gap-2.5">
-              <div className="flex -space-x-2 overflow-hidden">
-                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-700 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">ER</span>
-                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-600 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">MV</span>
-                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-800 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">AM</span>
-                <span className="inline-block h-6 w-6 sm:h-7 sm:w-7 rounded-full ring-2 ring-[#0C4242] bg-emerald-500 text-[9px] sm:text-[10px] font-bold text-white flex items-center justify-center shadow-xs">DK</span>
-              </div>
-              <span className="text-[11px] sm:text-xs text-white/70 font-medium">
-                Verified enterprise cryptographic platform
-              </span>
-            </div>
+
           </motion.div>
         </div>
 
@@ -434,9 +422,11 @@ export default function Landing() {
             transition={{ duration: 0.55 }}
             className="relative z-10 flex flex-col items-center space-y-4"
           >
-            <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mb-1 shadow-sm">
-              <ShieldCheck className="w-6 h-6 text-white" />
-            </div>
+            <img
+              src="/locus-logo-white.png"
+              alt="Lokus"
+              className="h-10 sm:h-12 w-auto object-contain mb-1"
+            />
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-[1.15]">
               Your workplace. Under control.
