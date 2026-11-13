@@ -54,7 +54,7 @@ export default function Landing() {
     }
     try {
       setIsDemoLoading(true);
-      await login('admin@lokus.io', 'password123');
+      await login('admin@locus.io', 'password123');
       navigate('/dashboard');
     } catch {
       navigate('/login?mode=login');
@@ -65,12 +65,17 @@ export default function Landing() {
 
   return (
     <div className="w-full bg-[#FAFBF6] text-zinc-900 font-sans selection:bg-[#0C4242] selection:text-white overflow-x-hidden relative">
-      {/* ─── Layer 1: Full-Screen Edge-to-Edge Hero (Visible at One View) ───── */}
-      <section className="w-full min-h-screen lg:h-screen lg:max-h-[100dvh] bg-[#0C4242] text-white flex flex-col justify-between relative overflow-hidden">
-        {/* Ambient radial glow & fine grid extending edge-to-edge */}
+      {/* ─── Hero + Post-Bottom Soft Faded Zone (Percentage stops ensure 100% seamless fade with 0 line) ───── */}
+      <div
+        className="w-full relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(to bottom, #0C4242 0%, #0C4242 58%, #104A45 66%, #1A5650 73%, #296A62 80%, #43857B 86%, #6FA59A 91%, #A8CAC1 94%, #D8EAE3 97%, #FAFBF6 99%, #FAFBF6 100%)',
+        }}
+      >
+        {/* Ambient radial glow & fine grid extending through hero */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
+          className="pointer-events-none absolute inset-0 z-0 h-[100vh]"
           style={{
             backgroundImage: `
               radial-gradient(ellipse 90% 60% at 50% 20%, rgba(20, 110, 100, 0.45) 0%, rgba(12, 66, 66, 0.72) 50%, rgba(8, 45, 45, 0.98) 100%),
@@ -78,8 +83,13 @@ export default function Landing() {
               linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
             `,
             backgroundSize: '100% 100%, 4.5rem 4.5rem, 4.5rem 4.5rem',
+            maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 95%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 95%)',
           }}
         />
+
+        {/* ─── Layer 1: Full-Screen Edge-to-Edge Hero (Visible at One View) ───── */}
+        <section className="w-full min-h-screen lg:h-screen lg:max-h-[100dvh] text-white flex flex-col justify-between relative z-10">
 
         {/* ─── Reference Navbar (Logo & Links on Left, Login & Mint Button on Right) ─ */}
         <header className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-4 border-b border-white/10 shrink-0">
@@ -89,11 +99,11 @@ export default function Landing() {
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center cursor-pointer hover:opacity-90 transition-opacity"
-              aria-label="Lokus Home"
+              aria-label="Locus Home"
             >
               <img
                 src="/locus-logo-white.png"
-                alt="Lokus"
+                alt="Locus"
                 className="h-7 sm:h-8 w-auto object-contain"
               />
             </button>
@@ -323,22 +333,12 @@ export default function Landing() {
           </motion.div>
         </div>
 
-        {/* ─── Bottom Trust Bar (Anchored at Bottom of 100vh Hero) ─────────── */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 py-3.5 sm:py-4 border-t border-white/10 flex flex-wrap items-center justify-around gap-3 sm:gap-4 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-white/60 shrink-0">
-          <span>Access Control (RBAC)</span>
-          <span className="text-white/30">·</span>
-          <span>Hardware Vault</span>
-          <span className="text-white/30">·</span>
-          <span>Biometric Attendance</span>
-          <span className="text-white/30">·</span>
-          <span>Automated EPF</span>
-          <span className="text-white/30">·</span>
-          <span>Audit Ledger</span>
-        </div>
+        {/* Subtle bottom breathing room */}
+        <div className="h-3 sm:h-5 shrink-0" />
       </section>
 
-      {/* ─── Layer 2: Capability Strip (Clean Editorial Pills) ─────────────── */}
-      <div className="max-w-6xl mx-auto w-full px-5 sm:px-10 py-8">
+      {/* ─── Layer 2: Capability Strip (Sitting right inside the soft post-bottom fade) ─────────────── */}
+      <div className="relative z-10 max-w-6xl mx-auto w-full px-5 sm:px-10 py-6 sm:py-8">
         <div className="flex flex-wrap items-center justify-center sm:justify-between gap-3 sm:gap-4">
           {CAPABILITY_PILLARS.map((item) => {
             const Icon = item.icon;
@@ -358,6 +358,7 @@ export default function Landing() {
           })}
         </div>
       </div>
+    </div>
 
       {/* ─── Layer 3: 2-Card Side-by-Side Showcase Grid ─────────────────────── */}
       <div className="w-full py-10 sm:py-14">
@@ -423,7 +424,7 @@ export default function Landing() {
           >
             <img
               src="/locus-logo-white.png"
-              alt="Lokus"
+              alt="Locus"
               className="h-10 sm:h-12 w-auto object-contain mb-1"
             />
 
@@ -456,7 +457,7 @@ export default function Landing() {
         </div>
 
         <footer className="w-full px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <span>© 2026 Lokus Enterprise</span>
+          <span>© 2026 Locus Enterprise</span>
           <div className="flex items-center gap-5 text-zinc-500">
             <button
               type="button"
