@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       employee_code: body.employee_code || `EMP-${Date.now().toString().slice(-4)}`,
       first_name: body.first_name || 'New',
       last_name: body.last_name || 'Member',
-      email: body.email || `employee-${Date.now()}@lokus.internal`,
+      email: body.email || `employee-${Date.now()}@locus.internal`,
       designation: body.designation || 'Team Member',
       employment_status: body.employment_status || 'active',
       manager_employee_id: body.manager_employee_id || null,

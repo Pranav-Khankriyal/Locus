@@ -25,7 +25,7 @@ export const VerificationService = {
         message: verified
           ? 'Canonical SHA-256 digest matches registered integrity seal.'
           : 'Integrity mismatch! Asset record has been altered or seal is missing.',
-        transactionRef: result.transaction_id || 'LOKUS-SEAL-AST',
+        transactionRef: result.transaction_id || 'LOCUS-SEAL-AST',
         checkedAt: result.verified_at || new Date().toISOString(),
       };
     } else {
@@ -41,9 +41,9 @@ export const VerificationService = {
         id: emp.id,
         record: emp.employeeId,
         message: verified
-          ? 'Cryptographic identity digest matches registered Lokus seal.'
+          ? 'Cryptographic identity digest matches registered Locus seal.'
           : 'Identity verification failed! Profile attributes do not match registered credentials.',
-        transactionRef: result.transaction_id || `LOKUS-SEAL-ID-${emp.employeeId}`,
+        transactionRef: result.transaction_id || `LOCUS-SEAL-ID-${emp.employeeId}`,
         checkedAt: result.verified_at || new Date().toISOString(),
       };
     }

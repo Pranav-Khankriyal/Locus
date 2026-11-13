@@ -55,5 +55,5 @@ export function computeEntityHash(entityType: string, entity: Record<string, any
 export function generateSealRef(entityType: string, entityId: string, hash: string): string {
   const shortId = entityId.replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase();
   const shortHash = hash.slice(0, 10).toUpperCase();
-  return `LOKUS-SEAL-${entityType.slice(0, 3).toUpperCase()}-${shortId}-${shortHash}`;
+  return `LOCUS-SEAL-${entityType.slice(0, 3).toUpperCase()}-${shortId}-${shortHash}`;
 }

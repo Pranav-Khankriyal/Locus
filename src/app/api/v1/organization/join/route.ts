@@ -4,7 +4,7 @@ import { db, normalizeCompanyCode } from '@/lib/db';
 function resolveUser(request: Request, fallbackEmail?: string) {
   const authHeader = request.headers.get('authorization') || '';
   const token = authHeader.replace(/^Bearer\s+/i, '');
-  if (token.startsWith('lokus_token_')) {
+  if (token.startsWith('locus_token_') || token.startsWith('lokus_token_')) {
     const userId = token.split('_')[2];
     const found = db.users.find((u) => u.id === userId);
     if (found) return found;

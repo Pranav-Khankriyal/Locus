@@ -1,7 +1,7 @@
 const API_URL = typeof window !== 'undefined' ? (process.env.NEXT_PUBLIC_API_URL || '') : '';
-const ACCESS_TOKEN = 'lokus_access_token';
-const REFRESH_TOKEN = 'lokus_refresh_token';
-const ORGANIZATION_ID = 'lokus_organization_id';
+const ACCESS_TOKEN = 'locus_access_token';
+const REFRESH_TOKEN = 'locus_refresh_token';
+const ORGANIZATION_ID = 'locus_organization_id';
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
@@ -11,10 +11,10 @@ export class ApiError extends Error {
 
 export const tokens = {
   get access() {
-    return typeof window !== 'undefined' ? localStorage.getItem(ACCESS_TOKEN) : null;
+    return typeof window !== 'undefined' ? (localStorage.getItem(ACCESS_TOKEN) || localStorage.getItem('lokus_access_token')) : null;
   },
   get refresh() {
-    return typeof window !== 'undefined' ? localStorage.getItem(REFRESH_TOKEN) : null;
+    return typeof window !== 'undefined' ? (localStorage.getItem(REFRESH_TOKEN) || localStorage.getItem('lokus_refresh_token')) : null;
   },
   set(access: string, refresh: string) {
     if (typeof window !== 'undefined') {
@@ -27,12 +27,15 @@ export const tokens = {
       localStorage.removeItem(ACCESS_TOKEN);
       localStorage.removeItem(REFRESH_TOKEN);
       localStorage.removeItem(ORGANIZATION_ID);
+      localStorage.removeItem('lokus_access_token');
+      localStorage.removeItem('lokus_refresh_token');
+      localStorage.removeItem('lokus_organization_id');
     }
   },
 };
 
 export const currentOrganization = {
-  get: () => (typeof window !== 'undefined' ? localStorage.getItem(ORGANIZATION_ID) : null),
+  get: () => (typeof window !== 'undefined' ? (localStorage.getItem(ORGANIZATION_ID) || localStorage.getItem('lokus_organization_id')) : null),
   set: (id: string) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(ORGANIZATION_ID, id);
@@ -53,7 +56,7 @@ async function request<T>(path: string, init: RequestInit = {}, retry = true): P
   try {
     response = await fetch(`${API_URL}${path}`, { ...init, headers });
   } catch {
-    throw new ApiError(0, 'Cannot reach the Lokus API service.');
+    throw new ApiError(0, 'Cannot reach the Locus API service.');
   }
 
   if (response.status === 401 && retry && tokens.refresh && path !== '/api/v1/auth/refresh') {

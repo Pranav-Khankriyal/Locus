@@ -16,7 +16,7 @@ export async function GET(
     identity = {
       id: `id-${emp.id}`,
       employee_id: emp.id,
-      did: `did:lokus:${emp.organization_id}:${emp.id}`,
+      did: `did:locus:${emp.organization_id}:${emp.id}`,
       status: 'Pending',
       hash: '',
       seal_ref: '',

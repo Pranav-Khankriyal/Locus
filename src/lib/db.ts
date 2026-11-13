@@ -7,32 +7,32 @@ import {
   buildDefaultEmployeeHRData,
   computeSalaryBreakdownFromCTC,
   createEnterpriseSeedForSchema,
-  type LokusAttendanceRecord,
-  type LokusBonusRecord,
-  type LokusHoliday,
-  type LokusLeaveBalance,
-  type LokusLeaveRequest,
-  type LokusOrgRequest,
-  type LokusPFAccount,
-  type LokusPFTransaction,
-  type LokusSalarySlip,
-  type LokusSalaryStructure,
+  type LocusAttendanceRecord,
+  type LocusBonusRecord,
+  type LocusHoliday,
+  type LocusLeaveBalance,
+  type LocusLeaveRequest,
+  type LocusOrgRequest,
+  type LocusPFAccount,
+  type LocusPFTransaction,
+  type LocusSalarySlip,
+  type LocusSalaryStructure,
 } from './enterprise-seed';
 
 export type {
-  LokusAttendanceRecord,
-  LokusBonusRecord,
-  LokusHoliday,
-  LokusLeaveBalance,
-  LokusLeaveRequest,
-  LokusOrgRequest,
-  LokusPFAccount,
-  LokusPFTransaction,
-  LokusSalarySlip,
-  LokusSalaryStructure,
+  LocusAttendanceRecord,
+  LocusBonusRecord,
+  LocusHoliday,
+  LocusLeaveBalance,
+  LocusLeaveRequest,
+  LocusOrgRequest,
+  LocusPFAccount,
+  LocusPFTransaction,
+  LocusSalarySlip,
+  LocusSalaryStructure,
 };
 
-export interface LokusOrganization {
+export interface LocusOrganization {
   id: string;
   name: string;
   code: string;
@@ -51,7 +51,7 @@ export function normalizeCompanyCode(raw: string): string {
     .slice(0, 32);
 }
 
-export interface LokusOrganizationUnit {
+export interface LocusOrganizationUnit {
   id: string;
   organization_id: string;
   name: string;
@@ -60,7 +60,7 @@ export interface LokusOrganizationUnit {
   created_at: string;
 }
 
-export interface LokusUser {
+export interface LocusUser {
   id: string;
   email: string;
   password_hash: string;
@@ -68,23 +68,23 @@ export interface LokusUser {
   created_at: string;
 }
 
-export interface LokusPermission {
+export interface LocusPermission {
   id: string;
   code: string;
   description: string;
 }
 
-export interface LokusRole {
+export interface LocusRole {
   id: string;
   organization_id: string;
   name: string;
   description: string;
   is_system: boolean;
-  permissions: LokusPermission[];
+  permissions: LocusPermission[];
   created_at: string;
 }
 
-export interface LokusEmployee {
+export interface LocusEmployee {
   id: string;
   organization_id: string;
   organization_unit_id: string | null;
@@ -98,7 +98,7 @@ export interface LokusEmployee {
   created_at: string;
 }
 
-export interface LokusIdentity {
+export interface LocusIdentity {
   id: string;
   employee_id: string;
   did: string;
@@ -109,7 +109,7 @@ export interface LokusIdentity {
   created_at: string;
 }
 
-export interface LokusAssetCategory {
+export interface LocusAssetCategory {
   id: string;
   organization_id: string;
   name: string;
@@ -118,7 +118,7 @@ export interface LokusAssetCategory {
   created_at: string;
 }
 
-export interface LokusAsset {
+export interface LocusAsset {
   id: string;
   organization_id: string;
   asset_category_id: string;
@@ -138,7 +138,7 @@ export interface LokusAsset {
   created_at: string;
 }
 
-export interface LokusAssetTransaction {
+export interface LocusAssetTransaction {
   id: string;
   asset_id: string;
   transaction_type: 'ASSIGN' | 'RETURN' | 'TRANSFER';
@@ -149,7 +149,7 @@ export interface LokusAssetTransaction {
   created_at: string;
 }
 
-export interface LokusAuditEvent {
+export interface LocusAuditEvent {
   id: string;
   organization_id: string;
   actor_user_id: string;
@@ -172,7 +172,7 @@ export interface LokusAuditEvent {
   created_at: string;
 }
 
-export interface LokusIntegritySeal {
+export interface LocusIntegritySeal {
   id: string;
   organization_id: string;
   entity_type: 'Asset' | 'Identity';
@@ -184,38 +184,38 @@ export interface LokusIntegritySeal {
   algorithm: string;
 }
 
-export interface LokusDatabaseSchema {
-  organizations: LokusOrganization[];
-  units: LokusOrganizationUnit[];
-  users: LokusUser[];
-  roles: LokusRole[];
+export interface LocusDatabaseSchema {
+  organizations: LocusOrganization[];
+  units: LocusOrganizationUnit[];
+  users: LocusUser[];
+  roles: LocusRole[];
   user_roles: { user_id: string; role_id: string; organization_id: string }[];
-  employees: LokusEmployee[];
-  identities: LokusIdentity[];
-  categories: LokusAssetCategory[];
-  assets: LokusAsset[];
-  transactions: LokusAssetTransaction[];
-  audit_logs: LokusAuditEvent[];
-  integrity_seals: LokusIntegritySeal[];
-  attendance_records: LokusAttendanceRecord[];
-  leave_balances: LokusLeaveBalance[];
-  leave_requests: LokusLeaveRequest[];
-  holidays: LokusHoliday[];
-  salary_structures: LokusSalaryStructure[];
-  salary_slips: LokusSalarySlip[];
-  pf_accounts: LokusPFAccount[];
-  pf_transactions: LokusPFTransaction[];
-  bonuses: LokusBonusRecord[];
-  org_requests: LokusOrgRequest[];
+  employees: LocusEmployee[];
+  identities: LocusIdentity[];
+  categories: LocusAssetCategory[];
+  assets: LocusAsset[];
+  transactions: LocusAssetTransaction[];
+  audit_logs: LocusAuditEvent[];
+  integrity_seals: LocusIntegritySeal[];
+  attendance_records: LocusAttendanceRecord[];
+  leave_balances: LocusLeaveBalance[];
+  leave_requests: LocusLeaveRequest[];
+  holidays: LocusHoliday[];
+  salary_structures: LocusSalaryStructure[];
+  salary_slips: LocusSalarySlip[];
+  pf_accounts: LocusPFAccount[];
+  pf_transactions: LocusPFTransaction[];
+  bonuses: LocusBonusRecord[];
+  org_requests: LocusOrgRequest[];
 }
 
-const DB_FILE_PATH = path.join(process.cwd(), 'data', 'lokus-db.json');
+const DB_FILE_PATH = path.join(process.cwd(), 'data', 'locus-db.json');
 
 function hashPassword(password: string): string {
   return sha256Hex(`salt_${password}`);
 }
 
-const ALL_PERMISSIONS: LokusPermission[] = [
+const ALL_PERMISSIONS: LocusPermission[] = [
   { id: 'p-1', code: 'organisation.read', description: 'View organization data' },
   { id: 'p-2', code: 'organisation.manage', description: 'Manage organization settings' },
   { id: 'p-3', code: 'organisation.manage_units', description: 'Manage organization units' },
@@ -248,7 +248,7 @@ const ALL_PERMISSIONS: LokusPermission[] = [
 ];
 
 export function buildOrgDefaultRoles(orgId: string, now: string) {
-  const ownerRole: LokusRole = {
+  const ownerRole: LocusRole = {
     id: `r-owner-${orgId}`,
     organization_id: orgId,
     name: 'Organisation Owner',
@@ -258,7 +258,7 @@ export function buildOrgDefaultRoles(orgId: string, now: string) {
     created_at: now,
   };
 
-  const coAdminRole: LokusRole = {
+  const coAdminRole: LocusRole = {
     id: `r-coadmin-${orgId}`,
     organization_id: orgId,
     name: 'Co-Admin',
@@ -268,7 +268,7 @@ export function buildOrgDefaultRoles(orgId: string, now: string) {
     created_at: now,
   };
 
-  const assetManagerRole: LokusRole = {
+  const assetManagerRole: LocusRole = {
     id: `r-asset-${orgId}`,
     organization_id: orgId,
     name: 'Asset Manager',
@@ -278,7 +278,7 @@ export function buildOrgDefaultRoles(orgId: string, now: string) {
     created_at: now,
   };
 
-  const employeeRole: LokusRole = {
+  const employeeRole: LocusRole = {
     id: `r-emp-${orgId}`,
     organization_id: orgId,
     name: 'Employee',
@@ -304,22 +304,22 @@ export function buildOrgDefaultRoles(orgId: string, now: string) {
   return { ownerRole, coAdminRole, assetManagerRole, employeeRole };
 }
 
-function createDefaultSeed(): LokusDatabaseSchema {
+function createDefaultSeed(): LocusDatabaseSchema {
   const orgId = '11111111-1111-1111-1111-111111111111';
   const adminUserId = '22222222-2222-2222-2222-222222222222';
   const now = new Date().toISOString();
 
-  const org: LokusOrganization = {
+  const org: LocusOrganization = {
     id: orgId,
     name: 'Acme Corporation',
     code: 'ACME-CORP',
-    description: 'Enterprise organization workspace running Lokus Trust & Verification Platform.',
+    description: 'Enterprise organization workspace running Locus Trust & Verification Platform.',
     owner_user_id: adminUserId,
     co_admin_emails: [],
     created_at: now,
   };
 
-  const units: LokusOrganizationUnit[] = [
+  const units: LocusOrganizationUnit[] = [
     { id: 'u-1', organization_id: orgId, name: 'Executive Leadership', unit_type: 'division', parent_unit_id: null, created_at: now },
     { id: 'u-2', organization_id: orgId, name: 'Engineering', unit_type: 'division', parent_unit_id: null, created_at: now },
     { id: 'u-3', organization_id: orgId, name: 'Cloud Infrastructure & Security', unit_type: 'department', parent_unit_id: 'u-2', created_at: now },
@@ -327,17 +327,17 @@ function createDefaultSeed(): LokusDatabaseSchema {
     { id: 'u-5', organization_id: orgId, name: 'People & Operations', unit_type: 'division', parent_unit_id: null, created_at: now },
   ];
 
-  const adminRole: LokusRole = {
+  const adminRole: LocusRole = {
     id: 'r-1',
     organization_id: orgId,
     name: 'Organisation Administrator',
-    description: 'Complete system access across all Lokus modules.',
+    description: 'Complete system access across all Locus modules.',
     is_system: true,
     permissions: ALL_PERMISSIONS,
     created_at: now,
   };
 
-  const assetManagerRole: LokusRole = {
+  const assetManagerRole: LocusRole = {
     id: 'r-2',
     organization_id: orgId,
     name: 'Asset Manager',
@@ -347,7 +347,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     created_at: now,
   };
 
-  const employeeRole: LokusRole = {
+  const employeeRole: LocusRole = {
     id: 'r-3',
     organization_id: orgId,
     name: 'Employee',
@@ -370,15 +370,15 @@ function createDefaultSeed(): LokusDatabaseSchema {
     created_at: now,
   };
 
-  const adminUser: LokusUser = {
+  const adminUser: LocusUser = {
     id: adminUserId,
-    email: 'admin@lokus.io',
+    email: 'admin@locus.io',
     password_hash: hashPassword('password123'),
     is_active: true,
     created_at: now,
   };
 
-  const employees: LokusEmployee[] = [
+  const employees: LocusEmployee[] = [
     {
       id: 'e-1',
       organization_id: orgId,
@@ -386,7 +386,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       employee_code: 'EMP-001',
       first_name: 'Elena',
       last_name: 'Vance',
-      email: 'admin@lokus.io',
+      email: 'admin@locus.io',
       designation: 'Chief Technology Officer',
       employment_status: 'active',
       manager_employee_id: null,
@@ -399,7 +399,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       employee_code: 'EMP-002',
       first_name: 'Marcus',
       last_name: 'Chen',
-      email: 'marcus.chen@lokus.io',
+      email: 'marcus.chen@locus.io',
       designation: 'Principal Security Architect',
       employment_status: 'active',
       manager_employee_id: 'e-1',
@@ -412,7 +412,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       employee_code: 'EMP-003',
       first_name: 'Sarah',
       last_name: 'Connor',
-      email: 'sarah.connor@lokus.io',
+      email: 'sarah.connor@locus.io',
       designation: 'Lead DevOps Engineer',
       employment_status: 'active',
       manager_employee_id: 'e-2',
@@ -425,7 +425,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       employee_code: 'EMP-004',
       first_name: 'David',
       last_name: 'Kim',
-      email: 'david.kim@lokus.io',
+      email: 'david.kim@locus.io',
       designation: 'Senior Product Designer',
       employment_status: 'active',
       manager_employee_id: 'e-1',
@@ -438,7 +438,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       employee_code: 'EMP-005',
       first_name: 'Aisha',
       last_name: 'Patel',
-      email: 'aisha.patel@lokus.io',
+      email: 'aisha.patel@locus.io',
       designation: 'People Operations Lead',
       employment_status: 'active',
       manager_employee_id: 'e-1',
@@ -446,7 +446,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     },
   ];
 
-  const categories: LokusAssetCategory[] = [
+  const categories: LocusAssetCategory[] = [
     { id: 'c-1', organization_id: orgId, name: 'Laptops & Workstations', type: 'Physical', parent_category_id: null, created_at: now },
     { id: 'c-2', organization_id: orgId, name: 'Hardware Security Keys', type: 'Physical', parent_category_id: null, created_at: now },
     { id: 'c-3', organization_id: orgId, name: 'Monitors & Displays', type: 'Physical', parent_category_id: null, created_at: now },
@@ -455,7 +455,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     { id: 'c-6', organization_id: orgId, name: 'Enterprise Software Licenses', type: 'Digital', parent_category_id: null, created_at: now },
   ];
 
-  const assets: LokusAsset[] = [
+  const assets: LocusAsset[] = [
     {
       id: 'a-1',
       organization_id: orgId,
@@ -537,7 +537,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       organization_id: orgId,
       asset_category_id: 'c-5',
       asset_code: 'AST-2002',
-      name: 'Enterprise Wildcard SSL Certificate (*.lokus.internal)',
+      name: 'Enterprise Wildcard SSL Certificate (*.locus.internal)',
       description: 'DigiCert 2048-bit RSA TLS server identity certificate',
       asset_type: 'Digital',
       serial_number: 'SHA256:F4:7A:B3:91:0C:4E',
@@ -572,12 +572,12 @@ function createDefaultSeed(): LokusDatabaseSchema {
     },
   ];
 
-  const identities: LokusIdentity[] = [];
-  const integrity_seals: LokusIntegritySeal[] = [];
+  const identities: LocusIdentity[] = [];
+  const integrity_seals: LocusIntegritySeal[] = [];
 
   // Seed identities and initial cryptographic seals for employees
   for (const emp of employees) {
-    const did = `did:lokus:acme-corp:${emp.id}`;
+    const did = `did:locus:acme-corp:${emp.id}`;
     const hash = computeEntityHash('identity', { ...emp, did });
     const sealRef = generateSealRef('Identity', emp.id, hash);
 
@@ -625,7 +625,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     });
   }
 
-  const transactions: LokusAssetTransaction[] = [
+  const transactions: LocusAssetTransaction[] = [
     {
       id: 'tx-1',
       asset_id: 'a-1',
@@ -658,7 +658,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
     },
   ];
 
-  const audit_logs: LokusAuditEvent[] = [
+  const audit_logs: LocusAuditEvent[] = [
     {
       id: 'log-1',
       organization_id: orgId,
@@ -696,7 +696,7 @@ function createDefaultSeed(): LokusDatabaseSchema {
       action: 'CRYPTOGRAPHIC_SEAL_ISSUED',
       entity_type: 'Identity',
       entity_id: 'e-1',
-      metadata: { algorithm: 'SHA-256', did: 'did:lokus:acme-corp:e-1' },
+      metadata: { algorithm: 'SHA-256', did: 'did:locus:acme-corp:e-1' },
       created_at: now,
     },
     {
@@ -730,8 +730,8 @@ function createDefaultSeed(): LokusDatabaseSchema {
   };
 }
 
-class LokusDatabase {
-  private data: LokusDatabaseSchema | null = null;
+class LocusDatabase {
+  private data: LocusDatabaseSchema | null = null;
   private lastMtime: number = 0;
 
   private ensureDir() {
@@ -741,7 +741,7 @@ class LokusDatabase {
     }
   }
 
-  private hydrateSchema(data: LokusDatabaseSchema): boolean {
+  private hydrateSchema(data: LocusDatabaseSchema): boolean {
     let changed = false;
     if (!Array.isArray(data.attendance_records) || !Array.isArray(data.salary_slips) || !Array.isArray(data.pf_accounts)) {
       const seed = createEnterpriseSeedForSchema(data.organizations || [], data.employees || []);
@@ -793,16 +793,18 @@ class LokusDatabase {
     return changed;
   }
 
-  private load(): LokusDatabaseSchema {
+  private load(): LocusDatabaseSchema {
     this.ensureDir();
-    if (fs.existsSync(DB_FILE_PATH)) {
+    const fallbackPath = path.join(process.cwd(), 'data', 'lokus-db.json');
+    const targetPath = fs.existsSync(DB_FILE_PATH) ? DB_FILE_PATH : (fs.existsSync(fallbackPath) ? fallbackPath : DB_FILE_PATH);
+    if (fs.existsSync(targetPath)) {
       try {
         const stat = fs.statSync(DB_FILE_PATH);
         if (this.data && stat.mtimeMs === this.lastMtime) {
           return this.data;
         }
-        const content = fs.readFileSync(DB_FILE_PATH, 'utf-8');
-        const parsed = JSON.parse(content) as LokusDatabaseSchema;
+        const content = fs.readFileSync(targetPath, 'utf-8');
+        const parsed = JSON.parse(content) as LocusDatabaseSchema;
         const migrated = this.hydrateSchema(parsed);
         this.data = parsed;
         this.lastMtime = stat.mtimeMs;
@@ -811,7 +813,7 @@ class LokusDatabase {
         }
         return this.data!;
       } catch (err) {
-        console.error('Error reading Lokus database file, re-initializing seed:', err);
+        console.error('Error reading Locus database file, re-initializing seed:', err);
       }
     }
     this.data = createDefaultSeed();
@@ -855,14 +857,14 @@ class LokusDatabase {
   get org_requests() { return this.load().org_requests; }
 
   // --- Mutators ---
-  addOrganization(org: LokusOrganization) {
+  addOrganization(org: LocusOrganization) {
     const db = this.load();
     db.organizations.push(org);
     this.save();
     return org;
   }
 
-  addHoliday(holiday: LokusHoliday) {
+  addHoliday(holiday: LocusHoliday) {
     const db = this.load();
     db.holidays.push(holiday);
     this.save();
@@ -901,14 +903,14 @@ class LokusDatabase {
     return org;
   }
 
-  addUnit(unit: LokusOrganizationUnit) {
+  addUnit(unit: LocusOrganizationUnit) {
     const db = this.load();
     db.units.push(unit);
     this.save();
     return unit;
   }
 
-  updateUnit(id: string, updates: Partial<LokusOrganizationUnit>) {
+  updateUnit(id: string, updates: Partial<LocusOrganizationUnit>) {
     const db = this.load();
     const idx = db.units.findIndex((u) => u.id === id);
     if (idx !== -1) {
@@ -925,24 +927,24 @@ class LokusDatabase {
     this.save();
   }
 
-  addUser(user: LokusUser) {
+  addUser(user: LocusUser) {
     const db = this.load();
     db.users.push(user);
     this.save();
     return user;
   }
 
-  addEmployee(emp: LokusEmployee) {
+  addEmployee(emp: LocusEmployee) {
     const db = this.load();
     db.employees.push(emp);
     
     // Automatically issue identity and cryptographic seal
-    const did = `did:lokus:${emp.organization_id}:${emp.id}`;
+    const did = `did:locus:${emp.organization_id}:${emp.id}`;
     const hash = computeEntityHash('identity', { ...emp, did, status: 'Active' });
     const sealRef = generateSealRef('Identity', emp.id, hash);
     const now = new Date().toISOString();
 
-    const identity: LokusIdentity = {
+    const identity: LocusIdentity = {
       id: `id-${emp.id}`,
       employee_id: emp.id,
       did,
@@ -976,7 +978,7 @@ class LokusDatabase {
     return emp;
   }
 
-  updateEmployee(id: string, updates: Partial<LokusEmployee>) {
+  updateEmployee(id: string, updates: Partial<LocusEmployee>) {
     const db = this.load();
     const idx = db.employees.findIndex((e) => e.id === id);
     if (idx !== -1) {
@@ -994,7 +996,7 @@ class LokusDatabase {
     this.save();
   }
 
-  addAsset(asset: LokusAsset) {
+  addAsset(asset: LocusAsset) {
     const db = this.load();
     const hash = computeEntityHash('asset', asset);
     const sealRef = generateSealRef('Asset', asset.id, hash);
@@ -1020,7 +1022,7 @@ class LokusDatabase {
     return asset;
   }
 
-  updateAsset(id: string, updates: Partial<LokusAsset>) {
+  updateAsset(id: string, updates: Partial<LocusAsset>) {
     const db = this.load();
     const idx = db.assets.findIndex((a) => a.id === id);
     if (idx !== -1) {
@@ -1037,28 +1039,28 @@ class LokusDatabase {
     this.save();
   }
 
-  addTransaction(tx: LokusAssetTransaction) {
+  addTransaction(tx: LocusAssetTransaction) {
     const db = this.load();
     db.transactions.push(tx);
     this.save();
     return tx;
   }
 
-  addAudit(log: LokusAuditEvent) {
+  addAudit(log: LocusAuditEvent) {
     const db = this.load();
     db.audit_logs.unshift(log); // recent first
     this.save();
     return log;
   }
 
-  addRole(role: LokusRole) {
+  addRole(role: LocusRole) {
     const db = this.load();
     db.roles.push(role);
     this.save();
     return role;
   }
 
-  updateRole(id: string, updates: Partial<LokusRole>) {
+  updateRole(id: string, updates: Partial<LocusRole>) {
     const db = this.load();
     const idx = db.roles.findIndex((r) => r.id === id);
     if (idx !== -1) {
@@ -1082,7 +1084,7 @@ class LokusDatabase {
     this.save();
   }
 
-  updateIdentity(employeeId: string, updates: Partial<LokusIdentity>) {
+  updateIdentity(employeeId: string, updates: Partial<LocusIdentity>) {
     const db = this.load();
     const idx = db.identities.findIndex((i) => i.employee_id === employeeId);
     if (idx !== -1) {
@@ -1131,14 +1133,14 @@ class LokusDatabase {
         message: isMatch
           ? 'Canonical SHA-256 digest matches registered integrity seal.'
           : 'Integrity discrepancy detected! Current record does not match registered cryptographic seal.',
-        transactionRef: seal ? seal.seal_ref : asset.integrity_seal_ref || 'LOKUS-SEAL-VERIFIED',
+        transactionRef: seal ? seal.seal_ref : asset.integrity_seal_ref || 'LOCUS-SEAL-VERIFIED',
         checkedAt: now,
       };
     } else {
       const emp = db.employees.find((e) => e.id === id);
       if (!emp) return { verified: false, message: 'Employee not found', hash: '', sealRef: '' };
       const ident = db.identities.find((i) => i.employee_id === emp.id);
-      const did = ident?.did || `did:lokus:${emp.organization_id}:${emp.id}`;
+      const did = ident?.did || `did:locus:${emp.organization_id}:${emp.id}`;
       const currentHash = computeEntityHash('identity', { ...emp, did });
       const seal = db.integrity_seals.find((s) => s.entity_type === 'Identity' && s.entity_id === id);
 
@@ -1173,7 +1175,7 @@ class LokusDatabase {
         message: isMatch
           ? 'Cryptographic identity digest matches registered seal.'
           : 'Discrepancy detected! Personnel identity credentials altered from original seal.',
-        transactionRef: seal ? seal.seal_ref : `LOKUS-SEAL-ID-${emp.employee_code}`,
+        transactionRef: seal ? seal.seal_ref : `LOCUS-SEAL-ID-${emp.employee_code}`,
         checkedAt: now,
       };
     }
@@ -1194,7 +1196,7 @@ class LokusDatabase {
       asset.integrity_status = 'Verified';
 
       const existingIdx = db.integrity_seals.findIndex((s) => s.entity_type === 'Asset' && s.entity_id === id);
-      const sealRecord: LokusIntegritySeal = {
+      const sealRecord: LocusIntegritySeal = {
         id: `seal-ast-${asset.id}`,
         organization_id: asset.organization_id,
         entity_type: 'Asset',
@@ -1225,14 +1227,14 @@ class LokusDatabase {
       const emp = db.employees.find((e) => e.id === id);
       if (!emp) throw new Error('Employee not found');
       let ident = db.identities.find((i) => i.employee_id === emp.id);
-      const did = ident?.did || `did:lokus:${emp.organization_id}:${emp.id}`;
+      const did = ident?.did || `did:locus:${emp.organization_id}:${emp.id}`;
       const hash = computeEntityHash('identity', { ...emp, did });
       const sealRef = generateSealRef('Identity', emp.id, hash);
       if (!ident) {
         ident = {
           id: `id-${emp.id}`,
           employee_id: emp.id,
-          did: `did:lokus:${emp.organization_id}:${emp.id}`,
+          did: `did:locus:${emp.organization_id}:${emp.id}`,
           status: 'Verified',
           hash,
           seal_ref: sealRef,
@@ -1248,7 +1250,7 @@ class LokusDatabase {
       }
 
       const existingIdx = db.integrity_seals.findIndex((s) => s.entity_type === 'Identity' && s.entity_id === id);
-      const sealRecord: LokusIntegritySeal = {
+      const sealRecord: LocusIntegritySeal = {
         id: `seal-id-${emp.id}`,
         organization_id: emp.organization_id,
         entity_type: 'Identity',
@@ -1286,11 +1288,11 @@ class LokusDatabase {
     action?: 'clock_in' | 'clock_out' | 'mark';
     check_in?: string | null;
     check_out?: string | null;
-    status?: LokusAttendanceRecord['status'];
-    work_mode?: LokusAttendanceRecord['work_mode'];
+    status?: LocusAttendanceRecord['status'];
+    work_mode?: LocusAttendanceRecord['work_mode'];
     location?: string;
     notes?: string;
-  }): LokusAttendanceRecord {
+  }): LocusAttendanceRecord {
     const db = this.load();
     const now = new Date();
     const nowIso = now.toISOString();
@@ -1322,7 +1324,7 @@ class LokusDatabase {
       }
     }
 
-    let status: LokusAttendanceRecord['status'] = input.status || existing?.status || 'Present';
+    let status: LocusAttendanceRecord['status'] = input.status || existing?.status || 'Present';
     if (input.action === 'clock_in' && !input.status && checkIn) {
       const [h, m] = checkIn.split(':').map(Number);
       const isLate = h > 9 || (h === 9 && m > 45);
@@ -1331,7 +1333,7 @@ class LokusDatabase {
       status = 'Half Day';
     }
 
-    const record: LokusAttendanceRecord = {
+    const record: LocusAttendanceRecord = {
       id: existing?.id || `att-${input.employee_id}-${input.date}`,
       organization_id: input.organization_id,
       employee_id: input.employee_id,
@@ -1357,10 +1359,10 @@ class LokusDatabase {
   }
 
   // --- Leaves & Paid Leave Balance Mutators ---
-  createLeaveRequest(req: Omit<LokusLeaveRequest, 'id' | 'status' | 'reviewed_by_id' | 'reviewed_at' | 'reviewer_notes' | 'created_at'>): LokusLeaveRequest {
+  createLeaveRequest(req: Omit<LocusLeaveRequest, 'id' | 'status' | 'reviewed_by_id' | 'reviewed_at' | 'reviewer_notes' | 'created_at'>): LocusLeaveRequest {
     const db = this.load();
     const now = new Date().toISOString();
-    const record: LokusLeaveRequest = {
+    const record: LocusLeaveRequest = {
       ...req,
       id: `lv-${Date.now()}-${Math.floor(Math.random() * 100)}`,
       is_paid: req.leave_type !== 'Unpaid Leave',
@@ -1380,7 +1382,7 @@ class LokusDatabase {
     status: 'Approved' | 'Rejected' | 'Cancelled',
     reviewerId: string,
     notes?: string
-  ): LokusLeaveRequest | null {
+  ): LocusLeaveRequest | null {
     const db = this.load();
     const idx = db.leave_requests.findIndex((l) => l.id === id);
     if (idx === -1) return null;
@@ -1434,7 +1436,7 @@ class LokusDatabase {
         const existingIdx = db.attendance_records.findIndex(
           (a) => a.employee_id === req.employee_id && a.date === dateStr
         );
-        const attRow: LokusAttendanceRecord = {
+        const attRow: LocusAttendanceRecord = {
           id: `att-${req.employee_id}-${dateStr}`,
           organization_id: req.organization_id,
           employee_id: req.employee_id,
@@ -1464,7 +1466,7 @@ class LokusDatabase {
   }
 
   // --- Payroll, Salary Structures, Bonuses & PF Mutators ---
-  upsertSalaryStructure(input: Partial<LokusSalaryStructure> & { organization_id: string; employee_id: string }) {
+  upsertSalaryStructure(input: Partial<LocusSalaryStructure> & { organization_id: string; employee_id: string }) {
     const db = this.load();
     const now = new Date().toISOString();
     const idx = db.salary_structures.findIndex((s) => s.employee_id === input.employee_id);
@@ -1473,7 +1475,7 @@ class LokusDatabase {
     const ctc = Number(input.annual_ctc ?? existing?.annual_ctc ?? 1500000);
     const auto = computeSalaryBreakdownFromCTC(ctc);
 
-    const record: LokusSalaryStructure = {
+    const record: LocusSalaryStructure = {
       id: existing?.id || `sal-${input.employee_id}`,
       organization_id: input.organization_id,
       employee_id: input.employee_id,
@@ -1509,7 +1511,7 @@ class LokusDatabase {
     return record;
   }
 
-  generateSalarySlips(orgId: string, month: string): LokusSalarySlip[] {
+  generateSalarySlips(orgId: string, month: string): LocusSalarySlip[] {
     const db = this.load();
     const now = new Date().toISOString();
     const [y, m] = month.split('-').map(Number);
@@ -1519,7 +1521,7 @@ class LokusDatabase {
     ];
     const monthLabel = `${monthNames[((m || 1) - 1) % 12]} ${y || 2026}`;
     const orgEmployees = db.employees.filter((e) => e.organization_id === orgId);
-    const createdOrUpdated: LokusSalarySlip[] = [];
+    const createdOrUpdated: LocusSalarySlip[] = [];
 
     for (const emp of orgEmployees) {
       const struct =
@@ -1573,7 +1575,7 @@ class LokusDatabase {
       const slipId = `slip-${emp.id}-${month}`;
       const hash = sha256Hex(`${slipId}:${emp.id}:${month}:${netPay}`);
 
-      const slip: LokusSalarySlip = {
+      const slip: LocusSalarySlip = {
         id: slipId,
         organization_id: orgId,
         slip_number: `SLIP-${month.replace('-', '')}-${emp.id.toUpperCase()}`,
@@ -1612,7 +1614,7 @@ class LokusDatabase {
     return createdOrUpdated;
   }
 
-  markSlipPaid(slipId: string): LokusSalarySlip | null {
+  markSlipPaid(slipId: string): LocusSalarySlip | null {
     const db = this.load();
     const slip = db.salary_slips.find((s) => s.id === slipId);
     if (!slip) return null;
@@ -1668,10 +1670,10 @@ class LokusDatabase {
     return slip;
   }
 
-  createBonus(input: Omit<LokusBonusRecord, 'id' | 'created_at' | 'credited_at'>): LokusBonusRecord {
+  createBonus(input: Omit<LocusBonusRecord, 'id' | 'created_at' | 'credited_at'>): LocusBonusRecord {
     const db = this.load();
     const now = new Date().toISOString();
-    const record: LokusBonusRecord = {
+    const record: LocusBonusRecord = {
       ...input,
       id: `bon-${Date.now()}-${Math.floor(Math.random() * 100)}`,
       created_at: now,
@@ -1682,7 +1684,7 @@ class LokusDatabase {
     return record;
   }
 
-  updateBonusStatus(id: string, status: LokusBonusRecord['status'], actorId: string): LokusBonusRecord | null {
+  updateBonusStatus(id: string, status: LocusBonusRecord['status'], actorId: string): LocusBonusRecord | null {
     const db = this.load();
     const bon = db.bonuses.find((b) => b.id === id);
     if (!bon) return null;
@@ -1693,7 +1695,7 @@ class LokusDatabase {
     return bon;
   }
 
-  updatePFAccount(employeeId: string, updates: Partial<LokusPFAccount>): LokusPFAccount | null {
+  updatePFAccount(employeeId: string, updates: Partial<LocusPFAccount>): LocusPFAccount | null {
     const db = this.load();
     const idx = db.pf_accounts.findIndex((p) => p.employee_id === employeeId);
     if (idx === -1) return null;
@@ -1710,10 +1712,10 @@ class LokusDatabase {
     organization_id: string;
     employee_id: string;
     month: string;
-    type: LokusPFTransaction['type'];
+    type: LocusPFTransaction['type'];
     employee_contribution: number;
     employer_contribution: number;
-  }): LokusPFTransaction | null {
+  }): LocusPFTransaction | null {
     const db = this.load();
     const pf = db.pf_accounts.find((p) => p.employee_id === input.employee_id);
     if (!pf) return null;
@@ -1729,7 +1731,7 @@ class LokusDatabase {
     pf.total_balance = Math.max(0, pf.total_balance + delta);
     pf.updated_at = now;
 
-    const tx: LokusPFTransaction = {
+    const tx: LocusPFTransaction = {
       id: `pftx-${Date.now()}-${Math.floor(Math.random() * 100)}`,
       organization_id: input.organization_id,
       employee_id: input.employee_id,
@@ -1749,12 +1751,12 @@ class LokusDatabase {
 
   // --- Organisation Requests Mutators ---
   createOrgRequest(
-    input: Omit<LokusOrgRequest, 'id' | 'request_number' | 'status' | 'reviewed_by_id' | 'reviewer_notes' | 'created_at' | 'updated_at'>
-  ): LokusOrgRequest {
+    input: Omit<LocusOrgRequest, 'id' | 'request_number' | 'status' | 'reviewed_by_id' | 'reviewer_notes' | 'created_at' | 'updated_at'>
+  ): LocusOrgRequest {
     const db = this.load();
     const now = new Date().toISOString();
     const num = `REQ-2026-${String(db.org_requests.length + 15).padStart(3, '0')}`;
-    const record: LokusOrgRequest = {
+    const record: LocusOrgRequest = {
       ...input,
       id: `req-${Date.now()}-${Math.floor(Math.random() * 100)}`,
       request_number: num,
@@ -1771,10 +1773,10 @@ class LokusDatabase {
 
   reviewOrgRequest(
     id: string,
-    status: LokusOrgRequest['status'],
+    status: LocusOrgRequest['status'],
     reviewerId: string,
     notes?: string
-  ): LokusOrgRequest | null {
+  ): LocusOrgRequest | null {
     const db = this.load();
     const req = db.org_requests.find((r) => r.id === id);
     if (!req) return null;
@@ -1793,4 +1795,20 @@ class LokusDatabase {
   }
 }
 
-export const db = new LokusDatabase();
+export const db = new LocusDatabase();
+
+// Backward compatibility aliases
+export type LokusOrganization = LocusOrganization;
+export type LokusOrganizationUnit = LocusOrganizationUnit;
+export type LokusUser = LocusUser;
+export type LokusPermission = LocusPermission;
+export type LokusRole = LocusRole;
+export type LokusEmployee = LocusEmployee;
+export type LokusIdentity = LocusIdentity;
+export type LokusAssetCategory = LocusAssetCategory;
+export type LokusAsset = LocusAsset;
+export type LokusAssetTransaction = LocusAssetTransaction;
+export type LokusAuditEvent = LocusAuditEvent;
+export type LokusIntegritySeal = LocusIntegritySeal;
+export type LokusDatabaseSchema = LocusDatabaseSchema;
+export const LokusDatabase = LocusDatabase;

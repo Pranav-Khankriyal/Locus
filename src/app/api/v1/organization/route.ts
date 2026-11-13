@@ -11,7 +11,7 @@ interface HierarchyBranchInput {
 function resolveUserFromRequest(request: Request, fallbackEmail?: string) {
   const authHeader = request.headers.get('authorization') || '';
   const token = authHeader.replace(/^Bearer\s+/i, '');
-  if (token.startsWith('lokus_token_')) {
+  if (token.startsWith('locus_token_') || token.startsWith('lokus_token_')) {
     const userId = token.split('_')[2];
     const found = db.users.find((u) => u.id === userId);
     if (found) return found;
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
     const id = `org-${Date.now()}`;
     const creator = resolveUserFromRequest(request, body.creatorEmail);
     const ownerUserId = creator?.id || body.creatorUserId || db.users[0]?.id;
-    const ownerEmail = (creator?.email || body.creatorEmail || 'owner@lokus.io').toLowerCase();
+    const ownerEmail = (creator?.email || body.creatorEmail || 'owner@locus.io').toLowerCase();
     const ownerName = String(body.creatorName || ownerEmail.split('@')[0] || 'Owner').trim();
 
     const coAdminEmails: string[] = Array.isArray(body.coAdminEmails)

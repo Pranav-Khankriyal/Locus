@@ -20,8 +20,8 @@ export async function POST(request: Request) {
       });
     }
 
-    const token = `lokus_token_${user.id}_${Date.now()}`;
-    const refreshToken = `lokus_refresh_${user.id}_${Date.now()}`;
+    const token = `locus_token_${user.id}_${Date.now()}`;
+    const refreshToken = `locus_refresh_${user.id}_${Date.now()}`;
 
     return NextResponse.json({
       access_token: token,

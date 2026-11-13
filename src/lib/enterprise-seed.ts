@@ -1,6 +1,6 @@
 import { sha256Hex, generateSealRef } from './crypto-verification';
 
-export interface LokusAttendanceRecord {
+export interface LocusAttendanceRecord {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -15,7 +15,7 @@ export interface LokusAttendanceRecord {
   updated_at: string;
 }
 
-export interface LokusLeaveBalance {
+export interface LocusLeaveBalance {
   employee_id: string;
   organization_id: string;
   year: number;
@@ -31,7 +31,7 @@ export interface LokusLeaveBalance {
   unpaid_taken: number;
 }
 
-export interface LokusLeaveRequest {
+export interface LocusLeaveRequest {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -48,7 +48,7 @@ export interface LokusLeaveRequest {
   created_at: string;
 }
 
-export interface LokusHoliday {
+export interface LocusHoliday {
   id: string;
   organization_id: string;
   name: string;
@@ -56,7 +56,7 @@ export interface LokusHoliday {
   type: 'Public' | 'Company' | 'Optional';
 }
 
-export interface LokusSalaryStructure {
+export interface LocusSalaryStructure {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -77,7 +77,7 @@ export interface LokusSalaryStructure {
   updated_at: string;
 }
 
-export interface LokusSalarySlip {
+export interface LocusSalarySlip {
   id: string;
   organization_id: string;
   slip_number: string;
@@ -107,7 +107,7 @@ export interface LokusSalarySlip {
   generated_at: string;
 }
 
-export interface LokusBonusRecord {
+export interface LocusBonusRecord {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -127,7 +127,7 @@ export interface LokusBonusRecord {
   credited_at: string | null;
 }
 
-export interface LokusPFAccount {
+export interface LocusPFAccount {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -145,7 +145,7 @@ export interface LokusPFAccount {
   updated_at: string;
 }
 
-export interface LokusPFTransaction {
+export interface LocusPFTransaction {
   id: string;
   organization_id: string;
   employee_id: string;
@@ -159,7 +159,7 @@ export interface LokusPFTransaction {
   created_at: string;
 }
 
-export interface LokusOrgRequest {
+export interface LocusOrgRequest {
   id: string;
   organization_id: string;
   request_number: string;
@@ -234,7 +234,7 @@ export function buildDefaultEmployeeHRData(
   const parts = computeSalaryBreakdownFromCTC(annualCtc);
   const banks = ['HDFC Bank', 'ICICI Bank', 'Axis Bank', 'Kotak Mahindra Bank', 'SBI Corporate'];
 
-  const leaveBalance: LokusLeaveBalance = {
+  const leaveBalance: LocusLeaveBalance = {
     employee_id: emp.id,
     organization_id: emp.organization_id,
     year: 2026,
@@ -250,7 +250,7 @@ export function buildDefaultEmployeeHRData(
     unpaid_taken: 0,
   };
 
-  const salaryStructure: LokusSalaryStructure = {
+  const salaryStructure: LocusSalaryStructure = {
     id: `sal-${emp.id}`,
     organization_id: emp.organization_id,
     employee_id: emp.id,
@@ -269,7 +269,7 @@ export function buildDefaultEmployeeHRData(
   const erShare = parts.employer_pf_monthly * monthsAccumulated;
   const interestYtd = Math.round((empShare + erShare) * 0.0825 * 0.5);
 
-  const pfAccount: LokusPFAccount = {
+  const pfAccount: LocusPFAccount = {
     id: `pf-${emp.id}`,
     organization_id: emp.organization_id,
     employee_id: emp.id,
@@ -306,7 +306,7 @@ export function createEnterpriseSeedForSchema(
   const now = new Date().toISOString();
   const orgId = organizations[0]?.id || '11111111-1111-1111-1111-111111111111';
 
-  const holidays: LokusHoliday[] = [
+  const holidays: LocusHoliday[] = [
     { id: 'hol-1', organization_id: orgId, name: 'Republic Day', date: '2026-01-26', type: 'Public' },
     { id: 'hol-2', organization_id: orgId, name: 'Holi Festival', date: '2026-03-04', type: 'Public' },
     { id: 'hol-3', organization_id: orgId, name: 'Independence Day', date: '2026-08-15', type: 'Public' },
@@ -316,12 +316,12 @@ export function createEnterpriseSeedForSchema(
     { id: 'hol-7', organization_id: orgId, name: 'Christmas Day', date: '2026-12-25', type: 'Public' },
   ];
 
-  const attendance_records: LokusAttendanceRecord[] = [];
-  const leave_balances: LokusLeaveBalance[] = [];
-  const salary_structures: LokusSalaryStructure[] = [];
-  const salary_slips: LokusSalarySlip[] = [];
-  const pf_accounts: LokusPFAccount[] = [];
-  const pf_transactions: LokusPFTransaction[] = [];
+  const attendance_records: LocusAttendanceRecord[] = [];
+  const leave_balances: LocusLeaveBalance[] = [];
+  const salary_structures: LocusSalaryStructure[] = [];
+  const salary_slips: LocusSalarySlip[] = [];
+  const pf_accounts: LocusPFAccount[] = [];
+  const pf_transactions: LocusPFTransaction[] = [];
 
   // Last 10 days attendance for existing employees
   const today = new Date();
@@ -416,7 +416,7 @@ export function createEnterpriseSeedForSchema(
     });
   });
 
-  const leave_requests: LokusLeaveRequest[] = [
+  const leave_requests: LocusLeaveRequest[] = [
     {
       id: 'lv-1',
       organization_id: orgId,
@@ -483,7 +483,7 @@ export function createEnterpriseSeedForSchema(
     },
   ];
 
-  const bonuses: LokusBonusRecord[] = [
+  const bonuses: LocusBonusRecord[] = [
     {
       id: 'bon-1',
       organization_id: orgId,
@@ -538,7 +538,7 @@ export function createEnterpriseSeedForSchema(
     },
   ];
 
-  const org_requests: LokusOrgRequest[] = [
+  const org_requests: LocusOrgRequest[] = [
     {
       id: 'req-1',
       organization_id: orgId,
@@ -617,3 +617,15 @@ export function createEnterpriseSeedForSchema(
   };
 }
 
+
+// Backward compatibility aliases
+export type LokusAttendanceRecord = LocusAttendanceRecord;
+export type LokusLeaveBalance = LocusLeaveBalance;
+export type LokusLeaveRequest = LocusLeaveRequest;
+export type LokusHoliday = LocusHoliday;
+export type LokusSalaryStructure = LocusSalaryStructure;
+export type LokusSalarySlip = LocusSalarySlip;
+export type LokusBonusRecord = LocusBonusRecord;
+export type LokusPFAccount = LocusPFAccount;
+export type LokusPFTransaction = LocusPFTransaction;
+export type LokusOrgRequest = LocusOrgRequest;

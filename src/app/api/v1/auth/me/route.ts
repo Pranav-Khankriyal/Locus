@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const token = authHeader.replace(/^Bearer\s+/i, '');
 
   let user = db.users[0];
-  if (token.startsWith('lokus_token_')) {
+  if (token.startsWith('locus_token_') || token.startsWith('lokus_token_')) {
     const parts = token.split('_');
     const userId = parts[2];
     const found = db.users.find((u) => u.id === userId);
