@@ -31,7 +31,7 @@ export function VerificationResult({ result }: { result: VerificationResultData 
         ]}
       />
       <p className="subtle" style={{ fontSize: 11, marginTop: 20 }}>
-        Validated against Lokus SHA-256 Canonical Digest Engine.
+        Validated against Locus SHA-256 Canonical Digest Engine.
       </p>
     </section>
   );

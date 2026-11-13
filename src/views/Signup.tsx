@@ -25,7 +25,7 @@ export default function Signup() {
 
     const emailToUse = email.trim().includes('@')
       ? email.trim()
-      : `${email.trim()}@lokus.io`;
+      : `${email.trim()}@locus.io`;
 
     try {
       await signup(name, emailToUse, password);
@@ -39,10 +39,10 @@ export default function Signup() {
   return (
     <div className="h-screen max-h-screen w-full bg-[#f2f4f6] flex items-center justify-center p-3 sm:p-4 lg:p-6 font-sans text-gray-900 overflow-hidden">
       {/* Centered Main Card */}
-      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full max-h-[96vh] p-5 sm:p-7 lg:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 items-center overflow-hidden">
+      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full max-h-[96vh] grid grid-cols-1 md:grid-cols-2 items-stretch overflow-hidden">
         
         {/* Left Column: Signup Form */}
-        <div className="flex flex-col justify-center px-1 sm:px-4 py-1">
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 max-h-[96vh] overflow-y-auto workspace-scroll">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
             Create account
           </h1>
@@ -180,11 +180,14 @@ export default function Signup() {
           </p>
         </div>
 
-        {/* Right Column: Live Enterprise Feature Showcase */}
-        <AuthShowcaseCard
-          title="Built for Modern Organizations"
-          subtitle="Onboard your team with automated payroll, leave tracking, asset custody, and role permissions."
-        />
+        {/* Right Column: Live Enterprise Feature Showcase (Edge-to-Edge with Card) */}
+        <div className="hidden md:flex flex-col h-full w-full">
+          <AuthShowcaseCard
+            className="w-full h-full"
+            title="Built for Modern Organizations"
+            subtitle="Onboard your team with automated payroll, leave tracking, asset custody, and role permissions."
+          />
+        </div>
 
       </div>
     </div>

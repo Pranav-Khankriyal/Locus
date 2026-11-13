@@ -30,12 +30,12 @@ export default function JoinOrganisation() {
 
   return (
     <div className="min-h-screen w-full bg-[#f2f4f6] flex items-center justify-center p-3 sm:p-5 lg:p-7 font-sans text-gray-900">
-      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full p-6 sm:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div className="flex flex-col justify-center px-1 sm:px-3 py-1">
+      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 items-stretch overflow-hidden">
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 max-h-[85vh] overflow-y-auto workspace-scroll">
           <div className="flex items-center justify-between mb-6">
             <img
-              src="/lokus-logo.png"
-              alt="Lokus"
+              src="/locus-logo.png"
+              alt="Locus"
               className="h-7 w-auto object-contain mix-blend-multiply"
             />
             <button
@@ -127,10 +127,13 @@ export default function JoinOrganisation() {
           </p>
         </div>
 
-        <AuthShowcaseCard
-          title="Connect With Your Team"
-          subtitle="Check in daily, view salary slips & PF passbook, submit requests, and access assigned assets."
-        />
+        <div className="hidden md:flex flex-col h-full w-full">
+          <AuthShowcaseCard
+            className="w-full h-full"
+            title="Connect With Your Team"
+            subtitle="Check in daily, view salary slips & PF passbook, submit requests, and access assigned assets."
+          />
+        </div>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ export function AppShell() {
 
   useEffect(() => {
     try {
-      const saved = window.localStorage.getItem('lokus:sidebar-expanded');
+      const saved = window.localStorage.getItem('locus:sidebar-expanded') || window.localStorage.getItem('lokus:sidebar-expanded');
       if (saved === '0') setSidebarExpanded(false);
     } catch {
       // ignore storage access issues
@@ -67,7 +67,7 @@ export function AppShell() {
     setSidebarExpanded((prev) => {
       const next = !prev;
       try {
-        window.localStorage.setItem('lokus:sidebar-expanded', next ? '1' : '0');
+        window.localStorage.setItem('locus:sidebar-expanded', next ? '1' : '0');
       } catch {
         // ignore storage access issues
       }
@@ -416,7 +416,7 @@ export function AppShell() {
                   <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-200/80 p-2 z-50 animate-in fade-in slide-in-from-top-2">
                     <div className="px-3 py-2 border-b border-gray-100">
                       <p className="text-xs font-bold text-gray-900">{user?.name || 'Administrator'}</p>
-                      <p className="text-[11px] text-gray-400 truncate">{user?.email || 'admin@lokus.io'}</p>
+                      <p className="text-[11px] text-gray-400 truncate">{user?.email || 'admin@locus.io'}</p>
                     </div>
                     <div className="py-1">
                       <Link

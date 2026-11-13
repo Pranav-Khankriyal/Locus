@@ -541,7 +541,7 @@ export function ConnectedWorkflowCard() {
         {/* Bottom Center Hub */}
         <div className="relative z-10 mx-auto px-5 h-10 rounded-t-full bg-[#0C4242] text-white flex items-center justify-center gap-1.5 shadow-[0_4px_15px_rgba(12,66,66,0.3)]">
           <span className="w-2 h-2 rounded-full bg-[#34D399] animate-pulse" />
-          <span className="text-[11px] font-semibold">Lokus Core</span>
+          <span className="text-[11px] font-semibold">Locus Core</span>
         </div>
       </div>
     </CardFrame>

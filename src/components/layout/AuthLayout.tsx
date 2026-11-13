@@ -9,7 +9,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
         <Link to="/" className="brand">
           <Layers className="text-emerald-400" />
           <span>
-            LOKUS<span className="brand-light"> Platform</span>
+            LOCUS<span className="brand-light"> Platform</span>
           </span>
         </Link>
         <div>
@@ -42,7 +42,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
       </aside>
       <section className="auth-content">
         <div className="auth-card">{children}</div>
-        <p className="auth-note">Lokus Enterprise Trust & Verification Platform</p>
+        <p className="auth-note">Locus Enterprise Trust & Verification Platform</p>
       </section>
     </main>
   );

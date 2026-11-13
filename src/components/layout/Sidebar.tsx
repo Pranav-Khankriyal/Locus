@@ -141,7 +141,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         <div className="pt-4 mt-4 border-t border-gray-100 space-y-3">
           <div className="flex items-center gap-2 px-2 text-[11px] font-semibold text-[#107C41]">
             <span className="w-2 h-2 rounded-full bg-[#107C41]" />
-            Lokus Engine Online
+            Locus Engine Online
           </div>
           <div className="flex items-center gap-2.5 p-2 rounded-xl bg-gray-50 border border-gray-200/70">
             <span className="avatar small">{initials(user?.name || 'U')}</span>

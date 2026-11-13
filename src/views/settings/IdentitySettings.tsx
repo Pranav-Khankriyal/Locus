@@ -6,13 +6,13 @@ export default function IdentitySettings() {
       page="identity"
       title="Identity & Cryptographic Engine Configuration"
       description="Configure decentralized identifier schemes and cryptographic seal policies"
-      initial={{ method: 'did:lokus', verification: 'SHA-256 Canonical Digest Engine', renewal: true }}
+      initial={{ method: 'did:locus', verification: 'SHA-256 Canonical Digest Engine', renewal: true }}
       fields={[
         {
           key: 'method',
           label: 'DID Method',
-          options: ['did:lokus', 'did:key', 'did:web'],
-          description: 'The platform uses did:lokus decentralized identifiers with SHA-256 cryptographic proofs.',
+          options: ['did:locus', 'did:key', 'did:web'],
+          description: 'The platform uses did:locus decentralized identifiers with SHA-256 cryptographic proofs.',
         },
         {
           key: 'verification',

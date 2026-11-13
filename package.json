@@ -1,9 +1,9 @@
 {
-  "name": "lokus",
+  "name": "locus",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Lokus - Enterprise Trust, Identity, RBAC & Asset Management Platform",
+  "description": "Locus - Enterprise Trust, Identity, RBAC & Asset Management Platform",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

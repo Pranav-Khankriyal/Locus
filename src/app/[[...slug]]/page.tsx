@@ -12,7 +12,7 @@ export default function CatchAllPage() {
         setComponent(() => mod.default);
       })
       .catch((err) => {
-        console.error('Failed to load Lokus client app:', err);
+        console.error('Failed to load Locus client app:', err);
         setError(err?.message || String(err));
       });
   }, []);
@@ -42,7 +42,7 @@ export default function CatchAllPage() {
       <div className="min-h-screen bg-[#fbf9f5] flex flex-col items-center justify-center font-sans select-none">
         <div className="w-9 h-9 border-3 border-emerald-200 border-t-[#107C41] rounded-full animate-spin mb-4" />
         <div className="text-xs font-bold text-slate-500 tracking-widest uppercase">
-          Loading Lokus...
+          Loading Locus...
         </div>
       </div>
     );

@@ -22,7 +22,7 @@ export default function Login() {
   const [orgChoice, setOrgChoice] = useState<OrgChoice>('create');
 
   // Login form state - Email only
-  const [email, setEmail] = useState('admin@lokus.io');
+  const [email, setEmail] = useState('admin@locus.io');
   const [password, setPassword] = useState('password123');
 
   // Signup form state - Email only
@@ -204,10 +204,10 @@ export default function Login() {
   return (
     <div className="h-screen max-h-screen w-full bg-[#f4f6f8] flex items-center justify-center p-3 sm:p-5 lg:p-7 font-sans text-gray-900 overflow-hidden">
       {/* Centered Main Bento Card */}
-      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full max-h-[96vh] p-6 sm:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center overflow-hidden">
+      <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] border border-gray-100 max-w-4xl lg:max-w-5xl w-full max-h-[96vh] grid grid-cols-1 md:grid-cols-2 items-stretch overflow-hidden">
         
         {/* Left Column: Form Content */}
-        <div className="flex flex-col justify-center px-1 sm:px-3 py-1 max-h-[85vh] overflow-y-auto workspace-scroll">
+        <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10 max-h-[96vh] overflow-y-auto workspace-scroll">
 
           {/* ================= CASE 1: EXISTING AUTHENTICATED USER WITHOUT ORG ================= */}
           {isPostLoginWithoutOrg ? (
@@ -522,8 +522,8 @@ export default function Login() {
             /* ================= CASE 3: SIGNUP STEP 1 (CLEAN EMAIL ONLY) ================= */
             <div className="animate-in fade-in duration-200">
               <img
-                src="/lokus-logo.png"
-                alt="Lokus"
+                src="/locus-logo.png"
+                alt="Locus"
                 className="h-7 w-auto object-contain mix-blend-multiply mb-5"
               />
               <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#111827] tracking-tight leading-tight mb-6">
@@ -647,8 +647,8 @@ export default function Login() {
             /* ================= CASE 4: LOGIN FORM (CLEAN EMAIL ONLY) ================= */
             <div className="animate-in fade-in duration-200">
               <img
-                src="/lokus-logo.png"
-                alt="Lokus"
+                src="/locus-logo.png"
+                alt="Locus"
                 className="h-7 w-auto object-contain mix-blend-multiply mb-5"
               />
               <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-[#111827] tracking-tight leading-tight mb-6">
@@ -663,7 +663,7 @@ export default function Login() {
                   </label>
                   <input
                     type="email"
-                    placeholder="admin@lokus.io"
+                    placeholder="admin@locus.io"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -787,28 +787,30 @@ export default function Login() {
 
         </div>
 
-        {/* Right Column: Live Enterprise Feature Showcase */}
-        <AuthShowcaseCard
-          maxHeightClass="max-h-[500px]"
-          title={
-            isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
-              ? orgChoice === 'create'
-                ? 'Launch Your Organization'
-                : 'Connect With Your Team'
-              : mode === 'signup'
-              ? 'Built for Modern Organizations'
-              : 'Unified Enterprise Workforce & Access OS'
-          }
-          subtitle={
-            isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
-              ? orgChoice === 'create'
-                ? 'Configure teams, payroll structures, leave policies, asset custody, and RBAC in minutes.'
-                : 'Check in daily, view salary slips & PF passbook, submit requests, and access assigned assets.'
-              : mode === 'signup'
-              ? 'Onboard your team with automated payroll, leave tracking, asset custody, and role permissions.'
-              : 'Manage attendance, paid leaves, payroll & PF, employee requests, assets, and roles in one place.'
-          }
-        />
+        {/* Right Column: Live Enterprise Feature Showcase (Edge-to-Edge with Card) */}
+        <div className="hidden md:flex flex-col h-full w-full">
+          <AuthShowcaseCard
+            className="w-full h-full"
+            title={
+              isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
+                ? orgChoice === 'create'
+                  ? 'Launch Your Organization'
+                  : 'Connect With Your Team'
+                : mode === 'signup'
+                ? 'Built for Modern Organizations'
+                : 'Unified Enterprise Workforce & Access OS'
+            }
+            subtitle={
+              isPostLoginWithoutOrg || (mode === 'signup' && signupStep === 'details')
+                ? orgChoice === 'create'
+                  ? 'Configure teams, payroll structures, leave policies, asset custody, and RBAC in minutes.'
+                  : 'Check in daily, view salary slips & PF passbook, submit requests, and access assigned assets.'
+                : mode === 'signup'
+                ? 'Onboard your team with automated payroll, leave tracking, asset custody, and role permissions.'
+                : 'Manage attendance, paid leaves, payroll & PF, employee requests, assets, and roles in one place.'
+            }
+          />
+        </div>
 
       </div>
     </div>
