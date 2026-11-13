@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -30,10 +31,35 @@ const CAPABILITY_PILLARS = [
 
 export default function Landing() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useSession();
+  const { isAuthenticated, login } = useSession();
+  const [isDemoLoading, setIsDemoLoading] = useState(false);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      navigate('/signup');
+    }
+  };
+
+  const handleViewDemo = async () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+      return;
+    }
+    try {
+      setIsDemoLoading(true);
+      await login('admin@lokus.io', 'password123');
+      navigate('/dashboard');
+    } catch {
+      navigate('/login?mode=login');
+    } finally {
+      setIsDemoLoading(false);
+    }
   };
 
   return (
@@ -54,7 +80,7 @@ export default function Landing() {
           }}
         />
 
-        {/* ─── Full-Bleed Top Header ────────────────────────────────────────── */}
+        {/* ─── Clean Header (Links Removed per User Request) ────────────────── */}
         <header className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-4 border-b border-white/10 shrink-0">
           <button
             type="button"
@@ -68,45 +94,6 @@ export default function Landing() {
               Lokus
             </span>
           </button>
-
-          {/* Center navigation links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs sm:text-sm font-medium text-white/80">
-            <button
-              type="button"
-              onClick={() => scrollTo('section-01')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              People
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('section-02')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Assets
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('section-03')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Attendance
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('section-04')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Payroll
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo('section-05')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              RBAC
-            </button>
-          </nav>
 
           {/* Right CTA */}
           <div className="flex items-center gap-3">
@@ -129,7 +116,7 @@ export default function Landing() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => navigate('/signup')}
+                  onClick={handleGetStarted}
                   className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer active:scale-98"
                 >
                   Get Started
@@ -219,18 +206,28 @@ export default function Landing() {
             <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
-                onClick={() => navigate(isAuthenticated ? '/dashboard' : '/signup')}
+                onClick={handleGetStarted}
                 className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white hover:bg-zinc-100 text-[#0C4242] text-xs sm:text-sm font-semibold transition-all shadow-md inline-flex items-center gap-2 cursor-pointer active:scale-98"
               >
                 Get started for free <ArrowRight className="w-4 h-4 text-[#0C4242]" />
               </button>
               <button
                 type="button"
-                onClick={() => scrollTo('section-01')}
-                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-medium border border-white/25 transition-all inline-flex items-center gap-2 cursor-pointer backdrop-blur-xs active:scale-98"
+                onClick={handleViewDemo}
+                disabled={isDemoLoading}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-medium border border-white/25 transition-all inline-flex items-center gap-2 cursor-pointer backdrop-blur-xs active:scale-98 disabled:opacity-70"
               >
-                View Demo
-                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300" />
+                {isDemoLoading ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Loading Demo...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>View Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300" />
+                  </>
+                )}
               </button>
             </div>
 
@@ -362,17 +359,18 @@ export default function Landing() {
             <div className="pt-3 flex flex-wrap items-center justify-center gap-3.5">
               <button
                 type="button"
-                onClick={() => navigate('/signup')}
+                onClick={handleGetStarted}
                 className="px-7 py-3 rounded-full bg-white text-[#0C4242] hover:bg-zinc-100 font-semibold text-xs sm:text-sm transition-all shadow-md inline-flex items-center gap-2 cursor-pointer active:scale-98"
               >
                 Enter Your Workspace <ArrowRight className="w-4 h-4 text-[#0C4242]" />
               </button>
               <button
                 type="button"
-                onClick={() => navigate('/login?mode=login')}
-                className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 border border-white/25 text-white text-xs sm:text-sm font-medium transition-all cursor-pointer backdrop-blur-xs active:scale-98"
+                onClick={handleViewDemo}
+                disabled={isDemoLoading}
+                className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 border border-white/25 text-white text-xs sm:text-sm font-medium transition-all cursor-pointer backdrop-blur-xs active:scale-98 disabled:opacity-70"
               >
-                Sign In
+                {isDemoLoading ? 'Loading Demo...' : 'View Demo'}
               </button>
             </div>
           </motion.div>
@@ -391,7 +389,7 @@ export default function Landing() {
             <span>/</span>
             <button
               type="button"
-              onClick={() => navigate('/signup')}
+              onClick={handleGetStarted}
               className="hover:text-zinc-900 transition-colors cursor-pointer"
             >
               Get Started
