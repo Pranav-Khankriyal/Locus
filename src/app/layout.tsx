@@ -3,10 +3,16 @@ import './globals.css';
 import '@/workspace.css';
 
 export const metadata: Metadata = {
-  title: 'Lokus - Enterprise Trust & Identity Platform',
+  title: 'Locus - Enterprise Trust & Identity Platform',
   description: 'Enterprise Cryptographic Identity, RBAC, and Asset Management Platform',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png' },
+    ],
   },
 };
 
