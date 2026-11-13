@@ -271,7 +271,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl mx-auto flex flex-col items-center"
+            className="max-w-4xl mx-auto flex flex-col items-center"
           >
             {/* Rating / Review Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-medium text-white mb-4 sm:mb-5">
@@ -280,10 +280,9 @@ export default function Landing() {
             </div>
 
             {/* Giant Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem] font-bold tracking-tight leading-[1.08] text-white">
-              Workplace management,{' '}
-              <br className="hidden sm:inline" />
-              <span>made easy.</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[3.75rem] font-bold tracking-tight leading-[1.12] text-white text-center">
+              <span className="block sm:whitespace-nowrap">Workplace management,</span>
+              <span className="block">made easy.</span>
             </h1>
 
             {/* Subtitle */}
