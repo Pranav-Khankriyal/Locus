@@ -141,7 +141,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         <div className="pt-4 mt-4 border-t border-zinc-100 space-y-3">
           <div className="flex items-center gap-2 px-2 text-[11px] font-semibold text-emerald-700">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Locus Engine Online · Tamper Active
+            Workspace Active · Connected
           </div>
           <div className="flex items-center gap-2.5 p-2 rounded-xl bg-zinc-50 border border-zinc-200/70">
             <span className="w-8 h-8 rounded-full bg-zinc-950 text-white font-bold text-xs flex items-center justify-center shrink-0">

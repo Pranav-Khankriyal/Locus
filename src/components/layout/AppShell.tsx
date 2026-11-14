@@ -370,19 +370,6 @@ export function AppShell() {
               </div>
             )}
           </nav>
-
-          {/* Tamper Integrity Card (Matching Demo Reference UI) */}
-          {sidebarExpanded && (
-            <div className="p-3.5 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-left shrink-0">
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-800 mb-1">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Tamper Integrity</span>
-              </div>
-              <p className="text-[11px] text-zinc-500 leading-snug font-normal">
-                Canonical SHA-256 seals active on all employee records and hardware custody.
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Bottom Actions (Settings & Logout) */}
