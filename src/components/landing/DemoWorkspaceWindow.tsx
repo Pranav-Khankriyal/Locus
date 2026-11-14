@@ -47,7 +47,20 @@ export function DemoWorkspaceWindow() {
   }, []);
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 my-12 sm:my-20">
+    <div className="relative w-full max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 mt-6 sm:mt-10 mb-16 sm:mb-24">
+      {/* ─── Notion-Style Minimalist Mascot Doodles (Matching Reference) ─── */}
+      {/* Top-Right Peeking Face Doodle */}
+      <div className="hidden md:block absolute -top-14 right-12 sm:right-20 z-30 pointer-events-none select-none opacity-85">
+        <svg width="90" height="64" viewBox="0 0 90 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-zinc-200">
+          <path d="M14 54C14 28 30 10 52 10C72 10 82 28 82 54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M28 26C31 23 37 23 40 26" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="34" cy="33" r="3.5" fill="currentColor" />
+          <path d="M54 26C57 23 63 23 66 26" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="60" cy="33" r="3.5" fill="currentColor" />
+          <path d="M46 30V43C46 46 43 47 40 47" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+
       {/* ─── Window Outer Frame with Sleek macOS Chrome ─── */}
       <div
         className={`relative rounded-[20px] sm:rounded-[28px] border transition-colors duration-300 overflow-hidden ${

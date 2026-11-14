@@ -2,18 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight,
   ArrowUpRight,
   Check,
   ChevronDown,
-  Clock,
-  KeyRound,
   Laptop,
   Lock,
   Search,
   ShieldCheck,
   Sparkles,
-  Users,
   Wallet,
 } from 'lucide-react';
 import { useSession } from '@/hooks/useSession';
@@ -60,7 +56,7 @@ export default function Landing() {
 
   return (
     <div className="w-full min-h-screen bg-[#000000] text-white font-sans selection:bg-[#10B981] selection:text-black overflow-x-hidden antialiased">
-      
+
       {/* ══════════════════════════════════════════════════════════
           FIRST SECTION: HERO WITH HIGH-EXPOSURE GREEN ACCENT ON SLEEK BLACK
       ══════════════════════════════════════════════════════════ */}
@@ -70,7 +66,7 @@ export default function Landing() {
           background: 'linear-gradient(180deg, #000000 0%, #030706 60%, #000000 100%)',
         }}
       >
-        
+
         {/* Luminous High-Exposure Green Accent Aura */}
         <div
           aria-hidden="true"
@@ -250,105 +246,59 @@ export default function Landing() {
           </div>
         </header>
 
-        {/* ── Hero Center Content ── */}
-        <div className="relative z-10 max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 pt-24 sm:pt-32 pb-24 text-center">
-          
-          {/* Green accent badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 text-xs sm:text-[13px] font-medium mb-8 backdrop-blur-md"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#34D399] animate-pulse" />
-            <span>Enterprise Identity, Asset Custody &amp; Payroll Platform</span>
-          </motion.div>
+        {/* ── Hero Center Content matching Notion typography & layout ── */}
+        <div className="relative z-10 w-full max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 pt-16 sm:pt-24 pb-8 sm:pb-12 text-center flex flex-col items-center justify-center">
 
-          {/* Giant Title matching Codex typography scale */}
+          {/* Headline matching Notion typography scale, tight tracking & signature pill */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-semibold tracking-[-0.035em] leading-[1.05] text-white max-w-4xl mx-auto"
+            className="w-full text-center text-3xl sm:text-4xl md:text-5xl lg:text-[64px] xl:text-[72px] font-bold tracking-[-0.035em] leading-[1.1] text-white max-w-4xl mx-auto"
           >
-            Workplace management
-            <br />
-            made easy.
+            <span className="block">Workplace management</span>
+            <span className="block mt-2 sm:mt-3">
+              made{' '}
+              <span className="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-0.5 sm:py-1 mx-1 sm:mx-2 rounded-full bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/35 align-middle shadow-[0_0_35px_rgba(52,211,153,0.3)]">
+                <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#34D399] animate-pulse inline-block" />
+                <span className="font-bold">easy</span>
+              </span>
+            </span>
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* Subtitle matching Notion scale */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal"
+            className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed font-normal text-center"
           >
-            One unified platform to manage employees, hardware custody, attendance, and payroll — built with enterprise-grade RBAC and compliance.
+            One unified platform to manage employees, hardware custody, attendance, and payroll — built with cryptographic trust.
           </motion.p>
 
-          {/* Hero CTAs with Green Accent */}
+          {/* Hero CTAs matching Notion rounded-xl shape & side-by-side layout */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+            className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
           >
             <button
               type="button"
               onClick={handleGetStarted}
-              className="px-7 py-3.5 rounded-full bg-[#34D399] hover:bg-[#2fe09d] text-black text-sm sm:text-[15px] font-semibold transition-all shadow-[0_0_35px_rgba(52,211,153,0.4)] inline-flex items-center gap-2 cursor-pointer active:scale-98"
+              className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-[#34D399] hover:bg-[#2fe09d] text-zinc-950 text-sm sm:text-base font-semibold transition-all shadow-[0_0_35px_rgba(52,211,153,0.35)] cursor-pointer active:scale-98"
             >
               Get started for free
-              <ArrowRight className="w-4 h-4 text-black" />
             </button>
 
             <button
               type="button"
               onClick={handleViewDemo}
               disabled={isDemoLoading}
-              className="px-7 py-3.5 rounded-full bg-emerald-950/40 hover:bg-emerald-900/50 text-white text-sm sm:text-[15px] font-medium border border-emerald-400/30 transition-all inline-flex items-center gap-2 cursor-pointer backdrop-blur-md active:scale-98 disabled:opacity-70 shadow-[0_0_20px_rgba(12,66,66,0.3)]"
+              className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] text-white text-sm sm:text-base font-medium border border-white/15 transition-all cursor-pointer backdrop-blur-md active:scale-98 disabled:opacity-70"
             >
-              {isDemoLoading ? (
-                <>
-                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Loading demo workspace...</span>
-                </>
-              ) : (
-                <>
-                  <span>View live demo</span>
-                  <ArrowUpRight className="w-4 h-4 text-[#34D399]" />
-                </>
-              )}
+              {isDemoLoading ? 'Loading demo...' : 'Request a demo'}
             </button>
-          </motion.div>
-
-          {/* Capability Quick-Links with Emerald Glass Styling */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 pt-8 border-t border-emerald-500/20 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
-          >
-            {[
-              { id: 'feature-directory', label: 'Employee Directory', icon: Users },
-              { id: 'feature-assets', label: 'Hardware Custody Vault', icon: Laptop },
-              { id: 'feature-attendance', label: 'Attendance & Leaves', icon: Clock },
-              { id: 'feature-payroll', label: 'EPF & Salary Slips', icon: Wallet },
-              { id: 'feature-rbac', label: 'Role Scopes & RBAC', icon: KeyRound },
-            ].map((p) => {
-              const Icon = p.icon;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => scrollTo(p.id)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-500/25 hover:border-emerald-400/50 text-emerald-200 hover:text-white text-xs sm:text-[13px] font-medium transition-all cursor-pointer backdrop-blur-sm"
-                >
-                  <Icon className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{p.label}</span>
-                </button>
-              );
-            })}
           </motion.div>
         </div>
       </section>
@@ -365,7 +315,7 @@ export default function Landing() {
       {/* ─── FEATURE 01: Employee Management (Codex Split: Text Left, Canvas Right) ─── */}
       <section id="feature-directory" className="w-full border-b border-zinc-900 bg-[#000000]">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          
+
           {/* Left Text Column */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold text-white tracking-[-0.03em] leading-[1.12]">
@@ -385,7 +335,7 @@ export default function Landing() {
               }}
             >
               <div className="relative w-full min-h-[380px] sm:min-h-[440px]">
-                
+
                 {/* Back App Window: Employee Directory Table (Dark Authentic UI) */}
                 <div className="w-[88%] sm:w-[84%] rounded-2xl bg-[#18181D] border border-white/[0.08] shadow-[0_25px_60px_rgba(0,0,0,0.55)] overflow-hidden">
                   {/* Window Bar */}
@@ -491,7 +441,7 @@ export default function Landing() {
       {/* ─── FEATURE 02: Scale Code Review / Asset Vault (Codex Split: Canvas Left, Text Right) ─── */}
       <section id="feature-assets" className="w-full border-b border-zinc-900 bg-[#000000]">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          
+
           {/* Visual Canvas on Left (matching Screenshot 2) */}
           <div className="lg:col-span-7 order-2 lg:order-1">
             <div
@@ -501,7 +451,7 @@ export default function Landing() {
               }}
             >
               <div className="relative w-full min-h-[380px] sm:min-h-[440px]">
-                
+
                 {/* Back Window: PR Review / Hardware Custody Ledger */}
                 <div className="w-[90%] sm:w-[86%] rounded-2xl bg-[#191A1F] border border-white/[0.08] shadow-[0_25px_60px_rgba(0,0,0,0.55)] overflow-hidden">
                   <div className="flex items-center justify-between px-4 py-3 bg-[#131417] border-b border-white/[0.06]">
@@ -546,7 +496,7 @@ export default function Landing() {
                     <ShieldCheck className="w-4 h-4 text-white" />
                   </div>
                   <div className="text-sm font-semibold text-white">
-                    Audit custody with Lokus
+                    Audit custody with Locus
                   </div>
                   <p className="text-[11px] text-zinc-400 mt-1">
                     Check custody handoff edge cases &amp; serial match
@@ -568,7 +518,7 @@ export default function Landing() {
               Scale asset custody confidently
             </h2>
             <p className="mt-6 text-base sm:text-lg lg:text-[18px] text-zinc-400 leading-[1.6] max-w-[420px] font-normal">
-              Keep physical hardware accounted for as your team scales. Lokus automatically verifies handoffs, surfaces unreturned assets, and answers audit questions so your team focuses where judgment is needed most.
+              Keep physical hardware accounted for as your team scales. Locus automatically verifies handoffs, surfaces unreturned assets, and answers audit questions so your team focuses where judgment is needed most.
             </p>
           </div>
 
@@ -578,7 +528,7 @@ export default function Landing() {
       {/* ─── FEATURE 03: Attendance & Leaves (Codex Split: Text Left, Canvas Right) ─── */}
       <section id="feature-attendance" className="w-full border-b border-zinc-900 bg-[#000000]">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          
+
           {/* Left Text Column */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold text-white tracking-[-0.03em] leading-[1.12]">
@@ -598,7 +548,7 @@ export default function Landing() {
               }}
             >
               <div className="relative w-full min-h-[380px] sm:min-h-[440px]">
-                
+
                 {/* Back Window: Attendance Calendar Grid */}
                 <div className="w-[88%] sm:w-[84%] rounded-2xl bg-[#18181D] border border-white/[0.08] shadow-[0_25px_60px_rgba(0,0,0,0.55)] p-5">
                   <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] text-xs">
@@ -674,7 +624,7 @@ export default function Landing() {
       {/* ─── FEATURE 04: Payroll & Statutory EPF (Codex Split: Canvas Left, Text Right) ─── */}
       <section id="feature-payroll" className="w-full border-b border-zinc-900 bg-[#000000]">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          
+
           {/* Visual Canvas on Left */}
           <div className="lg:col-span-7 order-2 lg:order-1">
             <div
@@ -684,7 +634,7 @@ export default function Landing() {
               }}
             >
               <div className="relative w-full min-h-[380px] sm:min-h-[440px]">
-                
+
                 {/* Back Window: Payroll Register Table */}
                 <div className="w-[90%] sm:w-[86%] rounded-2xl bg-[#191A1F] border border-white/[0.08] shadow-[0_25px_60px_rgba(0,0,0,0.55)] p-5">
                   <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] text-xs">
@@ -736,7 +686,7 @@ export default function Landing() {
               Statutory payroll, on autopilot
             </h2>
             <p className="mt-6 text-base sm:text-lg lg:text-[18px] text-zinc-400 leading-[1.6] max-w-[420px] font-normal">
-              Execute compliant payroll runs in minutes. Lokus automatically computes 12% EPF matching, handles income tax TDS deductions, and generates ledger-audited salary slips without tedious manual exports.
+              Execute compliant payroll runs in minutes. Locus automatically computes 12% EPF matching, handles income tax TDS deductions, and generates ledger-audited salary slips without tedious manual exports.
             </p>
           </div>
 
@@ -746,14 +696,14 @@ export default function Landing() {
       {/* ─── FEATURE 05: Meet our leadership / Platform Architecture (Meta Screenshot 3 style) ─── */}
       <section className="w-full border-b border-zinc-900 bg-[#000000]">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-28 sm:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
-          
+
           {/* Left Text Block with Pill CTA (Screenshot 3 style) */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-semibold text-white tracking-[-0.03em] leading-[1.12]">
               Engineered for enterprise trust
             </h2>
             <p className="mt-6 text-base sm:text-lg lg:text-[18px] text-zinc-400 leading-[1.6] max-w-[480px] font-normal">
-              Lokus architecture is built as security-first infrastructure, ensuring immutable audit logs, granular role delegation, and verifiable digital custody for every asset and employee action.
+              Locus architecture is built as security-first infrastructure, ensuring immutable audit logs, granular role delegation, and verifiable digital custody for every asset and employee action.
             </p>
 
             <div className="mt-8">
@@ -809,7 +759,7 @@ export default function Landing() {
       ══════════════════════════════════════════════════════════ */}
       <section id="section-news" className="w-full border-b border-zinc-900 bg-[#000000] py-28 sm:py-36">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16">
-          
+
           {/* Header (Screenshot 4 typography & pill) */}
           <div className="flex flex-col items-center text-center mb-16 sm:mb-20">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-semibold tracking-[-0.03em] text-white">
@@ -828,7 +778,7 @@ export default function Landing() {
 
           {/* 3 News Cards in a Row (Screenshot 4 style) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-            
+
             {/* Card 1 */}
             <div className="group flex flex-col cursor-pointer">
               <div className="w-full aspect-[16/10] rounded-[26px] overflow-hidden bg-[#16171B] border border-white/[0.08] relative">
@@ -847,7 +797,7 @@ export default function Landing() {
               </div>
 
               <h3 className="mt-5 text-lg sm:text-xl font-semibold text-white leading-snug group-hover:text-zinc-200 transition-colors">
-                Introducing Lokus Hardware Custody: A Digital Vault and Handoff Ledger in Just One Click
+                Introducing Locus Hardware Custody: A Digital Vault and Handoff Ledger in Just One Click
               </h3>
 
               <div className="mt-4 flex items-center gap-2.5 text-sm font-medium text-zinc-400 group-hover:text-white transition-colors">
@@ -903,7 +853,7 @@ export default function Landing() {
               </div>
 
               <h3 className="mt-5 text-lg sm:text-xl font-semibold text-white leading-snug group-hover:text-zinc-200 transition-colors">
-                Biggest Platform News from Lokus Connect: Unified RBAC &amp; Live Org Directory
+                Biggest Platform News from Locus Connect: Unified RBAC &amp; Live Org Directory
               </h3>
 
               <div className="mt-4 flex items-center gap-2.5 text-sm font-medium text-zinc-400 group-hover:text-white transition-colors">
@@ -924,10 +874,10 @@ export default function Landing() {
       ══════════════════════════════════════════════════════════ */}
       <section className="w-full bg-[#000000] py-24 sm:py-32">
         <div className="max-w-[1240px] mx-auto px-6 sm:px-10 lg:px-16 text-center">
-          
+
           <img
             src="/locus-logo-white.png"
-            alt="Lokus"
+            alt="Locus"
             className="h-9 sm:h-10 w-auto object-contain mx-auto mb-6"
           />
 
@@ -958,7 +908,7 @@ export default function Landing() {
           </div>
 
           <div className="mt-16 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
-            <span>© 2026 Lokus Technologies, Inc. All rights reserved.</span>
+            <span>© 2026 Locus Technologies, Inc. All rights reserved.</span>
             <div className="flex items-center gap-6">
               <button
                 type="button"

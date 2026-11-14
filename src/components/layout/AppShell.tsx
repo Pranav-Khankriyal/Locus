@@ -152,195 +152,295 @@ export function AppShell() {
     : [];
 
   return (
-    <div className="h-screen max-h-screen w-full bg-[#f7f8fa] flex font-sans text-zinc-900 antialiased overflow-hidden">
+    <div className="h-screen max-h-screen w-full bg-[#F9FAF9] flex font-sans text-zinc-900 antialiased overflow-hidden">
       <Sidebar open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
 
       {/* Extendable / Collapsible Desktop Sidebar (Docked Full-Height on Left) */}
       <aside
-        className={`hidden lg:flex flex-col justify-between bg-white border-r border-slate-200/70 shrink-0 h-full select-none transition-all duration-200 ease-out ${
+        className={`hidden lg:flex flex-col justify-between bg-white border-r border-zinc-200/80 shrink-0 h-full select-none transition-all duration-200 ease-out ${
           sidebarExpanded ? 'w-60 px-3.5 py-4' : 'w-[68px] px-2.5 py-4 items-center'
         }`}
       >
-          {/* Sidebar Header + Collapse/Expand Toggle + Dashboard Link */}
-          <div className="flex flex-col gap-3 min-h-0 flex-1 overflow-hidden w-full">
-            <div
-              className={`flex items-center shrink-0 pb-2 border-b border-slate-100 ${
-                sidebarExpanded ? 'justify-between px-1.5' : 'justify-center'
-              }`}
-            >
-              {sidebarExpanded && (
-                <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400 truncate">
-                  {organisation?.name || 'Workspace'}
-                </span>
-              )}
+        {/* Sidebar Header + Collapse/Expand Toggle + Dashboard Link */}
+        <div className="flex flex-col gap-3 min-h-0 flex-1 overflow-hidden w-full">
+          {/* Top Org Header Card */}
+          {sidebarExpanded ? (
+            <div className="flex items-center gap-2.5 px-1 pb-3 border-b border-zinc-100">
+              <div className="w-8 h-8 rounded-full bg-zinc-950 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs">
+                {initials(organisation?.name || 'Acme')}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-xs font-bold text-zinc-900 truncate">
+                  {organisation?.name || 'Acme Corporation'}
+                </div>
+                <div className="text-[10px] font-medium text-zinc-400">
+                  Enterprise DID Tier
+                </div>
+              </div>
               <button
                 type="button"
                 onClick={toggleSidebar}
                 aria-expanded={sidebarExpanded}
-                aria-label={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
-                title={sidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
-                className="w-8 h-8 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100/80 flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                aria-label="Collapse sidebar"
+                title="Collapse sidebar"
+                className="w-7 h-7 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 flex items-center justify-center transition-colors cursor-pointer shrink-0"
               >
-                {sidebarExpanded ? (
-                  <PanelLeftClose className="w-4 h-4" />
-                ) : (
-                  <PanelLeftOpen className="w-4 h-4" />
-                )}
+                <PanelLeftClose className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Scrollable Navigation Stack */}
-            <nav
-              aria-label="Primary Navigation"
-              className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-1 py-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              <NavLink
-                to="/dashboard"
-                title="Dashboard"
-                className={({ isActive }) =>
-                  `shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
-                    sidebarExpanded
-                      ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
-                      : 'w-10 h-10 justify-center mx-auto'
-                  } ${
-                    isActive
-                      ? 'bg-[#107C41] text-white shadow-xs'
-                      : 'text-slate-600 hover:bg-slate-100/70 hover:text-slate-900'
-                  }`
-                }
+          ) : (
+            <div className="flex flex-col items-center gap-2 pb-3 border-b border-zinc-100 w-full">
+              <div className="w-8 h-8 rounded-full bg-zinc-950 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs">
+                {initials(organisation?.name || 'Acme')}
+              </div>
+              <button
+                type="button"
+                onClick={toggleSidebar}
+                aria-expanded={sidebarExpanded}
+                aria-label="Expand sidebar"
+                title="Expand sidebar"
+                className="w-7 h-7 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 flex items-center justify-center transition-colors cursor-pointer"
               >
-                <LayoutGrid className="w-[17px] h-[17px] shrink-0" />
-                {sidebarExpanded && <span className="truncate">Dashboard</span>}
-              </NavLink>
+                <PanelLeftOpen className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
-              {hrLinks.length > 0 && (
-                <div className="pt-3 flex flex-col gap-1">
-                  {sidebarExpanded ? (
-                    <span className="px-3 pb-1 text-[10.5px] font-medium uppercase tracking-wider text-slate-400">
-                      Workforce & HR
-                    </span>
-                  ) : (
-                    <div className="mx-2 my-1.5 border-t border-slate-100" />
-                  )}
-                  {hrLinks.map((link) => {
-                    const active = location.pathname.startsWith(link.to);
-                    const Icon = link.icon;
-                    return (
-                      <NavLink
-                        key={link.to}
-                        to={link.to}
-                        title={link.name}
-                        className={`shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
-                          sidebarExpanded
-                            ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
-                            : 'w-10 h-10 justify-center mx-auto'
-                        } ${
-                          active
-                            ? 'bg-emerald-50/90 text-[#107C41] font-medium'
-                            : 'text-slate-600 hover:bg-slate-100/70 hover:text-slate-900'
-                        }`}
-                      >
-                        <Icon className="w-[17px] h-[17px] shrink-0" />
-                        {sidebarExpanded && <span className="truncate">{link.name}</span>}
-                      </NavLink>
-                    );
-                  })}
-                </div>
-              )}
+          {/* Quick Search Trigger (Matching Reference UI) */}
+          {sidebarExpanded ? (
+            <button
+              type="button"
+              onClick={openSearch}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-50 hover:bg-zinc-100/80 border border-zinc-200/70 text-xs text-zinc-400 transition-colors cursor-pointer"
+            >
+              <span className="flex items-center gap-2">
+                <Search className="w-3.5 h-3.5 text-zinc-400" />
+                <span>Quick search...</span>
+              </span>
+              <kbd className="font-mono text-[10px] text-zinc-400 bg-white px-1.5 py-0.5 rounded border border-zinc-200 shadow-2xs">
+                ⌘K
+              </kbd>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={openSearch}
+              title="Quick search (⌘K)"
+              className="w-10 h-10 rounded-xl bg-zinc-50 hover:bg-zinc-100 border border-zinc-200/70 text-zinc-500 flex items-center justify-center transition-colors cursor-pointer mx-auto"
+            >
+              <Search className="w-4 h-4" />
+            </button>
+          )}
 
-              {opsLinks.length > 0 && (
-                <div className="pt-3 flex flex-col gap-1">
-                  {sidebarExpanded ? (
-                    <span className="px-3 pb-1 text-[10.5px] font-medium uppercase tracking-wider text-slate-400">
-                      Assets & Access
-                    </span>
-                  ) : (
-                    <div className="mx-2 my-1.5 border-t border-slate-100" />
-                  )}
-                  {opsLinks.map((link) => {
-                    const active = location.pathname.startsWith(link.to);
-                    const Icon = link.icon;
-                    return (
-                      <NavLink
-                        key={link.to}
-                        to={link.to}
-                        title={link.name}
-                        className={`shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
-                          sidebarExpanded
-                            ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
-                            : 'w-10 h-10 justify-center mx-auto'
-                        } ${
-                          active
-                            ? 'bg-emerald-50/90 text-[#107C41] font-medium'
-                            : 'text-slate-600 hover:bg-slate-100/70 hover:text-slate-900'
-                        }`}
-                      >
-                        <Icon className="w-[17px] h-[17px] shrink-0" />
-                        {sidebarExpanded && <span className="truncate">{link.name}</span>}
-                      </NavLink>
-                    );
-                  })}
-                </div>
-              )}
-            </nav>
-          </div>
-
-          {/* Bottom Actions (Settings & Logout) */}
-          <div className="flex flex-col gap-1 w-full shrink-0 pt-3 border-t border-slate-100">
+          {/* Scrollable Navigation Stack */}
+          <nav
+            aria-label="Primary Navigation"
+            className="flex-1 min-h-0 overflow-y-auto flex flex-col gap-1 py-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             <NavLink
-              to="/settings"
-              title="Settings"
+              to="/dashboard"
+              title="Dashboard"
               className={({ isActive }) =>
-                `rounded-xl flex items-center transition-all cursor-pointer ${
+                `shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
                   sidebarExpanded
                     ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
                     : 'w-10 h-10 justify-center mx-auto'
                 } ${
                   isActive
-                    ? 'bg-emerald-50/90 text-[#107C41] font-medium'
-                    : 'text-slate-600 hover:bg-slate-100/70 hover:text-slate-900'
+                    ? 'bg-emerald-50/90 text-emerald-900 font-semibold border-l-2 border-emerald-600 shadow-xs'
+                    : 'text-zinc-600 hover:bg-zinc-100/70 hover:text-zinc-900'
                 }`
               }
             >
-              <Settings className="w-[17px] h-[17px] shrink-0" />
-              {sidebarExpanded && <span className="truncate">Settings</span>}
+              <LayoutGrid className="w-[17px] h-[17px] shrink-0 text-emerald-600" />
+              {sidebarExpanded && (
+                <div className="flex-1 flex items-center justify-between min-w-0">
+                  <span className="truncate">Dashboard</span>
+                </div>
+              )}
             </NavLink>
 
+            {hrLinks.length > 0 && (
+              <div className="pt-3 flex flex-col gap-1">
+                {sidebarExpanded ? (
+                  <span className="px-3 pb-1 text-[10.5px] font-medium uppercase tracking-wider text-zinc-400">
+                    Workforce &amp; HR
+                  </span>
+                ) : (
+                  <div className="mx-2 my-1.5 border-t border-zinc-100" />
+                )}
+                {hrLinks.map((link) => {
+                  const active = location.pathname.startsWith(link.to);
+                  const Icon = link.icon;
+                  // Dynamic badge count
+                  let badge = '';
+                  if (link.to === '/employees') badge = '148';
+                  else if (link.to === '/attendance') badge = '98%';
+                  else if (link.to === '/payroll') badge = 'Synced';
+
+                  return (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      title={link.name}
+                      className={`shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
+                        sidebarExpanded
+                          ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
+                          : 'w-10 h-10 justify-center mx-auto'
+                      } ${
+                        active
+                          ? 'bg-emerald-50/90 text-emerald-900 font-semibold border-l-2 border-emerald-600 shadow-xs'
+                          : 'text-zinc-600 hover:bg-zinc-100/70 hover:text-zinc-900'
+                      }`}
+                    >
+                      <Icon className={`w-[17px] h-[17px] shrink-0 ${active ? 'text-emerald-600' : 'text-zinc-400'}`} />
+                      {sidebarExpanded && (
+                        <div className="flex-1 flex items-center justify-between min-w-0">
+                          <span className="truncate">{link.name}</span>
+                          {badge && (
+                            <span
+                              className={`text-[10.5px] font-medium px-1.5 py-0.5 rounded ${
+                                badge === 'Synced'
+                                  ? 'bg-emerald-500/10 text-emerald-700 border border-emerald-500/20'
+                                  : 'bg-zinc-100 text-zinc-500'
+                              }`}
+                            >
+                              {badge}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </NavLink>
+                  );
+                })}
+              </div>
+            )}
+
+            {opsLinks.length > 0 && (
+              <div className="pt-3 flex flex-col gap-1">
+                {sidebarExpanded ? (
+                  <span className="px-3 pb-1 text-[10.5px] font-medium uppercase tracking-wider text-zinc-400">
+                    Assets &amp; Trust
+                  </span>
+                ) : (
+                  <div className="mx-2 my-1.5 border-t border-zinc-100" />
+                )}
+                {opsLinks.map((link) => {
+                  const active = location.pathname.startsWith(link.to);
+                  const Icon = link.icon;
+                  let badge = '';
+                  if (link.to === '/assets') badge = '42';
+                  else if (link.to === '/verification') badge = 'Active';
+
+                  return (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      title={link.name}
+                      className={`shrink-0 rounded-xl flex items-center transition-all cursor-pointer ${
+                        sidebarExpanded
+                          ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
+                          : 'w-10 h-10 justify-center mx-auto'
+                      } ${
+                        active
+                          ? 'bg-emerald-50/90 text-emerald-900 font-semibold border-l-2 border-emerald-600 shadow-xs'
+                          : 'text-zinc-600 hover:bg-zinc-100/70 hover:text-zinc-900'
+                      }`}
+                    >
+                      <Icon className={`w-[17px] h-[17px] shrink-0 ${active ? 'text-emerald-600' : 'text-zinc-400'}`} />
+                      {sidebarExpanded && (
+                        <div className="flex-1 flex items-center justify-between min-w-0">
+                          <span className="truncate">{link.name}</span>
+                          {badge && (
+                            <span
+                              className={`text-[10.5px] font-medium px-1.5 py-0.5 rounded ${
+                                badge === 'Active'
+                                  ? 'bg-emerald-500/10 text-emerald-700 border border-emerald-500/20'
+                                  : 'bg-zinc-100 text-zinc-500'
+                              }`}
+                            >
+                              {badge}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </NavLink>
+                  );
+                })}
+              </div>
+            )}
+          </nav>
+
+          {/* Tamper Integrity Card (Matching Demo Reference UI) */}
+          {sidebarExpanded && (
+            <div className="p-3.5 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-left shrink-0">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-800 mb-1">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>Tamper Integrity</span>
+              </div>
+              <p className="text-[11px] text-zinc-500 leading-snug font-normal">
+                Canonical SHA-256 seals active on all employee records and hardware custody.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Actions (Settings & Logout) */}
+        <div className="flex flex-col gap-1 w-full shrink-0 pt-3 border-t border-zinc-100">
+          <NavLink
+            to="/settings"
+            title="Settings"
+            className={({ isActive }) =>
+              `rounded-xl flex items-center transition-all cursor-pointer ${
+                sidebarExpanded
+                  ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium'
+                  : 'w-10 h-10 justify-center mx-auto'
+              } ${
+                isActive
+                  ? 'bg-emerald-50/90 text-emerald-900 font-semibold'
+                  : 'text-zinc-600 hover:bg-zinc-100/70 hover:text-zinc-900'
+              }`
+            }
+          >
+            <Settings className="w-[17px] h-[17px] shrink-0 text-zinc-400" />
+            {sidebarExpanded && <span className="truncate">Settings</span>}
+          </NavLink>
+
+          <button
+            type="button"
+            onClick={logout}
+            title="Sign out"
+            className={`rounded-xl flex items-center text-zinc-600 hover:text-red-600 hover:bg-red-50/70 transition-all cursor-pointer ${
+              sidebarExpanded
+                ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium w-full'
+                : 'w-10 h-10 justify-center mx-auto'
+            }`}
+          >
+            <LogOut className="w-[17px] h-[17px] shrink-0 text-zinc-400" />
+            {sidebarExpanded && <span className="truncate">Sign out</span>}
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Column: Compact Top Controls + Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 min-h-0">
+        <header className="w-full px-6 sm:px-9 pt-4 pb-2 shrink-0 z-30 select-none">
+          <div className="max-w-[1440px] mx-auto w-full flex items-center justify-between lg:justify-end gap-4">
             <button
               type="button"
-              onClick={logout}
-              title="Sign out"
-              className={`rounded-xl flex items-center text-slate-600 hover:text-red-600 hover:bg-red-50/70 transition-all cursor-pointer ${
-                sidebarExpanded
-                  ? 'px-3 py-2.5 gap-3 text-[13.5px] font-medium w-full'
-                  : 'w-10 h-10 justify-center mx-auto'
-              }`}
+              onClick={() => setMobileNavOpen(true)}
+              aria-label="Open navigation"
+              className="lg:hidden w-9 h-9 rounded-full bg-white border border-zinc-200/80 flex items-center justify-center text-zinc-600 hover:text-zinc-900 shadow-xs cursor-pointer"
             >
-              <LogOut className="w-[17px] h-[17px] shrink-0" />
-              {sidebarExpanded && <span className="truncate">Sign out</span>}
+              <Menu className="w-4 h-4" />
             </button>
-          </div>
-        </aside>
 
-        {/* Main Column: Compact Top Controls + Content Area */}
-        <div className="flex-1 flex flex-col min-w-0 min-h-0">
-          <header className="w-full px-6 sm:px-9 pt-4 pb-2 shrink-0 z-30 select-none">
-            <div className="max-w-[1440px] mx-auto w-full flex items-center justify-between lg:justify-end gap-4">
-              <button
-                type="button"
-                onClick={() => setMobileNavOpen(true)}
-                aria-label="Open navigation"
-                className="lg:hidden w-9 h-9 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-slate-600 hover:text-slate-900 shadow-xs cursor-pointer"
-              >
-                <Menu className="w-4 h-4" />
-              </button>
-
-              {/* Right Action Controls */}
-              <div className="flex items-center gap-2.5">
+            {/* Right Action Controls */}
+            <div className="flex items-center gap-2.5">
               {/* Search Button */}
               <button
                 type="button"
-                className="w-8 h-8 rounded-full bg-white border border-gray-200/80 flex items-center justify-center text-gray-500 hover:text-gray-800 hover:bg-gray-50 shadow-xs transition-colors cursor-pointer"
+                className="w-8 h-8 rounded-full bg-white border border-zinc-200/80 flex items-center justify-center text-zinc-500 hover:text-zinc-800 hover:bg-zinc-50 shadow-xs transition-colors cursor-pointer"
                 aria-label="Search"
                 onClick={openSearch}
               >
@@ -351,47 +451,47 @@ export function AppShell() {
               <div className="relative">
                 <button
                   type="button"
-                  className="w-8 h-8 rounded-full bg-white border border-gray-200/80 flex items-center justify-center text-gray-500 hover:text-gray-800 hover:bg-gray-50 shadow-xs transition-colors cursor-pointer relative"
+                  className="w-8 h-8 rounded-full bg-white border border-zinc-200/80 flex items-center justify-center text-zinc-500 hover:text-zinc-800 hover:bg-zinc-50 shadow-xs transition-colors cursor-pointer relative"
                   aria-label="Notifications"
                   onClick={() => setNotifMenuOpen(!notifMenuOpen)}
                 >
                   <Bell className="w-3.5 h-3.5" />
                   {unreadCount > 0 && (
-                    <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#107C41]" />
+                    <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-600" />
                   )}
                 </button>
 
                 {/* Notifications Dropdown */}
                 {notifMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-gray-200/80 p-4 z-50 animate-in fade-in slide-in-from-top-2">
-                    <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                      <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider">Notifications</h3>
+                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-zinc-200/80 p-4 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+                      <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-wider">Notifications</h3>
                       <button
                         type="button"
                         onClick={markAllRead}
-                        className="text-xs text-emerald-600 hover:underline flex items-center gap-1"
+                        className="text-xs text-emerald-600 hover:underline flex items-center gap-1 cursor-pointer"
                       >
                         <CheckCheck className="w-3.5 h-3.5" /> Mark read
                       </button>
                     </div>
-                    <div className="max-h-64 overflow-y-auto divide-y divide-gray-50 mt-2">
+                    <div className="max-h-64 overflow-y-auto divide-y divide-zinc-50 mt-2">
                       {notifications.length ? (
                         notifications.map((n) => (
                           <button
                             key={n.id}
                             type="button"
                             onClick={() => markRead(n.id)}
-                            className="w-full text-left py-2.5 hover:bg-gray-50/70 rounded-lg px-1 transition-colors cursor-pointer"
+                            className="w-full text-left py-2.5 hover:bg-zinc-50 rounded-lg px-1 transition-colors cursor-pointer"
                           >
-                            <p className="text-xs font-semibold text-gray-800">{n.title}</p>
-                            <p className="text-xs text-gray-500 mt-0.5">{n.message}</p>
-                            <span className="text-[10px] text-gray-400 mt-1 block">
+                            <p className="text-xs font-semibold text-zinc-800">{n.title}</p>
+                            <p className="text-xs text-zinc-500 mt-0.5">{n.message}</p>
+                            <span className="text-[10px] text-zinc-400 mt-1 block">
                               {formatDate(n.createdAt, true)}
                             </span>
                           </button>
                         ))
                       ) : (
-                        <p className="text-xs text-gray-400 py-4 text-center">You are all caught up</p>
+                        <p className="text-xs text-zinc-400 py-4 text-center">You are all caught up</p>
                       )}
                     </div>
                   </div>
@@ -403,38 +503,38 @@ export function AppShell() {
                 <button
                   type="button"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center gap-1.5 pl-1 pr-2 py-0.5 rounded-full bg-white border border-gray-200/80 hover:bg-gray-50 shadow-xs transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 pl-1 pr-2 py-0.5 rounded-full bg-white border border-zinc-200/80 hover:bg-zinc-50 shadow-xs transition-colors cursor-pointer"
                 >
-                  <div className="w-6 h-6 rounded-full bg-[#107C41] text-white flex items-center justify-center font-bold text-[11px]">
+                  <div className="w-6 h-6 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-[11px]">
                     {initials(user?.name || 'Admin')}
                   </div>
-                  <ChevronDown className="w-3 h-3 text-gray-400" />
+                  <ChevronDown className="w-3 h-3 text-zinc-400" />
                 </button>
 
                 {/* User Dropdown */}
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-200/80 p-2 z-50 animate-in fade-in slide-in-from-top-2">
-                    <div className="px-3 py-2 border-b border-gray-100">
-                      <p className="text-xs font-bold text-gray-900">{user?.name || 'Administrator'}</p>
-                      <p className="text-[11px] text-gray-400 truncate">{user?.email || 'admin@locus.io'}</p>
+                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-zinc-200/80 p-2 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="px-3 py-2 border-b border-zinc-100">
+                      <p className="text-xs font-bold text-zinc-900">{user?.name || 'Administrator'}</p>
+                      <p className="text-[11px] text-zinc-400 truncate">{user?.email || 'admin@locus.io'}</p>
                     </div>
                     <div className="py-1">
                       <Link
                         to={'/employees/' + user?.id}
                         onClick={() => setUserMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 rounded-xl"
+                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50 rounded-xl"
                       >
-                        <User className="w-3.5 h-3.5 text-gray-400" /> My Profile
+                        <User className="w-3.5 h-3.5 text-zinc-400" /> My Profile
                       </Link>
                       <Link
                         to="/settings"
                         onClick={() => setUserMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 rounded-xl"
+                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50 rounded-xl"
                       >
-                        <Settings className="w-3.5 h-3.5 text-gray-400" /> Workspace Settings
+                        <Settings className="w-3.5 h-3.5 text-zinc-400" /> Workspace Settings
                       </Link>
                     </div>
-                    <div className="pt-1 border-t border-gray-100">
+                    <div className="pt-1 border-t border-zinc-100">
                       <button
                         type="button"
                         onClick={logout}
@@ -447,16 +547,16 @@ export function AppShell() {
                 )}
               </div>
             </div>
-            </div>
-          </header>
+          </div>
+        </header>
 
-          {/* Main Content Area */}
-          <main className="flex-1 min-w-0 min-h-0 overflow-y-auto workspace-scroll px-6 sm:px-9 pt-1 pb-12">
-            <div className="max-w-[1440px] mx-auto w-full">
-              <Outlet />
-            </div>
-          </main>
-        </div>
+        {/* Main Content Area */}
+        <main className="flex-1 min-w-0 min-h-0 overflow-y-auto workspace-scroll px-6 sm:px-9 pt-1 pb-12">
+          <div className="max-w-[1440px] mx-auto w-full">
+            <Outlet />
+          </div>
+        </main>
+      </div>
 
       {/* Global Quick Search Modal */}
       {searchOpen && (

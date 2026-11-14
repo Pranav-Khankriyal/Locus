@@ -30,7 +30,7 @@ interface DaySummary {
 const TONE_META: Record<DayTone, { label: string; dot: string; box: string }> = {
   present: {
     label: 'Present',
-    dot: 'bg-[#107C41]',
+    dot: 'bg-emerald-500',
     box: 'border-emerald-200/80 bg-emerald-50/75 text-zinc-900',
   },
   late: {
@@ -50,8 +50,8 @@ const TONE_META: Record<DayTone, { label: string; dot: string; box: string }> = 
   },
   neutral: {
     label: 'No log',
-    dot: 'bg-slate-300',
-    box: 'border-slate-200/70 bg-[#f7f8fa]/70 text-slate-500',
+    dot: 'bg-zinc-300',
+    box: 'border-zinc-200/70 bg-zinc-50/70 text-zinc-500',
   },
 };
 
@@ -183,17 +183,17 @@ export function DashboardAttendanceCalendar({
   });
 
   return (
-    <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/70 shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+    <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
         <div>
           <h3 className="text-[15px] font-semibold text-zinc-900 flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-[#107C41]" />
+            <Calendar className="w-4 h-4 text-emerald-600" />
             <span>{personal ? 'My Attendance Calendar' : 'Attendance Calendar'}</span>
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">{monthTitle}</p>
+          <p className="text-xs text-zinc-400 mt-0.5">{monthTitle}</p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
+        <div className="flex flex-wrap items-center gap-3 text-[11px] text-zinc-500">
           {(['present', 'late', 'leave', 'absent'] as const).map((k) => (
             <span key={k} className="inline-flex items-center gap-1.5">
               <span className={`w-2 h-2 rounded-full ${TONE_META[k].dot}`} />
@@ -202,7 +202,7 @@ export function DashboardAttendanceCalendar({
           ))}
           <Link
             to="/attendance"
-            className="w-7 h-7 rounded-full border border-slate-200/80 flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors"
+            className="w-7 h-7 rounded-full border border-zinc-200/80 flex items-center justify-center text-zinc-400 hover:text-zinc-700 hover:bg-zinc-50 transition-colors"
             title="Open Attendance"
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -210,7 +210,7 @@ export function DashboardAttendanceCalendar({
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] font-mono text-slate-400 uppercase">
+      <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] font-mono text-zinc-400 uppercase">
         <span>Mon</span>
         <span>Tue</span>
         <span>Wed</span>
@@ -239,16 +239,16 @@ export function DashboardAttendanceCalendar({
                 meta.box
               } ${
                 isSelected
-                  ? 'ring-2 ring-[#107C41]/45'
+                  ? 'ring-2 ring-emerald-500/40'
                   : isToday
-                  ? 'border-[#107C41]/60'
+                  ? 'border-emerald-500/60'
                   : ''
               }`}
             >
               <div className="flex items-center justify-between w-full">
                 <span
                   className={`font-mono text-[11px] font-semibold tabular-nums ${
-                    isToday ? 'text-[#107C41]' : ''
+                    isToday ? 'text-emerald-700' : ''
                   }`}
                 >
                   {String(d.day).padStart(2, '0')}
@@ -264,19 +264,19 @@ export function DashboardAttendanceCalendar({
       </div>
 
       {activeSummary && (
-        <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-          <div className="flex items-center gap-2 text-slate-500">
-            <Clock className="w-3.5 h-3.5 text-[#107C41]" />
+        <div className="mt-4 pt-3.5 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-2 text-zinc-500">
+            <Clock className="w-3.5 h-3.5 text-emerald-600" />
             <span className="font-medium text-zinc-900">
               {new Date(year, monthIndex, activeSummary.day).toLocaleDateString('en-IN', {
                 day: '2-digit',
                 month: 'short',
               })}
             </span>
-            <span className="text-slate-300">·</span>
+            <span className="text-zinc-300">·</span>
             <span>{activeSummary.label}</span>
           </div>
-          <span className="font-mono text-[11px] text-[#107C41] font-medium">
+          <span className="font-mono text-[11px] text-emerald-700 font-medium">
             {activeSummary.detail}
           </span>
         </div>
@@ -334,18 +334,18 @@ export function DashboardWorkflowPulse({
   ];
 
   return (
-    <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/70 shadow-[0_1px_2px_rgba(15,23,42,0.03)] flex flex-col justify-between h-full">
-      <div className="flex items-start justify-between pb-4 border-b border-slate-100">
+    <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between h-full">
+      <div className="flex items-start justify-between pb-4 border-b border-zinc-100">
         <div>
           <h3 className="text-[15px] font-semibold text-zinc-900">
             Connected Workplace Flow
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-zinc-400 mt-0.5">
             Live sync from onboarding to payroll
           </p>
         </div>
-        <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#107C41] bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#107C41] animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2.5 py-0.5 rounded-full">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           Live
         </span>
       </div>
@@ -357,23 +357,23 @@ export function DashboardWorkflowPulse({
             <Link
               key={step.title}
               to={step.to}
-              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200/70 bg-[#f7f8fa]/70 hover:bg-emerald-50/60 hover:border-emerald-200 px-3.5 py-2.5 transition-all"
+              className="group flex items-center justify-between gap-3 rounded-xl border border-zinc-200/70 bg-zinc-50/70 hover:bg-emerald-50/60 hover:border-emerald-200 px-3.5 py-2.5 transition-all"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <span className="w-7 h-7 rounded-xl bg-white border border-slate-200/80 group-hover:border-emerald-200 text-[#107C41] flex items-center justify-center shrink-0">
+                <span className="w-7 h-7 rounded-xl bg-white border border-zinc-200/80 group-hover:border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0">
                   <Icon className="w-3.5 h-3.5" />
                 </span>
                 <div className="min-w-0">
                   <div className="text-[12.5px] font-semibold text-zinc-900 truncate">
                     {step.title}
                   </div>
-                  <div className="text-[11px] text-slate-500 font-mono tabular-nums">
+                  <div className="text-[11px] text-zinc-500 font-mono tabular-nums">
                     {step.metric}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 shrink-0 text-slate-400 group-hover:text-[#107C41] transition-colors">
+              <div className="flex items-center gap-1.5 shrink-0 text-zinc-400 group-hover:text-emerald-600 transition-colors">
                 <span className="text-[10px] font-mono">0{i + 1}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>
@@ -382,9 +382,9 @@ export function DashboardWorkflowPulse({
         })}
       </div>
 
-      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11.5px] text-slate-500">
+      <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-[11.5px] text-zinc-500">
         <span>All modules RBAC-scoped</span>
-        <Link to="/audit" className="text-[#107C41] font-medium hover:underline">
+        <Link to="/audit" className="text-emerald-700 font-medium hover:underline">
           View Audit Trail →
         </Link>
       </div>
