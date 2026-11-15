@@ -1,4 +1,4 @@
-import { Component, type ReactNode } from 'react';
+import { Component, type ReactNode, type ErrorInfo } from 'react';
 
 export class AppErrorBoundary extends Component<{ children: ReactNode }, { error: boolean; errorDetails?: string }> {
   state = { error: false, errorDetails: '' };
@@ -7,7 +7,7 @@ export class AppErrorBoundary extends Component<{ children: ReactNode }, { error
     return { error: true, errorDetails: error?.message || 'Unknown error' };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('AppErrorBoundary caught an error:', error, errorInfo);
   }
 

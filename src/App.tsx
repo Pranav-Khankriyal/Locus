@@ -10,7 +10,6 @@ import {useSession} from '@/hooks/useSession';
 import {can} from '@/utils/permissions';
 import {AppErrorBoundary} from '@/components/AppErrorBoundary';
 import Login from '@/views/Login';
-import Signup from '@/views/Signup';
 import CreateOrganisation from '@/views/onboarding/CreateOrganisation';
 import JoinOrganisation from '@/views/onboarding/JoinOrganisation';
 import AdminDashboard from '@/views/dashboard/AdminDashboard';

@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import type { VerificationResultData } from '@/types';
 import { Details } from '@/components/ui/Page';
